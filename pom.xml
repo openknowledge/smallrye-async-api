@@ -87,9 +87,7 @@
     </scm>
 
     <modules>
-        <module>spec/api</module>
-        <module>spec/tck</module>
-
+        <module>spec</module>
         <module>implementation</module>
         <module>tck</module>
     </modules>
