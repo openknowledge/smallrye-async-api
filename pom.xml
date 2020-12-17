@@ -88,6 +88,7 @@
 
     <modules>
         <module>spec</module>
+        <module>core</module>
         <module>implementation</module>
         <module>tck</module>
     </modules>
