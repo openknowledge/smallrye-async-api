@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.smallrye.asyncapi.runtime;
+/**
+ * <code>RuntimeException</code> to be thrown when fatal exceptions are detected
+ * in the Async API read/scan processes.
+ */
+package io.smallrye.asyncapi.core.runtime;
 
 /**
- * @author eric.wittmann@gmail.com
+ * <code>RuntimeException</code> to be thrown when fatal exceptions are detected
+ * in the Async API read/scan processes.
  */
-public enum AsyncApiFormat {
+public class AsyncApiRuntimeException extends RuntimeException {
 
-    JSON("application/json"),
-    YAML("application/yaml");
+    private static final long serialVersionUID = 8472532911884999427L;
 
-    private final String mimeType;
-
-    AsyncApiFormat(String mimeType) {
-        this.mimeType = mimeType;
+    public AsyncApiRuntimeException(final Throwable cause) {
+        super(cause);
     }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
 }
