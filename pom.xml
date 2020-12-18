@@ -110,6 +110,7 @@
         <module>spec</module>
         <module>core</module>
         <module>tck</module>
+        <module>examples</module>
     </modules>
 
     <dependencyManagement>
