@@ -16,20 +16,15 @@
  *
  */
 
-package test.io.smallrye.asyncapi.tck;
+package io.smallrye.asyncapi.bindings.ws;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import io.smallrye.asyncapi.spec.annotations.binding.ChannelBindings;
+import io.smallrye.asyncapi.spec.annotations.binding.ws.WebSocketChannelBinding;
+import io.smallrye.asyncapi.spec.annotations.channel.ChannelItem;
 
-/**
- * Use this annotation along with @TckTestRunner to indicate the specific Tck that is under test.
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Inherited
-public @interface TckTest {
+public class WSService {
 
+    @ChannelItem(channel = "ws-test1", bindings = @ChannelBindings(wsBinding = @WebSocketChannelBinding(method = "GET", bindingVersion = "0.1.0")))
+    public void wsTest1() {
+    }
 }

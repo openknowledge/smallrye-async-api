@@ -18,18 +18,17 @@
 
 package test.io.smallrye.asyncapi.tck;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.jboss.logging.Logger;
+import org.jboss.logging.annotations.LogMessage;
+import org.jboss.logging.annotations.Message;
+import org.jboss.logging.annotations.MessageLogger;
 
-/**
- * Use this annotation along with @TckTestRunner to indicate the specific Tck that is under test.
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Inherited
-public @interface TckTest {
+@MessageLogger(projectCode = "SMAAP", length = 5)
+interface TckLogging {
 
+    TckLogging log = Logger.getMessageLogger(TckLogging.class, TckLogging.class.getPackage().getName());
+
+    @LogMessage(level = Logger.Level.DEBUG)
+    @Message(id = 12000, value = "Indexing asset: %s from archive: %s")
+    void indexing(String archivePath, String archive);
 }

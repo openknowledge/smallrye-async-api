@@ -16,20 +16,18 @@
  *
  */
 
-package test.io.smallrye.asyncapi.tck;
+package io.smallrye.asyncapi.core.runtime.scanner;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.jboss.jandex.DotName;
 
-/**
- * Use this annotation along with @TckTestRunner to indicate the specific Tck that is under test.
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Inherited
-public @interface TckTest {
+public class DefaultScannerConstants {
+
+    static final DotName CHANNEL_ITEM = DotName.createSimple("io.smallrye.asyncapi.spec.annotations.channel.ChannelItem");
+
+    static final DotName MESSAGE = DotName.createSimple("io.smallrye.asyncapi.spec.annotations.message.Message");
+
+    static final DotName SECURITY_SCHEMES = DotName.createSimple("io.smallrye.asyncapi.spec.annotations.SecuritySchemes");
+
+    static final DotName PARAMETER = DotName.createSimple("io.smallrye.asyncapi.spec.annotations.Parameter");
 
 }

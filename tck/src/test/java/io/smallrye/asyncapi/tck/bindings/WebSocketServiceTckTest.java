@@ -16,20 +16,11 @@
  *
  */
 
-package test.io.smallrye.asyncapi.tck;
+package io.smallrye.asyncapi.tck.bindings;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import test.io.smallrye.asyncapi.tck.BaseTckTest;
+import test.io.smallrye.asyncapi.tck.TckTest;
 
-/**
- * Use this annotation along with @TckTestRunner to indicate the specific Tck that is under test.
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Inherited
-public @interface TckTest {
-
+@TckTest
+public class WebSocketServiceTckTest extends BaseTckTest<WebSocketServiceTest> {
 }
