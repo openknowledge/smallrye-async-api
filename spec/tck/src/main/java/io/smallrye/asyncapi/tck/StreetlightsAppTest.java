@@ -137,8 +137,7 @@ public class StreetlightsAppTest extends AppTestBase {
         vr.body("channels." + topic + ".publish.message.traits[0].contentType", equalTo("application/json"));
         vr.body("channels." + topic + ".publish.message.traits[0].name", equalTo("commonHeaders"));
         vr.body("channels." + topic + ".publish.message.traits[0].description", equalTo("Common Headers"));
-        vr.body("channels." + topic
-                + ".publish.message.traits[0].example",
+        vr.body("channels." + topic + ".publish.message.traits[0].example",
                 containsInAnyOrder("{'minimum': 0, 'maximum': 100}", "{'minimum': 10, 'maximum': 50}"));
 
         topic = "'smartylighting/streetlights/1/0/action/{streetlightId}/turn/off'";
@@ -153,8 +152,7 @@ public class StreetlightsAppTest extends AppTestBase {
         vr.body("channels." + topic + ".description",
                 equalTo("The topic on which measure values may be produced and consumed."));
         vr.body("channels." + topic + ".subscribe.operationId", equalTo("receiveLightMeasurement"));
-        vr.body("channels." + topic
-                + ".subscribe.summary",
+        vr.body("channels." + topic + ".subscribe.summary",
                 equalTo("Receive information about environmental lighting conditions of a particular streetlight."));
         vr.body("channels." + topic + ".subscribe.traits[0].$ref", equalTo("#/components/operationTraits/kafka"));
         vr.body("channels." + topic + ".subscribe.message.$ref", equalTo("#/components/messages/lightMeasured"));

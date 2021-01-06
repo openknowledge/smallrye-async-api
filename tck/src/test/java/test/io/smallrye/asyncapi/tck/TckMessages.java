@@ -32,5 +32,3 @@ interface TckMessages {
     @Message(id = 13001, value = "No @Deployment archive found for test.")
     Exception missingDeploymentArchive();
 }
-
-

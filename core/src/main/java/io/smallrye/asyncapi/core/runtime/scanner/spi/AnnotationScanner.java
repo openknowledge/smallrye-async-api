@@ -92,6 +92,7 @@ public interface AnnotationScanner {
         Map<String, SecurityScheme> securitySchemes = SecuritySchemesReader
                 .readSecuritySchemes(context, securitySchemesAnnotation.value(SecuritySchemesConstant.PROP_VALUES))
                 .orElse(new HashMap<>());
+
         Components components = ModelUtil.components(asyncAPI);
         securitySchemes.entrySet()
                 .forEach(securityScheme -> components.addSecurityScheme(securityScheme.getKey(), securityScheme.getValue()));

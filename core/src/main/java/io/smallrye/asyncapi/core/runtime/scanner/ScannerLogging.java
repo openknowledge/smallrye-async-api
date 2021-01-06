@@ -26,7 +26,7 @@ import org.jboss.logging.annotations.LogMessage;
 import org.jboss.logging.annotations.Message;
 import org.jboss.logging.annotations.MessageLogger;
 
-@MessageLogger(projectCode = "OKAAP", length = 5)
+@MessageLogger(projectCode = "SMAAP", length = 5)
 public interface ScannerLogging extends BasicLogger {
 
     ScannerLogging logger = Logger.getMessageLogger(ScannerLogging.class, ScannerLogging.class.getPackage().getName());
