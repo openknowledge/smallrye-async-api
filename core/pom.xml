@@ -59,6 +59,10 @@
             <version>5.6.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.smallrye</groupId>
+            <artifactId>smallrye-async-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
