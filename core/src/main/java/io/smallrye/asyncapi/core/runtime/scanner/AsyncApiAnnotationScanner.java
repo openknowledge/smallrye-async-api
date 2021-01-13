@@ -127,7 +127,7 @@ public class AsyncApiAnnotationScanner {
     private AsyncAPI scanOKProfileAsyncApiAnnotations() {
 
         // Initialize a new AAI document.  Even if nothing is found, this will be returned.
-        AsyncAPI asyncAPI = new AsyncAPIImpl();
+        AsyncAPI asyncAPI = this.annotationScannerContext.getAsyncAPI();
         asyncAPI.setAsyncapi(AsyncApiConstants.ASYNC_API_VERSION);
 
         // Creating a new instance of a registry which will be set on the thread context.
