@@ -16,18 +16,17 @@
 
 package test.io.smallrye.asyncapi.tck;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.jboss.logging.Messages;
+import org.jboss.logging.annotations.Message;
+import org.jboss.logging.annotations.MessageBundle;
 
-/**
- * Use this annotation along with @TckTestRunner to indicate the specific Tck that is under test.
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-@Inherited
-public @interface TckTest {
+@MessageBundle(projectCode = "OKAAP", length = 5)
+interface TckMessages {
+    TckMessages msg = Messages.getBundle(TckMessages.class);
 
+    @Message(id = 13000, value = "Archive was null!")
+    RuntimeException nullArchive();
+
+    @Message(id = 13001, value = "No @Deployment archive found for test.")
+    Exception missingDeploymentArchive();
 }

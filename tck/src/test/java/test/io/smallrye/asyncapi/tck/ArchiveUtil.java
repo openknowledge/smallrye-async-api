@@ -1,11 +1,11 @@
 /*
- * Copyright 2019 Red Hat, Inc.
+ * Copyright 2019 Red Hat
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *   http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package io.smallrye.asyncapi.api.util;
+package test.io.smallrye.asyncapi.tck;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.microprofile.config.ConfigProvider;
+import org.jboss.jandex.DotName;
 import org.jboss.jandex.IndexView;
 import org.jboss.jandex.Indexer;
 import org.jboss.logging.Logger;
@@ -34,29 +36,26 @@ import org.jboss.shrinkwrap.api.classloader.ShrinkWrapClassLoader;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 
-import io.smallrye.asyncapi.api.AsyncApiConfig;
-import io.smallrye.asyncapi.api.AsyncApiConfigImpl;
-import io.smallrye.asyncapi.api.AsyncApiConstants;
-import io.smallrye.asyncapi.runtime.AsyncApiFormat;
-import io.smallrye.asyncapi.runtime.AsyncApiStaticFile;
+import io.smallrye.asyncapi.core.api.AsyncApiConfig;
+import io.smallrye.asyncapi.core.api.AsyncApiConfigImpl;
+import io.smallrye.asyncapi.core.api.constants.AsyncApiConstants;
+import io.smallrye.asyncapi.core.runtime.AsyncApiFormat;
+import io.smallrye.asyncapi.core.runtime.AsyncApiStaticFile;
+import io.smallrye.asyncapi.core.runtime.scanner.AsyncApiAnnotationScanner;
+import io.smallrye.asyncapi.core.runtime.scanner.FilteredIndexView;
 
 /**
  * Some useful methods for creating stuff from ShrinkWrap {@link Archive}s.
- * 
- * @author eric.wittmann@gmail.com
  */
 public class ArchiveUtil {
     private static final Logger LOG = Logger.getLogger(ArchiveUtil.class);
 
-    /**
-     * Constructor.
-     */
     private ArchiveUtil() {
     }
 
     /**
      * Creates an {@link AsyncApiConfig} instance from the given ShrinkWrap archive.
-     * 
+     *
      * @param archive Shrinkwrap Archive instance
      * @return AsyncApiConfig
      */
@@ -69,11 +68,12 @@ public class ArchiveUtil {
     }
 
     /**
-     * Finds the static AsyncAPI file located in the deployment and, if it exists, returns
-     * it as an {@link AsyncApiStaticFile}. If not found, returns null. The static file
-     * (when not null) contains an {@link InputStream} to the contents of the static file.
-     * The caller is responsible for closing this stream.
-     * 
+     * Finds the static AsyncAPI file located in the deployment and, if it exists, returns it as an {@link AsyncApiStaticFile}.
+     * If not found, returns
+     * null. The static file (when not null) contains an {@link InputStream} to the contents of the static file. The caller is
+     * responsible for closing
+     * this stream.
+     *
      * @param archive Shrinkwrap Archive instance
      * @return AsyncApiStaticFile
      */
@@ -105,56 +105,75 @@ public class ArchiveUtil {
             return null;
         }
 
-        rval.setContent(node.getAsset().openStream());
+        rval.setContent(node.getAsset()
+                .openStream());
 
         return rval;
     }
 
     /**
      * Index the ShrinkWrap archive to produce a jandex index.
-     * 
+     *
      * @param config AsyncApiConfig
      * @param archive Shrinkwrap Archive
      * @return indexed classes in Archive
      */
     public static IndexView archiveToIndex(AsyncApiConfig config, Archive<?> archive) {
         if (archive == null) {
-            throw new RuntimeException("Archive was null!");
+            throw TckMessages.msg.nullArchive();
         }
 
         Indexer indexer = new Indexer();
+        index(indexer, "io/smallrye/asyncapi/core/runtime/scanner/CollectionStandin.class");
+        index(indexer, "io/smallrye/asyncapi/core/runtime/scanner/IterableStandin.class");
+        index(indexer, "io/smallrye/asyncapi/core/runtime/scanner/MapStandin.class");
         indexArchive(config, indexer, archive);
         return indexer.complete();
     }
 
+    private static void index(Indexer indexer, String resName) {
+        ClassLoader cl = AsyncApiAnnotationScanner.class.getClassLoader();
+        try (InputStream klazzStream = cl.getResourceAsStream(resName)) {
+            indexer.index(klazzStream);
+        } catch (IOException ioe) {
+            throw new UncheckedIOException(ioe);
+        }
+    }
+
     /**
      * Indexes the given archive.
-     * 
+     *
      * @param config
      * @param indexer
      * @param archive
      */
     private static void indexArchive(AsyncApiConfig config, Indexer indexer, Archive<?> archive) {
+        FilteredIndexView filter = new FilteredIndexView(null, config);
         Map<ArchivePath, Node> c = archive.getContent();
         try {
             for (Map.Entry<ArchivePath, Node> each : c.entrySet()) {
                 ArchivePath archivePath = each.getKey();
-                if (archivePath.get().endsWith(AsyncApiConstants.CLASS_SUFFIX)
-                        && acceptClassForScanning(config, archivePath.get())) {
-                    try (InputStream contentStream = each.getValue().getAsset().openStream()) {
-                        LOG.debugv("Indexing asset: {0} from archive: {1}", archivePath.get(), archive.getName());
+                if (archivePath.get()
+                        .endsWith(AsyncApiConstants.CLASS_SUFFIX) && acceptClassForScanning(filter, archivePath.get())) {
+                    try (InputStream contentStream = each.getValue()
+                            .getAsset()
+                            .openStream()) {
+                        TckLogging.log.indexing(archivePath.get(), archive.getName());
                         indexer.index(contentStream);
                     }
                     continue;
                 }
-                if (archivePath.get().endsWith(AsyncApiConstants.JAR_SUFFIX)
-                        && acceptJarForScanning(config, archivePath.get())) {
-                    try (InputStream contentStream = each.getValue().getAsset().openStream()) {
+                if (archivePath.get()
+                        .endsWith(AsyncApiConstants.JAR_SUFFIX) && acceptJarForScanning(config, archivePath.get())) {
+                    try (InputStream contentStream = each.getValue()
+                            .getAsset()
+                            .openStream()) {
                         JavaArchive jarArchive = ShrinkWrap.create(JavaArchive.class, archivePath.get())
-                                .as(ZipImporter.class).importFrom(contentStream).as(JavaArchive.class);
+                                .as(ZipImporter.class)
+                                .importFrom(contentStream)
+                                .as(JavaArchive.class);
                         indexArchive(config, indexer, jarArchive);
                     }
-                    continue;
                 }
             }
         } catch (IOException e) {
@@ -163,9 +182,9 @@ public class ArchiveUtil {
     }
 
     /**
-     * Returns true if the given JAR archive (dependency) should be cracked open and indexed
-     * along with the rest of the deployment's classes.
-     * 
+     * Returns true if the given JAR archive (dependency) should be cracked open and indexed along with the rest of the
+     * deployment's classes.
+     *
      * @param config
      * @param jarName
      */
@@ -175,61 +194,31 @@ public class ArchiveUtil {
         }
         Set<String> scanDependenciesJars = config.scanDependenciesJars();
         String nameOnly = new File(jarName).getName();
-        if (scanDependenciesJars.isEmpty() || scanDependenciesJars.contains(nameOnly)) {
-            return true;
-        }
-        return false;
+        return scanDependenciesJars.isEmpty() || scanDependenciesJars.contains(nameOnly);
     }
 
     /**
-     * Returns true if the class represented by the given archive path should be included in
-     * the annotation index.
-     * 
-     * @param config
+     * Returns true if the class represented by the given archive path should be included in the annotation index.
+     *
+     * @param filter
      * @param archivePath
      */
-    private static boolean acceptClassForScanning(AsyncApiConfig config, String archivePath) {
+    private static boolean acceptClassForScanning(FilteredIndexView filter, String archivePath) {
         if (archivePath == null) {
             return false;
-        }
-
-        Set<String> scanClasses = config.scanClasses();
-        Set<String> scanPackages = config.scanPackages();
-        Set<String> scanExcludeClasses = config.scanExcludeClasses();
-        Set<String> scanExcludePackages = config.scanExcludePackages();
-        if (scanClasses.isEmpty() && scanPackages.isEmpty() && scanExcludeClasses.isEmpty() && scanExcludePackages.isEmpty()) {
-            return true;
         }
 
         if (archivePath.startsWith(AsyncApiConstants.WEB_ARCHIVE_CLASS_PREFIX)) {
             archivePath = archivePath.substring(AsyncApiConstants.WEB_ARCHIVE_CLASS_PREFIX.length());
         }
-        String fqcn = archivePath.replaceAll("/", ".").substring(0, archivePath.lastIndexOf(AsyncApiConstants.CLASS_SUFFIX));
-        String packageName = "";
-        if (fqcn.contains(".")) {
-            int idx = fqcn.lastIndexOf(".");
-            packageName = fqcn.substring(0, idx);
+
+        String fqcn = archivePath.replaceAll("/", ".")
+                .substring(0, archivePath.lastIndexOf(AsyncApiConstants.CLASS_SUFFIX));
+
+        if (fqcn.startsWith(".")) {
+            fqcn = fqcn.substring(1);
         }
 
-        boolean accept;
-        // Includes
-        if (scanClasses.isEmpty() && scanPackages.isEmpty()) {
-            accept = true;
-        } else if (!scanClasses.isEmpty() && scanPackages.isEmpty()) {
-            accept = scanClasses.contains(fqcn);
-        } else if (scanClasses.isEmpty() && !scanPackages.isEmpty()) {
-            accept = scanPackages.contains(packageName);
-        } else {
-            accept = scanClasses.contains(fqcn) || scanPackages.contains(packageName);
-        }
-        // Excludes override includes
-        if (!scanExcludeClasses.isEmpty() && scanExcludeClasses.contains(fqcn)) {
-            accept = false;
-        }
-        if (!scanExcludePackages.isEmpty() && scanExcludePackages.contains(packageName)) {
-            accept = false;
-        }
-        return accept;
+        return filter.accepts(DotName.createSimple(fqcn));
     }
-
 }
