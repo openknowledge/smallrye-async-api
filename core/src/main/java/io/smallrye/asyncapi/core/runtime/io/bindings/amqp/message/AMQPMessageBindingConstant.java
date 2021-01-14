@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.io.bindings.amqp.message;
 
-package io.smallrye.asyncapi.tck;
+public class AMQPMessageBindingConstant {
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+    public static final String PROP_CONTENT_ENCODING = "contentEncoding";
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+    public static final String PROP_MESSAGE_TYPE = "messageType";
 
+    public static final String PROP_BINDING_VERSION = "bindingVersion";
+
+    public AMQPMessageBindingConstant() {
+    }
 }

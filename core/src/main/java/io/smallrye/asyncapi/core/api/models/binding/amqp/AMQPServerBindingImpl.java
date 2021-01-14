@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.api.models.binding.amqp;
 
-package io.smallrye.asyncapi.tck;
-
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+import io.smallrye.asyncapi.core.api.models.ExtensibleImpl;
+import io.smallrye.asyncapi.core.api.models.ModelImpl;
+import io.smallrye.asyncapi.spec.models.binding.ServerBinding;
+import io.smallrye.asyncapi.spec.models.binding.amqp.AMQPServerBinding;
 
 /**
- * @author eric.wittmann@gmail.com
+ * An implementation of the {@link AMQPServerBinding} AsyncAPI model interface.
  */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+public class AMQPServerBindingImpl extends ExtensibleImpl<ServerBinding> implements AMQPServerBinding, ModelImpl {
 }

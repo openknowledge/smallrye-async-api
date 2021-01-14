@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-package io.smallrye.asyncapi.tck;
+package io.smallrye.asyncapi.core.runtime;
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+public enum AsyncApiFormat {
+    JSON("application/json"),
+    YAML("application/yaml");
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+    private final String mimeType;
 
+    AsyncApiFormat(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
 }

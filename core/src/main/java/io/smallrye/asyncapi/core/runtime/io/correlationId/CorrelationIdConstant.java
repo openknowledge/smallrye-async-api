@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.io.correlationId;
 
-package io.smallrye.asyncapi.tck;
+import org.jboss.jandex.DotName;
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+import io.smallrye.asyncapi.spec.annotations.message.CorrelationID;
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+public class CorrelationIdConstant {
 
+    static final DotName DOTNAME_CORRELATION_ID = DotName.createSimple(CorrelationID.class.getName());
+
+    public static final String PROP_DESCRIPTION = "description";
+
+    public static final String PROP_LOCATION = "location";
+
+    public CorrelationIdConstant() {
+    }
 }

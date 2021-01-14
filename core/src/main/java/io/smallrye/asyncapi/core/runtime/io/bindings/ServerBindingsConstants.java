@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.io.bindings;
 
-package io.smallrye.asyncapi.tck;
+public class ServerBindingsConstants {
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+    public static final String PROP_MQTT_BINDING = "mqttBinding";
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+    public static final String PROP_BINDINGS = "bindings";
 
+    public ServerBindingsConstants() {
+    }
 }

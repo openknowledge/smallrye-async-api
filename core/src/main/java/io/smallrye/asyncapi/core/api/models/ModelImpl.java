@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.smallrye.asyncapi.tck;
-
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+package io.smallrye.asyncapi.core.api.models;
 
 /**
- * @author eric.wittmann@gmail.com
+ * Marker interface - all data model implementations implement this interface.
  */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+public interface ModelImpl {
 }

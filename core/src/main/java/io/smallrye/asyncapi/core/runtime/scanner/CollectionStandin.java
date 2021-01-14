@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.scanner;
 
-package io.smallrye.asyncapi.tck;
+import java.util.Collection;
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
-
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+public abstract class CollectionStandin<E> implements Collection<E> {
+    E value;
 }

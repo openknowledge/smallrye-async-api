@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.io.bindings.kafka.operation;
 
-package io.smallrye.asyncapi.tck;
+public class KafkaOperationBindingConstant {
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+    public static final String PROP_GROUP_ID = "groupId";
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+    public static final String PROP_CLIENT_ID = "clientId";
 
+    public static final String PROP_BINDING_VERSION = "bindingVersion";
+
+    public KafkaOperationBindingConstant() {
+    }
 }

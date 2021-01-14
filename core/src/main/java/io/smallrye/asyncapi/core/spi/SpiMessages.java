@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.spi;
 
-package io.smallrye.asyncapi.tck;
+import org.jboss.logging.Messages;
+import org.jboss.logging.annotations.Message;
+import org.jboss.logging.annotations.MessageBundle;
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+@MessageBundle(projectCode = "OKAAP", length = 5)
+interface SpiMessages {
+    SpiMessages msg = Messages.getBundle(SpiMessages.class);
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+    @Message(id = 9000, value = "Class '%s' is not Constructible.")
+    IllegalArgumentException classNotConstructible(String className);
 }

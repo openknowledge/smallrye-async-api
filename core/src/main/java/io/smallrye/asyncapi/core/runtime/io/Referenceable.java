@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.smallrye.asyncapi.tck;
-
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+package io.smallrye.asyncapi.core.runtime.io;
 
 /**
- * @author eric.wittmann@gmail.com
+ * Can be referenced
  */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+public class Referenceable {
 
+    public static final String PROP_$REF = "$ref";
+
+    private Referenceable() {
+    }
 }

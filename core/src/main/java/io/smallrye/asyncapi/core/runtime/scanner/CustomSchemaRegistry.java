@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.smallrye.asyncapi.tck;
-
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+package io.smallrye.asyncapi.core.runtime.scanner;
 
 /**
- * @author eric.wittmann@gmail.com
+ * A simple registry that allows users to provide a custom schema for some types.
  */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+public interface CustomSchemaRegistry {
+
+    /**
+     * Registers types with a custom schema.
+     *
+     * @param registry Schema registry to add the custom type/schema combinations to.
+     */
+    void registerCustomSchemas(SchemaRegistry registry);
 
 }

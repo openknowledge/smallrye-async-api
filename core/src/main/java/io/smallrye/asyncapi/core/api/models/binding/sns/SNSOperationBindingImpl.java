@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.api.models.binding.sns;
 
-package io.smallrye.asyncapi.tck;
-
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+import io.smallrye.asyncapi.core.api.models.ExtensibleImpl;
+import io.smallrye.asyncapi.core.api.models.ModelImpl;
+import io.smallrye.asyncapi.spec.models.binding.OperationBinding;
+import io.smallrye.asyncapi.spec.models.binding.sns.SNSOperationBinding;
 
 /**
- * @author eric.wittmann@gmail.com
+ * An implementation of the {@link SNSOperationBinding} AsyncAPI model interface.
  */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+public class SNSOperationBindingImpl extends ExtensibleImpl<OperationBinding> implements SNSOperationBinding, ModelImpl {
 }

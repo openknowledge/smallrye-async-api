@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.io.components;
 
-package io.smallrye.asyncapi.tck;
+public class ComponentsConstant {
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+    public static final String PROP_SCHEMAS = "schemas";
+    public static final String PROP_MESSAGES = "messages";
+    public static final String PROP_PARAMETERS = "parameters";
+    public static final String PROP_SECURITY_SCHEMES = "securitySchemes";
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+    private ComponentsConstant() {
+    }
 }

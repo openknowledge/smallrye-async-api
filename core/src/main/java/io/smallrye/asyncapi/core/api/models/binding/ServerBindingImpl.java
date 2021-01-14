@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.api.models.binding;
 
-package io.smallrye.asyncapi.tck;
-
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+import io.smallrye.asyncapi.core.api.models.ExtensibleImpl;
+import io.smallrye.asyncapi.core.api.models.ModelImpl;
+import io.smallrye.asyncapi.spec.models.binding.ServerBinding;
 
 /**
- * @author eric.wittmann@gmail.com
+ * An implementation of the {@link ServerBinding} AsyncAPI model interface.
  */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+public class ServerBindingImpl extends ExtensibleImpl<ServerBinding> implements ServerBinding, ModelImpl {
 }

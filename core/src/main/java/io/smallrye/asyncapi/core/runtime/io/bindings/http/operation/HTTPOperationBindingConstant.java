@@ -13,16 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.io.bindings.http.operation;
 
-package io.smallrye.asyncapi.tck;
+public class HTTPOperationBindingConstant {
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+    public static final String PROP_TYPE = "type";
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+    public static final String PROP_METHOD = "method";
 
+    public static final String PROP_QUERY = "query";
+
+    public static final String PROP_BINDING_VERSION = "bindingVersion";
+
+    public HTTPOperationBindingConstant() {
+    }
 }

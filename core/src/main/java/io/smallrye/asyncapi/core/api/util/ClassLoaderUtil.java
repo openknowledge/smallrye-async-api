@@ -13,16 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.api.util;
 
-package io.smallrye.asyncapi.tck;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+public class ClassLoaderUtil {
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+    private ClassLoaderUtil() {
+    }
+
+    public static final ClassLoader getDefaultClassLoader() {
+        if (System.getSecurityManager() == null) {
+            return Thread.currentThread()
+                    .getContextClassLoader();
+        }
+        return AccessController.doPrivileged((PrivilegedAction<ClassLoader>) () -> Thread.currentThread()
+                .getContextClassLoader());
+    }
 
 }

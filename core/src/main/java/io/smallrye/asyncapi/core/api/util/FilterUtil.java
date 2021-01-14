@@ -13,16 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.api.util;
 
-package io.smallrye.asyncapi.tck;
+import io.smallrye.asyncapi.spec.AASFilter;
+import io.smallrye.asyncapi.spec.models.AsyncAPI;
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+public class FilterUtil {
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+    private FilterUtil() {
+    }
 
+    /**
+     * Apply the given filter to the given model.
+     *
+     * @param filter AASFilter
+     * @param model AsyncAPI model
+     * @return Filtered AsyncAPI model
+     */
+    public static final AsyncAPI applyFilter(AASFilter filter, AsyncAPI model) {
+        return null;
+    }
 }

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.scanner.dataobject;
 
-package io.smallrye.asyncapi.tck;
+import org.jboss.logging.Messages;
+import org.jboss.logging.annotations.Message;
+import org.jboss.logging.annotations.MessageBundle;
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+@MessageBundle(projectCode = "OKAAP", length = 5)
+interface DataObjectMessages {
+    DataObjectMessages msg = Messages.getBundle(DataObjectMessages.class);
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+    @Message(id = 7000, value = "Input parameter can not be null")
+    RuntimeException notNull();
 }

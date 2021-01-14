@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.util;
 
-package io.smallrye.asyncapi.tck;
+public class StringUtil {
+    static final String EMPTY_STRING = "";
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
-
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+    public static boolean isNotEmpty(String stringVal) {
+        return !(stringVal == null || EMPTY_STRING.equals(stringVal.trim()));
+    }
 }

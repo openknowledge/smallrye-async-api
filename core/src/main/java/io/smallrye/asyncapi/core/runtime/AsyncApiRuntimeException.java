@@ -13,16 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.smallrye.asyncapi.tck;
-
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+/**
+ * <code>RuntimeException</code> to be thrown when fatal exceptions are detected
+ * in the Async API read/scan processes.
+ */
+package io.smallrye.asyncapi.core.runtime;
 
 /**
- * @author eric.wittmann@gmail.com
+ * <code>RuntimeException</code> to be thrown when fatal exceptions are detected
+ * in the Async API read/scan processes.
  */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+public class AsyncApiRuntimeException extends RuntimeException {
 
+    private static final long serialVersionUID = 8472532911884999427L;
+
+    public AsyncApiRuntimeException(final Throwable cause) {
+        super(cause);
+    }
 }

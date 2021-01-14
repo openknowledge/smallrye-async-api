@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.api.models.binding.nats;
 
-package io.smallrye.asyncapi.tck;
-
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+import io.smallrye.asyncapi.core.api.models.ExtensibleImpl;
+import io.smallrye.asyncapi.core.api.models.ModelImpl;
+import io.smallrye.asyncapi.spec.models.binding.MessageBinding;
+import io.smallrye.asyncapi.spec.models.binding.nats.NATSMessageBinding;
 
 /**
- * @author eric.wittmann@gmail.com
+ * An implementation of the {@link NATSMessageBinding} AsyncAPI model interface.
  */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
-
+public class NATSMessageBindingImpl extends ExtensibleImpl<MessageBinding> implements NATSMessageBinding, ModelImpl {
 }

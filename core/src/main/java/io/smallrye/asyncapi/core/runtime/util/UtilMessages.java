@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.smallrye.asyncapi.core.runtime.util;
 
-package io.smallrye.asyncapi.tck;
+import org.jboss.jandex.PrimitiveType;
+import org.jboss.logging.Messages;
+import org.jboss.logging.annotations.Message;
+import org.jboss.logging.annotations.MessageBundle;
 
-import test.io.smallrye.asyncapi.tck.BaseTckTest;
-import test.io.smallrye.asyncapi.tck.TckTest;
+@MessageBundle(projectCode = "OKAAP", length = 5)
+interface UtilMessages {
+    UtilMessages msg = Messages.getBundle(UtilMessages.class);
 
-/**
- * @author eric.wittmann@gmail.com
- */
-@TckTest
-public class StaticDocumentTckTest extends BaseTckTest<StaticDocumentTest> {
+    @Message(id = 8000, value = "RefType must not be null")
+    NullPointerException refTypeNotNull();
 
+    @Message(id = 8001, value = "Unknown primitive: %s")
+    IllegalArgumentException unknownPrimitive(PrimitiveType primitive);
 }
