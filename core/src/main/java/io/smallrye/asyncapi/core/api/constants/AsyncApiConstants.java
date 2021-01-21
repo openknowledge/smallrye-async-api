@@ -24,7 +24,7 @@ import io.smallrye.asyncapi.spec.AASConfig;
 
 public final class AsyncApiConstants {
 
-    public static final String VENDOR_NAME = "openknowledge.";
+    public static final String VENDOR_NAME = "smallrye.";
 
     public static final String SUFFIX_SCAN_DEPENDENCIES_DISABLE = "scan-dependencies.disable";
 
