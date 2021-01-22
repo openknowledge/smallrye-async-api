@@ -36,6 +36,7 @@
     <properties>
         <!-- MicroProfile Projects -->
         <version.eclipse.microprofile.config>2.0</version.eclipse.microprofile.config>
+        <version.eclipse.microprofile.rest-api>2.0</version.eclipse.microprofile.rest-api>
 
         <!-- SmallRye Projects -->
         <version.io.smallrye.smallrye-config>2.0.0</version.io.smallrye.smallrye-config>
@@ -45,6 +46,7 @@
 
         <!-- Jakarta EE Specifications -->
         <version.jakarta.validation>2.0.1</version.jakarta.validation>
+        <version.jakarta.servlet>4.0.4</version.jakarta.servlet>
 
         <!-- Third Party Libraries -->
         <version.com.fasterxml.jackson>2.12.0</version.com.fasterxml.jackson>
@@ -52,6 +54,7 @@
         <version.com.fasterxml.jackson.dataformat>2.12.0</version.com.fasterxml.jackson.dataformat>
         <version.commons-beanutils>1.9.4</version.commons-beanutils>
         <version.commons-logging>1.2</version.commons-logging>
+        <version.httpclient>4.5.13</version.httpclient>
 
         <!-- Test-only dependencies -->
         <version.org.hamcrest>1.3</version.org.hamcrest>
@@ -60,9 +63,22 @@
         <version.org.skyscreamer>1.5.0</version.org.skyscreamer>
         <version.org.jboss.resteasy.core-spi>4.5.8.Final</version.org.jboss.resteasy.core-spi>
 
+        <version.arquillian>1.6.0.Final</version.arquillian>
+        <version.io.rest-assured>4.3.3</version.io.rest-assured>
+
+        <version.restclient>2.0</version.restclient>
+        <version.restclient>1.1</version.restclient>
+
         <!-- Plug-Ins -->
+        <version.apache.rat.plugin>0.12</version.apache.rat.plugin>
+        <version.asciidoctor.maven.plugin>2.1.0</version.asciidoctor.maven.plugin>
         <version.buildhelper.plugin>3.0.0</version.buildhelper.plugin>
-        <version.jar.plugin>3.2.0</version.jar.plugin>
+        <version.eclipse.jarsigner.plugin>1.1.4</version.eclipse.jarsigner.plugin>
+        <version.maven.checkstyle.plugin>2.17</version.maven.checkstyle.plugin>
+        <version.maven.gpg.plugin>1.6</version.maven.gpg.plugin>
+        <version.maven.jar.plugin>3.2.0</version.maven.jar.plugin>
+        <version.maven.javadoc.plugin>3.2.0</version.maven.javadoc.plugin>
+        <version.maven.source.plugin>3.2.1</version.maven.source.plugin>
 
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/tck/target/site/jacoco-aggregate/jacoco.xml,${project.basedir}/../tck/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
@@ -111,11 +127,16 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <!-- MicroProfile Config -->
+            <!-- MicroProfile Projects -->
             <dependency>
                 <groupId>org.eclipse.microprofile.config</groupId>
                 <artifactId>microprofile-config-api</artifactId>
                 <version>${version.eclipse.microprofile.config}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.microprofile.rest.client</groupId>
+                <artifactId>microprofile-rest-client-api</artifactId>
+                <version>${version.eclipse.microprofile.rest-api}</version>
             </dependency>
 
             <!-- SmallRye Projects -->
@@ -138,6 +159,11 @@
                 <artifactId>jakarta.validation-api</artifactId>
                 <version>${version.jakarta.validation}</version>
             </dependency>
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${version.jakarta.servlet}</version>
+            </dependency>
 
             <!-- Third Party Libraries -->
             <dependency>
@@ -154,6 +180,11 @@
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-yaml</artifactId>
                 <version>${version.com.fasterxml.jackson.dataformat}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${version.httpclient}</version>
             </dependency>
 
             <!-- Test-only dependencies -->
@@ -183,6 +214,11 @@
                 <version>${version.org.hamcrest.java-hamcrest}</version>
             </dependency>
             <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>${version.io.rest-assured}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-core-spi</artifactId>
                 <version>${version.org.jboss.resteasy.core-spi}</version>
@@ -200,6 +236,19 @@
                 <version>${version.commons-logging}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${version.org.junit.jupiter.junit-jupiter}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${version.arquillian}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -209,12 +258,52 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>${version.jar.plugin}</version>
+                    <version>${version.maven.jar.plugin}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>{version.buildhelper.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.cbi.maven.plugins</groupId>
+                    <artifactId>eclipse-jarsigner-plugin</artifactId>
+                    <version>${version.eclipse.jarsigner.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${version.maven.checkstyle.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${version.maven.gpg.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${version.maven.javadoc.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${version.maven.release.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${version.maven.source.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>${version.asciidoctor.maven.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.rat</groupId>
+                    <artifactId>apache-rat-plugin</artifactId>
+                    <version>${version.apache.rat.plugin}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

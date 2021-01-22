@@ -30,37 +30,14 @@
     <artifactId>smallrye-async-api-spec-tck</artifactId>
     <name>SmallRye: MicroProfile AsyncAPI Spec TCK</name>
 
-    <properties>
-        <arquillian.version>1.6.0.Final</arquillian.version>
-        <restclient.version>2.0</restclient.version>
-        <rest-assured.version>4.3.3</rest-assured.version>
-        <servlet.version>4.0.4</servlet.version>
-        <httpclient.version>4.5.13</httpclient.version>
-        <restclient.version>1.1</restclient.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${arquillian.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>io.smallrye</groupId>
             <artifactId>smallrye-async-api-spec-api</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.eclipse.microprofile.rest.client</groupId>
             <artifactId>microprofile-rest-client-api</artifactId>
-            <version>${restclient.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -79,8 +56,6 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>${rest-assured.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -93,12 +68,10 @@
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>${servlet.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>${httpclient.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -151,5 +124,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
