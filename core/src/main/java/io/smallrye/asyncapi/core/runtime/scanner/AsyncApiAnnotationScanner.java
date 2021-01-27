@@ -95,7 +95,7 @@ public class AsyncApiAnnotationScanner {
             filteredIndexView = new FilteredIndexView(index, config);
         }
 
-        this.annotationScannerContext = new AnnotationScannerContext(filteredIndexView, loader, extensions, config);
+        this.annotationScannerContext = new AnnotationScannerContext(filteredIndexView, loader, extensions, config, new AsyncAPIImpl());
         this.annotationScannerFactory = new AnnotationScannerFactory(loader);
     }
 
@@ -180,12 +180,5 @@ public class AsyncApiAnnotationScanner {
                 throw ScannerMessages.msg.failedCreateInstance(config.customSchemaRegistryClass(), ex);
             }
         }
-    }
-
-    @Override
-    public String toString() {
-        return "AsyncApiAnnotationScanner{" + "annotationScannerContext=" + annotationScannerContext
-                + ", annotationScannerFactory="
-                + annotationScannerFactory + '}';
     }
 }
