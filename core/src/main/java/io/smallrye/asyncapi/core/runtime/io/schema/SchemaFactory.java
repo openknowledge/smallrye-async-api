@@ -35,7 +35,6 @@ import org.jboss.jandex.Type;
 
 import io.smallrye.asyncapi.core.api.constants.AsyncApiConstants;
 import io.smallrye.asyncapi.core.api.models.schema.SchemaImpl;
-import io.smallrye.asyncapi.core.api.models.schema.SchemaPropertyImpl;
 import io.smallrye.asyncapi.core.api.util.MergeUtil;
 import io.smallrye.asyncapi.core.runtime.io.CurrentScannerInfo;
 import io.smallrye.asyncapi.core.runtime.io.IoLogging;
@@ -252,21 +251,21 @@ public class SchemaFactory {
         schema.setUniqueItems(readAttr(annotation, SchemaConstant.PROP_UNIQUE_ITEMS, defaults));
         schema.setExtensions(ExtensionReader.readExtensions(context, annotation));
 
-        schema.setProperties(SchemaFactory.<AnnotationInstance[], Map<String, SchemaProperty>> readAttr(annotation,
-                SchemaConstant.PROP_PROPERTIES, properties -> {
-                    if (properties == null || properties.length == 0) {
-                        return null;
-                    }
-                    Map<String, SchemaProperty> propertySchemas = new LinkedHashMap<>(properties.length);
-                    for (AnnotationInstance propAnnotation : properties) {
-                        String key = JandexUtil.value(propAnnotation, SchemaConstant.PROP_NAME);
-                        SchemaProperty value = readSchemaProperty(context, new SchemaPropertyImpl(), propAnnotation,
-                                Collections.emptyMap());
-                        propertySchemas.put(key, value);
-                    }
+        schema.setProperties(SchemaFactory.<AnnotationInstance[], Map<String, Schema>> readAttr(annotation,
+            SchemaConstant.PROP_PROPERTIES, properties -> {
+                if (properties == null || properties.length == 0) {
+                    return null;
+                }
+                Map<String, Schema> propertySchemas = new LinkedHashMap<>(properties.length);
+                for (AnnotationInstance propAnnotation : properties) {
+                    String key = JandexUtil.value(propAnnotation, SchemaConstant.PROP_NAME);
+                    Schema value = readSchema(context, new SchemaImpl(), propAnnotation,
+                        Collections.emptyMap());
+                    propertySchemas.put(key, value);
+                }
 
-                    return propertySchemas;
-                }, defaults));
+                return propertySchemas;
+            }, defaults));
 
         List<String> enumeration = readAttr(annotation, SchemaConstant.PROP_ENUMERATION, defaults);
 

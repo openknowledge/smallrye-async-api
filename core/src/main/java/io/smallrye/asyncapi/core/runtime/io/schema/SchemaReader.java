@@ -115,7 +115,7 @@ public class SchemaReader {
      * @return Map of Schema models
      */
     public static Map<String, Schema> readSchemas(final AnnotationScannerContext context,
-            final AnnotationValue annotationValue) {
+        final AnnotationValue annotationValue) {
         if (annotationValue == null) {
             return null;
         }
@@ -177,7 +177,7 @@ public class SchemaReader {
         schema.setType(readSchemaType(node.get(SchemaConstant.PROP_TYPE)));
         schema.setNot(readSchema(node.get(SchemaConstant.PROP_NOT)));
         schema.setAllOf(readSchemaArray(node.get(SchemaConstant.PROP_ALL_OF)).orElse(null));
-        schema.setProperties(readSchemaProperties(node.get(SchemaConstant.PROP_PROPERTIES)).orElse(null));
+        schema.setProperties(readSchemas(node.get(SchemaConstant.PROP_PROPERTIES)).orElse(null));
         schema.setReadOnly(JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY).orElse(null));
         schema.setExternalDocs(ExternalDocsReader.readExternalDocs(node.get(ExternalDocsConstant.PROP_EXTERNAL_DOCS)));
         schema.setExample((String) readObject(node.get(SchemaConstant.PROP_EXAMPLE)));
