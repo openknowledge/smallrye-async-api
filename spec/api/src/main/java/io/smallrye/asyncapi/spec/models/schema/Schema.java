@@ -691,14 +691,14 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      *
      * @return property from this Schema instance
      **/
-    Map<String, SchemaProperty> getProperties();
+    Map<String, Schema> getProperties();
 
     /**
      * Sets the properties from this Schema instance
      *
      * @param properties from this Schema instance
      */
-    void setProperties(Map<String, SchemaProperty> properties);
+    void setProperties(Map<String, Schema> properties);
 
     /**
      * Sets the properties from this Schema instance
@@ -706,7 +706,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @param properties from this Schema instance
      * @return this Schema instance
      */
-    default Schema properties(Map<String, SchemaProperty> properties) {
+    default Schema properties(Map<String, Schema> properties) {
         setProperties(properties);
         return this;
     }
@@ -718,7 +718,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @param property to be added to the SchemaProperty
      * @return the current Schema object
      */
-    Schema addProperty(String key, SchemaProperty property);
+    Schema addProperty(String key, Schema property);
 
     /**
      * Removes the given schema property from this Schema' list of properties.
