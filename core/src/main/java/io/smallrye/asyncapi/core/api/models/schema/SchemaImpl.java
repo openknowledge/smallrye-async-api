@@ -84,7 +84,7 @@ public class SchemaImpl extends ExtensibleImpl<Schema> implements Schema, ModelI
 
     private Boolean writeOnly;
 
-    private Map<String, SchemaProperty> properties;
+    private Map<String, Schema> properties;
 
     private Schema additionalPropertiesSchema;
 
@@ -529,24 +529,24 @@ public class SchemaImpl extends ExtensibleImpl<Schema> implements Schema, ModelI
      * @see Schema#getProperties()
      */
     @Override
-    public Map<String, SchemaProperty> getProperties() {
-        return ModelUtil.unmodifiableMap(this.properties);
+    public Map<String, Schema> getProperties() {
+        return this.properties;
     }
 
     /**
-     * @see Schema#setProperties(Map<String,SchemaProperty>)
+     * @see Schema#setProperties(Map<String,Schema>)
      */
     @Override
-    public void setProperties(final Map<String, SchemaProperty> properties) {
-        this.properties = ModelUtil.replace(properties, LinkedHashMap::new);
+    public void setProperties(final Map<String, Schema> properties) {
+        this.properties = properties;
     }
 
     /**
-     * @see Schema#addProperty(String key, SchemaProperty property)
+     * @see Schema#addProperty(String key, Schema property)
      */
     @Override
-    public Schema addProperty(final String key, final SchemaProperty property) {
-        this.properties = ModelUtil.add(key, property, this.properties, LinkedHashMap<String, SchemaProperty>::new);
+    public Schema addProperty(final String key, final Schema property) {
+        this.properties = ModelUtil.add(key,property, this.properties, LinkedHashMap<String, Schema>::new);
         return this;
     }
 
@@ -742,24 +742,5 @@ public class SchemaImpl extends ExtensibleImpl<Schema> implements Schema, ModelI
     @Override
     public void setRef(final String ref) {
         this.ref = ref;
-    }
-
-    @Override
-    public String toString() {
-        return "SchemaImpl{" + "ref='" + ref + '\'' + ", title='" + title + '\'' + ", type=" + type + ", required=" + required
-                + ", description='"
-                + description + '\'' + ", format='" + format + '\'' + ", name='" + name + '\'' + ", multipleOf=" + multipleOf
-                + ", maximum=" + maximum
-                + ", exclusiveMaximum=" + exclusiveMaximum + ", minimum=" + minimum + ", exclusiveMinimum=" + exclusiveMinimum
-                + ", maxLength=" + maxLength
-                + ", minLength=" + minLength + ", pattern='" + pattern + '\'' + ", maxItems=" + maxItems + ", minItems="
-                + minItems + ", uniqueItems="
-                + uniqueItems + ", maxProperties=" + maxProperties + ", minProperties=" + minProperties + ", enumerations="
-                + enumerations + ", constant="
-                + constant + ", example='" + example + '\'' + ", readOnly=" + readOnly + ", writeOnly=" + writeOnly
-                + ", properties=" + properties
-                + ", additionalPropertiesSchema=" + additionalPropertiesSchema + ", additionalPropertiesSchemaBoolean="
-                + additionalPropertiesSchemaBoolean
-                + ", items=" + items + ", allOf=" + allOf + ", oneOf=" + oneOf + ", anyOf=" + anyOf + ", not=" + not + '}';
     }
 }

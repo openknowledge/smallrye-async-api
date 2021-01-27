@@ -32,6 +32,7 @@ import io.smallrye.asyncapi.spec.models.schema.Schema;
 import io.smallrye.asyncapi.spec.models.schema.SchemaProperty;
 
 public class SchemaWriter {
+
     private SchemaWriter() {
     }
 
@@ -145,17 +146,17 @@ public class SchemaWriter {
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_UNIQUE_ITEMS, model.getUniqueItems());
             JsonUtil.intProperty(node, SchemaConstant.PROP_MAX_PROPERTIES, model.getMaxProperties());
             JsonUtil.intProperty(node, SchemaConstant.PROP_MIN_PROPERTIES, model.getMinProperties());
-            //ObjectWriter.writeStringArray(node, model.getRequired(), SchemaConstant.PROP_REQUIRED);
+            ObjectWriter.writeStringArray(node, model.getRequired(), SchemaConstant.PROP_REQUIRED);
             ObjectWriter.writeStringArray(node, model.getEnumeration(), SchemaConstant.PROP_ENUMERATION);
             JsonUtil.enumProperty(node, SchemaConstant.PROP_TYPE, model.getType());
-            //writeSchemaList(node, model.getAllOf(), SchemaConstant.PROP_ALL_OF);
-            writeSchemaProperties(node, model.getProperties(), SchemaConstant.PROP_PROPERTIES);
+            writeSchemaList(node, model.getAllOf(), SchemaConstant.PROP_ALL_OF);
+            writeSchemas(node, model.getProperties(), SchemaConstant.PROP_PROPERTIES);
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY, model.getReadOnly());
             ExternalDocsWriter.writeExternalDocumentation(node, model.getExternalDocs());
-            //ObjectWriter.writeObject(node, SchemaConstant.PROP_EXAMPLE, model.getExample());
-            //writeSchemaList(node, model.getOneOf(), SchemaConstant.PROP_ONE_OF);
-            //writeSchemaList(node, model.getAnyOf(), SchemaConstant.PROP_ANY_OF);
-            //writeSchema(node, model.getNot(), SchemaConstant.PROP_NOT);
+            ObjectWriter.writeObject(node, SchemaConstant.PROP_EXAMPLE, model.getExample());
+            writeSchemaList(node, model.getOneOf(), SchemaConstant.PROP_ONE_OF);
+            writeSchemaList(node, model.getAnyOf(), SchemaConstant.PROP_ANY_OF);
+            writeSchema(node, model.getNot(), SchemaConstant.PROP_NOT);
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_WRITE_ONLY, model.getWriteOnly());
             ExtensionWriter.writeExtensions(node, model);
         }
@@ -187,14 +188,14 @@ public class SchemaWriter {
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_UNIQUE_ITEMS, model.getUniqueItems());
             JsonUtil.intProperty(node, SchemaConstant.PROP_MAX_PROPERTIES, model.getMaxProperties());
             JsonUtil.intProperty(node, SchemaConstant.PROP_MIN_PROPERTIES, model.getMinProperties());
-            //ObjectWriter.writeStringArray(node, model.getRequired(), SchemaConstant.PROP_REQUIRED);
+            ObjectWriter.writeStringArray(node, model.getRequired(), SchemaConstant.PROP_REQUIRED);
             JsonUtil.enumProperty(node, SchemaConstant.PROP_TYPE, model.getType());
-            //writeSchemaList(node, model.getAllOf(), SchemaConstant.PROP_ALL_OF);
+            writeSchemaList(node, model.getAllOf(), SchemaConstant.PROP_ALL_OF);
             ObjectWriter.writeStringArray(node, model.getEnumeration(), SchemaConstant.PROP_ENUMERATION);
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY, model.getReadOnly());
-            //ObjectWriter.writeObject(node, SchemaConstant.PROP_EXAMPLE, model.getExample());
-            //writeSchemaList(node, model.getOneOf(), SchemaConstant.PROP_ONE_OF);
-            //writeSchemaList(node, model.getAnyOf(), SchemaConstant.PROP_ANY_OF);
+            ObjectWriter.writeObject(node, SchemaConstant.PROP_EXAMPLE, model.getExample());
+            writeSchemaList(node, model.getOneOf(), SchemaConstant.PROP_ONE_OF);
+            writeSchemaList(node, model.getAnyOf(), SchemaConstant.PROP_ANY_OF);
             //writeSchema(node, model.getNot(), SchemaConstant.PROP_NOT);
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_WRITE_ONLY, model.getWriteOnly());
             ExtensionWriter.writeExtensions(node, model);
