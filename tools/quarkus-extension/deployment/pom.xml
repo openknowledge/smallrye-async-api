@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>quarkus-smallrye-asyncapi-deployment</artifactId>
-    <name>SmallRye - AsyncAPI Extension - Deployment</name>
+    <name>Quarkus - SmallRye AsyncAPI - Deployment</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

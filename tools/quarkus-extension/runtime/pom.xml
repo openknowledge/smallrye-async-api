@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>quarkus-smallrye-asyncapi</artifactId>
-    <name>SmallRye - AsyncAPI Extension - Runtime</name>
+    <name>Quarkus - SmallRye AsyncAPI - Runtime</name>
     <description>Document your Message Driven APIs with AsyncAPI</description>
 
     <properties>
