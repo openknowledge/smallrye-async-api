@@ -25,9 +25,11 @@
     </parent>
 
     <artifactId>smallrye-async-api-tools</artifactId>
-
     <name>SmallRye: MicroProfile AsyncAPI Tools</name>
-
     <packaging>pom</packaging>
+
+    <modules>
+        <module>quarkus-extension</module>
+    </modules>
 
 </project>
