@@ -210,6 +210,40 @@ public class StreetlightsAppTest extends AppTestBase {
         String parameters = "components.parameters.streetlightId.";
         vr.body(parameters + "description", equalTo("The ID of the streetlight."));
         vr.body(parameters + "schema.type", equalTo("string"));
+
+        String schemas = "components.schemas.";
+        vr.body(schemas + "dimLightPayload.required[0]", equalTo("percentage"));
+        vr.body(schemas + "dimLightPayload.required[1]", equalTo("sentAt"));
+        vr.body(schemas + "dimLightPayload.type", equalTo("object"));
+        vr.body(schemas + "dimLightPayload.properties.percentage.format", equalTo("int32"));
+        vr.body(schemas + "dimLightPayload.properties.percentage.description", equalTo("Percentage to which the light should be dimmed to."));
+        vr.body(schemas + "dimLightPayload.properties.percentage.maximum", equalTo(100));
+        vr.body(schemas + "dimLightPayload.properties.percentage.minimum", equalTo(0));
+        vr.body(schemas + "dimLightPayload.properties.percentage.type", equalTo("integer"));
+
+        vr.body(schemas + "dimLightPayload.properties.sentAt.format", equalTo("date-time"));
+        vr.body(schemas + "dimLightPayload.properties.sentAt.description", equalTo("Date and time when the message was sent."));
+        vr.body(schemas + "dimLightPayload.properties.sentAt.type", equalTo("string"));
+
+        vr.body(schemas + "turnOnOffPayload.required[0]", equalTo("command"));
+        vr.body(schemas + "turnOnOffPayload.required[1]", equalTo("sentAt"));
+        vr.body(schemas + "turnOnOffPayload.type", equalTo("object"));
+        vr.body(schemas + "turnOnOffPayload.properties.command.$ref", equalTo("#/components/schemas/Command"));
+        vr.body(schemas + "turnOnOffPayload.properties.sentAt.format", equalTo("date-time"));
+        vr.body(schemas + "turnOnOffPayload.properties.sentAt.type", equalTo("string"));
+
+        vr.body(schemas + "Command.type", equalTo("string"));
+        vr.body(schemas + "Command.enumeration[0]", equalTo("OFF"));
+        vr.body(schemas + "Command.enumeration[1]", equalTo("ON"));
+
+        vr.body(schemas + "lightMeasuredPayload.type", equalTo("object"));
+        vr.body(schemas + "lightMeasuredPayload.required[0]", equalTo("lumens"));
+        vr.body(schemas + "lightMeasuredPayload.properties.lumens.format", equalTo("int32"));
+        vr.body(schemas + "lightMeasuredPayload.properties.lumens.description", equalTo("Light intensity measured in lumens."));
+        vr.body(schemas + "lightMeasuredPayload.properties.lumens.minimum", equalTo(0));
+        vr.body(schemas + "lightMeasuredPayload.properties.lumens.type", equalTo("integer"));
+        vr.body(schemas + "lightMeasuredPayload.properties.sentAt.$ref", equalTo("#/components/schemas/sentAt"));
+
     }
 
     @RunAsClient
