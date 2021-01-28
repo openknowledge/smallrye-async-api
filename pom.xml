@@ -56,6 +56,9 @@
         <version.commons-logging>1.2</version.commons-logging>
         <version.httpclient>4.5.13</version.httpclient>
 
+        <version.reactivemessaging.api>2.3.0</version.reactivemessaging.api>
+        <version.reactivemessaging.mqtt>2.3.0</version.reactivemessaging.mqtt>
+
         <!-- Test-only dependencies -->
         <version.org.hamcrest>1.3</version.org.hamcrest>
         <version.org.hamcrest.java-hamcrest>2.0.0.0</version.org.hamcrest.java-hamcrest>
@@ -79,6 +82,7 @@
         <version.maven.jar.plugin>3.2.0</version.maven.jar.plugin>
         <version.maven.javadoc.plugin>3.2.0</version.maven.javadoc.plugin>
         <version.maven.source.plugin>3.2.1</version.maven.source.plugin>
+        <version.maven.release.plugin>2.5.3</version.maven.release.plugin>
 
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/tck/target/site/jacoco-aggregate/jacoco.xml,${project.basedir}/../tck/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
@@ -163,6 +167,18 @@
                 <groupId>jakarta.servlet</groupId>
                 <artifactId>jakarta.servlet-api</artifactId>
                 <version>${version.jakarta.servlet}</version>
+            </dependency>
+
+            <!-- Reative Messaging -->
+            <dependency>
+                <groupId>io.smallrye.reactive</groupId>
+                <artifactId>smallrye-reactive-messaging-api</artifactId>
+                <version>${version.reactivemessaging.api}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.smallrye.reactive</groupId>
+                <artifactId>smallrye-reactive-messaging-mqtt</artifactId>
+                <version>${version.reactivemessaging.mqtt}</version>
             </dependency>
 
             <!-- Third Party Libraries -->
@@ -304,6 +320,52 @@
                     <groupId>org.apache.rat</groupId>
                     <artifactId>apache-rat-plugin</artifactId>
                     <version>${version.apache.rat.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.cbi.maven.plugins</groupId>
+                    <artifactId>eclipse-jarsigner-plugin</artifactId>
+                    <version>${version.eclipse.jarsigner.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${version.maven.checkstyle.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${version.gpg.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${version.jar.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${version.maven.javadoc.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${version.maven.release.plugin}</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <localCheckout>true</localCheckout>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <arguments>${arguments} -Prelease -Drevremark=${revremark}</arguments>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${version.maven.source.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>${version.asciidoctor.maven.plugin}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

@@ -162,6 +162,7 @@
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
+                <version>${version.apache.rat.plugin}</version>
                 <executions>
                     <execution>
                         <id>rat-check</id>
