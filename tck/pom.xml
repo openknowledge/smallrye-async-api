@@ -59,6 +59,19 @@
             <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging-processor</artifactId>
+        </dependency>
+
         <!-- Test-only dependencies -->
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
@@ -109,11 +122,6 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>java-hamcrest</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.logging</groupId>
-            <artifactId>jboss-logging-annotations</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
