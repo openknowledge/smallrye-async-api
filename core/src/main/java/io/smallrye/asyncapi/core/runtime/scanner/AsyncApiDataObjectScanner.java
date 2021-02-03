@@ -256,15 +256,15 @@ public class AsyncApiDataObjectScanner {
 
                 // Get all fields *including* inherited.
                 Map<String, TypeResolver> properties = TypeResolver.getAllFields(index, ignoreResolver, currentType,
-                    currentClass,
-                    reference);
+                        currentClass,
+                        reference);
 
                 // Handle fields
                 properties.values()
-                    .stream()
-                    .filter(resolver -> !resolver.isIgnored())
-                    .forEach(resolver -> AnnotationTargetProcessor.process(context, objectStack, resolver,
-                        currentPathEntry));
+                        .stream()
+                        .filter(resolver -> !resolver.isIgnored())
+                        .forEach(resolver -> AnnotationTargetProcessor.process(context, objectStack, resolver,
+                                currentPathEntry));
 
                 processInheritance(currentPathEntry);
             }

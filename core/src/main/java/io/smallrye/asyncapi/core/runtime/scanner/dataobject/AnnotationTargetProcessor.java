@@ -122,7 +122,7 @@ public class AnnotationTargetProcessor implements BeanValidationScanner.Requirem
         } else {
             // Process the type of the field to derive the typeSchema
             TypeProcessor typeProcessor = new TypeProcessor(context, objectStack, parentPathEntry, typeResolver, entityType,
-                new SchemaImpl(), annotationTarget);
+                    new SchemaImpl(), annotationTarget);
 
             // Type could be replaced (e.g. generics)
             fieldType = typeProcessor.processType();

@@ -31,9 +31,12 @@
     <packaging>pom</packaging>
 
     <name>SmallRye: MicroProfile AsyncAPI Parent</name>
+    <description>Document your Message Drive APIs with AsyncAPI</description>
     <url>http://smallrye.io</url>
 
     <properties>
+        <version.quarkus>1.11.1.Final</version.quarkus>
+
         <!-- MicroProfile Projects -->
         <version.eclipse.microprofile.config>2.0</version.eclipse.microprofile.config>
         <version.eclipse.microprofile.rest-api>2.0</version.eclipse.microprofile.rest-api>
@@ -116,6 +119,7 @@
         <module>tck</module>
         <module>tools</module>
         <module>examples</module>
+        <module>ui</module>
     </modules>
 
     <dependencyManagement>
@@ -212,6 +216,38 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
                 <version>${version.httpclient}</version>
+            </dependency>
+
+            <!-- Tools -->
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-core</artifactId>
+                <version>${version.quarkus}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-vertx-http</artifactId>
+                <version>${version.quarkus}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-arc</artifactId>
+                <version>${version.quarkus}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-netty-deployment</artifactId>
+                <version>${version.quarkus}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-vertx-core-deployment</artifactId>
+                <version>${version.quarkus}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-vertx-http-deployment</artifactId>
+                <version>${version.quarkus}</version>
             </dependency>
 
             <!-- Test-only dependencies -->

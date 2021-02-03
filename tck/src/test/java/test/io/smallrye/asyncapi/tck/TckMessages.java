@@ -22,11 +22,11 @@ import org.jboss.logging.annotations.MessageBundle;
 
 @MessageBundle(projectCode = "SRAAP", length = 5)
 interface TckMessages {
-  TckMessages msg = Messages.getBundle(TckMessages.class);
+    TckMessages msg = Messages.getBundle(TckMessages.class);
 
-  @Message(id = 13000, value = "Archive was null!")
-  RuntimeException nullArchive();
+    @Message(id = 13000, value = "Archive was null!")
+    RuntimeException nullArchive();
 
-  @Message(id = 13001, value = "No @Deployment archive found for test.")
-  Exception missingDeploymentArchive();
+    @Message(id = 13001, value = "No @Deployment archive found for test.")
+    Exception missingDeploymentArchive();
 }

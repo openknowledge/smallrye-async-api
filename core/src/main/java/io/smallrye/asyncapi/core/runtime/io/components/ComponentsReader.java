@@ -61,7 +61,7 @@ public class ComponentsReader {
                 .setMessages(MessageReader.readMessages(context, nested.value(ComponentsConstant.PROP_MESSAGES)).orElse(null));
         components.setSecuritySchemes(SecuritySchemesReader
                 .readSecuritySchemes(context, nested.value(ComponentsConstant.PROP_SECURITY_SCHEMES)).orElse(null));
-        components.setSchemas(SchemaReader.readSchemas(context,nested.value(ComponentsConstant.PROP_SCHEMAS)));
+        components.setSchemas(SchemaReader.readSchemas(context, nested.value(ComponentsConstant.PROP_SCHEMAS)));
 
         return components;
     }

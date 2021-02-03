@@ -161,7 +161,7 @@ public class TckTestRunner extends ParentRunner<ProxiedTckTest> {
                         if (m.isAnnotationPresent(DataProvider.class)) {
                             DataProvider provider = m.getAnnotation(DataProvider.class);
                             if (provider.name()
-                                .equals(providerMethodName)) {
+                                    .equals(providerMethodName)) {
                                 providerMethod = m;
                                 break;
                             }
@@ -183,7 +183,7 @@ public class TckTestRunner extends ParentRunner<ProxiedTckTest> {
             }
         }
         children.sort(Comparator.comparing(o -> o.getTestMethod()
-            .getName()));
+                .getName()));
         return children;
     }
 
@@ -194,8 +194,8 @@ public class TckTestRunner extends ParentRunner<ProxiedTckTest> {
      */
     private Arquillian createDelegate(Object testObj) throws Exception {
         Object delegate = testObj.getClass()
-            .getMethod("getDelegate")
-            .invoke(testObj);
+                .getMethod("getDelegate")
+                .invoke(testObj);
         return (Arquillian) delegate;
     }
 
@@ -205,13 +205,13 @@ public class TckTestRunner extends ParentRunner<ProxiedTckTest> {
     @Override
     protected Description describeChild(ProxiedTckTest child) {
         StringBuilder name = new StringBuilder(child.getTestMethod()
-            .getName());
+                .getName());
 
         if (child.getArguments().length > 0) {
             name.append(' ');
             name.append(Arrays.stream(child.getArguments())
-                .map(Object::toString)
-                .collect(Collectors.joining(",")));
+                    .map(Object::toString)
+                    .collect(Collectors.joining(",")));
         }
 
         return Description.createTestDescription(tckTestClass, name.toString());
@@ -223,7 +223,7 @@ public class TckTestRunner extends ParentRunner<ProxiedTckTest> {
     @Override
     protected void runChild(final ProxiedTckTest child, final RunNotifier notifier) {
         AsyncApiDocument.INSTANCE.set(TckTestRunner.ASYNC_API_DOCS.get(child.getTest()
-            .getClass()));
+                .getClass()));
 
         Description description = describeChild(child);
         if (isIgnored(child)) {
@@ -238,7 +238,7 @@ public class TckTestRunner extends ParentRunner<ProxiedTckTest> {
                     } catch (InvocationTargetException e) {
                         Throwable cause = e.getCause();
                         Test testAnno = child.getTestMethod()
-                            .getAnnotation(Test.class);
+                                .getAnnotation(Test.class);
                         Class[] expectedExceptions = testAnno.expectedExceptions();
                         if (expectedExceptions != null && expectedExceptions.length > 0) {
                             Class expectedException = expectedExceptions[0];
@@ -280,9 +280,9 @@ public class TckTestRunner extends ParentRunner<ProxiedTckTest> {
     private static ClassLoader getContextClassLoader() {
         if (System.getSecurityManager() == null) {
             return Thread.currentThread()
-                .getContextClassLoader();
+                    .getContextClassLoader();
         }
         return AccessController.doPrivileged((PrivilegedAction<ClassLoader>) () -> Thread.currentThread()
-            .getContextClassLoader());
+                .getContextClassLoader());
     }
 }
