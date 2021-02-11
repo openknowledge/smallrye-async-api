@@ -88,22 +88,19 @@ public class StreetlightsAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testServers(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("servers", hasSize(1));
 
-        String url = "api.streetlights.smartylighting.com:{port}";
-        String serverPath = "servers.find { it.url == '" + url + "' }";
-
-        vr.body(serverPath + ".description", equalTo("Test broker"));
-        vr.body(serverPath + ".variables", aMapWithSize(1));
-        vr.body(serverPath + ".variables.port.default", equalTo("1883"));
-        vr.body(serverPath + ".variables.port.description", equalTo("Secure connection (TLS) is available through port 8883."));
-        vr.body(serverPath + ".variables.port.enum", containsInAnyOrder("1883", "8883"));
-        vr.body(serverPath + ".security", hasSize(3));
-        vr.body(serverPath + ".security[0].apiKey", hasSize(0));
-        vr.body(serverPath + ".security[1].supportedOauthFlows", hasSize(3));
-        vr.body(serverPath + ".security[1].supportedOauthFlows",
+        vr.body("servers.production.description", equalTo("Test broker"));
+        vr.body("servers.production.variables", aMapWithSize(1));
+        vr.body("servers.production.variables.port.default", equalTo("1883"));
+        vr.body("servers.production.variables.port.description",
+                equalTo("Secure connection (TLS) is available through port 8883."));
+        vr.body("servers.production.variables.port.enum", containsInAnyOrder("1883", "8883"));
+        vr.body("servers.production.security", hasSize(3));
+        vr.body("servers.production.security[0].apiKey", hasSize(0));
+        vr.body("servers.production.security[1].supportedOauthFlows", hasSize(3));
+        vr.body("servers.production.security[1].supportedOauthFlows",
                 containsInAnyOrder("streetlights:on", "streetlights:off", "streetlights:dim"));
-        vr.body(serverPath + ".security[2].openIdConnectWellKnown", hasSize(0));
+        vr.body("servers.production.security[2].openIdConnectWellKnown", hasSize(0));
     }
 
     @RunAsClient

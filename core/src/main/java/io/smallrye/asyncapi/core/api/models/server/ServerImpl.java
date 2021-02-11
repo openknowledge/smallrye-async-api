@@ -35,6 +35,8 @@ public class ServerImpl extends ExtensibleImpl<Server> implements Server, ModelI
 
     private String url;
 
+    private String name;
+
     private String protocol;
 
     private String protocolVersion;
@@ -61,6 +63,22 @@ public class ServerImpl extends ExtensibleImpl<Server> implements Server, ModelI
     @Override
     public void setUrl(final String url) {
         this.url = url;
+    }
+
+    /**
+     * @see Server#getName()
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * @see Server#setName(String name)
+     */
+    @Override
+    public void setName(final String name) {
+        this.name = name;
     }
 
     /**

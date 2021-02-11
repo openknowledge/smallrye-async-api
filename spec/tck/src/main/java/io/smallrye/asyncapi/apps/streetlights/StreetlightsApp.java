@@ -33,7 +33,7 @@ import io.smallrye.asyncapi.spec.annotations.server.ServerVariable;
 import io.smallrye.asyncapi.spec.annotations.tag.Tag;
 
 @AsyncAPI(asyncapi = "2.0.0", defaultContentType = "application/json", info = @Info(title = "Streetlights API", version = "1.0.0", description = "The Smartylighting Streetlights API allows you to remotely manage the city lights. ### Check out its awesome features: * TurnOnOff a specific streetlight on/off * Dim a specific streetlight * Receive real-time information about environmental lighting conditions", license = @License(name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0")), externalDocs = @ExternalDocumentation(url = "https://example.com", description = "Find more info here"), id = "urn:com:smartylighting:streetlights:server", servers = {
-        @Server(url = "api.streetlights.smartylighting.com:{port}", protocol = "mqtt", description = "Test broker", variables = {
+        @Server(url = "api.streetlights.smartylighting.com:{port}", name = "production", protocol = "mqtt", description = "Test broker", variables = {
                 @ServerVariable(name = "port", description = "Secure connection (TLS) is available through port 8883.", defaultValue = "1883", enumeration = {
                         "1883", "8883" })
         }, security = {

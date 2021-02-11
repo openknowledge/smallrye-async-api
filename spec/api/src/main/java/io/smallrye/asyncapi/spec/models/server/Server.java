@@ -61,6 +61,31 @@ public interface Server extends Constructible, Extensible<Server> {
     }
 
     /**
+     * Returns the name of the Server
+     *
+     * @return the name
+     */
+    String getName();
+
+    /**
+     * Sets the name of the Server
+     *
+     * @param name of the Server
+     */
+    void setName(String name);
+
+    /**
+     * Sets this Server instance's name
+     *
+     * @param name of the Server
+     * @return the current Server object
+     */
+    default Server name(String name) {
+        setName(name);
+        return this;
+    }
+
+    /**
      * Returns the protocol of the Server
      *
      * @return the protocol

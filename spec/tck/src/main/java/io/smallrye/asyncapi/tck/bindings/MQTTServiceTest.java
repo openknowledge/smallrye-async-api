@@ -66,15 +66,12 @@ public class MQTTServiceTest extends AppTestBase {
     public void testServerBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        String url = "mqtt://example.com";
-        String serverPath = "servers.find { it.url == '" + url + "' }";
-
-        vr.body(serverPath + ".bindings.mqttBinding.clientId", equalTo("guest"));
-        vr.body(serverPath + ".bindings.mqttBinding.cleanSession", equalTo(true));
-        vr.body(serverPath + ".bindings.mqttBinding.lastWill.topic", equalTo("/last-will"));
-        vr.body(serverPath + ".bindings.mqttBinding.lastWill.qos", equalTo(2));
-        vr.body(serverPath + ".bindings.mqttBinding.lastWill.message", equalTo("Guest gone offline."));
-        vr.body(serverPath + ".bindings.mqttBinding.lastWill.retain", equalTo(false));
+        vr.body("servers.production.bindings.mqttBinding.clientId", equalTo("guest"));
+        vr.body("servers.production.bindings.mqttBinding.cleanSession", equalTo(true));
+        vr.body("servers.production.bindings.mqttBinding.lastWill.topic", equalTo("/last-will"));
+        vr.body("servers.production.bindings.mqttBinding.lastWill.qos", equalTo(2));
+        vr.body("servers.production.bindings.mqttBinding.lastWill.message", equalTo("Guest gone offline."));
+        vr.body("servers.production.bindings.mqttBinding.lastWill.retain", equalTo(false));
 
     }
 }
