@@ -78,7 +78,6 @@ public class ParameterWriter {
 
         ObjectNode node = parent.putObject(model.getName());
 
-        JsonUtil.stringProperty(node, ParameterConstant.PROP_NAME, model.getName());
         JsonUtil.stringProperty(node, ParameterConstant.PROP_DESCRIPTION, model.getDescription());
         SchemaWriter.writeSchema(node.putObject(ParameterConstant.PROP_SCHEMA), model.getSchema());
         JsonUtil.stringProperty(node, ParameterConstant.PROP_LOCATION, model.getLocation());
