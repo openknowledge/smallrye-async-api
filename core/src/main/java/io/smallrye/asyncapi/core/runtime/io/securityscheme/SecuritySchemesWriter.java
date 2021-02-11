@@ -46,10 +46,19 @@ public class SecuritySchemesWriter {
             return;
         }
         ObjectNode node;
-        if (model.getName() != null && model.getName() != "") {
-            node = parent.putObject(model.getName());
-        } else {
-            node = parent.putObject(model.getType().toString());
+
+        switch (model.getType()) {
+            case APIKEY:
+                node = parent.putObject("apiKey");
+                break;
+            case OAUTH2:
+                node = parent.putObject("supportedOauthFlows");
+                break;
+            case OPENIDCONNECT:
+                node = parent.putObject("openIdConnectWellKnown");
+                break;
+            default:
+                node = parent.putObject(model.getType().toString());
         }
 
         if (model.getType() != null) {
