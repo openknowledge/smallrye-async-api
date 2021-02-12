@@ -40,6 +40,8 @@ public class WebSocketServiceTest extends AppTestBase {
     public void testVersion(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
+        System.out.println(getResponse().body().prettyPrint());
+
         vr.body("asyncapi", equalTo("2.0.0"));
     }
 
@@ -48,7 +50,7 @@ public class WebSocketServiceTest extends AppTestBase {
     public void testChannelBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        String channelPath = "channels.ws-test1.bindings.wsBinding.";
+        String channelPath = "channels.ws-test1.bindings.ws.";
         vr.body(channelPath + "method", equalTo("GET"));
         vr.body(channelPath + "bindingVersion", equalTo("0.1.0"));
     }

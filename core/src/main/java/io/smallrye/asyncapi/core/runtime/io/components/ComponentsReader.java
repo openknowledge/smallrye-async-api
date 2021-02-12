@@ -15,12 +15,6 @@
  */
 package io.smallrye.asyncapi.core.runtime.io.components;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import io.smallrye.asyncapi.core.runtime.io.schema.SchemaReader;
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationValue;
 
@@ -30,10 +24,10 @@ import io.smallrye.asyncapi.core.api.models.ComponentsImpl;
 import io.smallrye.asyncapi.core.runtime.io.IoLogging;
 import io.smallrye.asyncapi.core.runtime.io.message.MessageReader;
 import io.smallrye.asyncapi.core.runtime.io.parameter.ParameterReader;
+import io.smallrye.asyncapi.core.runtime.io.schema.SchemaReader;
 import io.smallrye.asyncapi.core.runtime.io.securityscheme.SecuritySchemesReader;
 import io.smallrye.asyncapi.core.runtime.scanner.spi.AnnotationScannerContext;
 import io.smallrye.asyncapi.spec.models.Components;
-import io.smallrye.asyncapi.spec.models.security.SecurityScheme;
 
 public class ComponentsReader {
 
@@ -58,7 +52,7 @@ public class ComponentsReader {
                 .setMessages(MessageReader.readMessages(context, nested.value(ComponentsConstant.PROP_MESSAGES)).orElse(null));
         components.setSecuritySchemes(SecuritySchemesReader
                 .readSecuritySchemes(context, nested.value(ComponentsConstant.PROP_SECURITY_SCHEMES)).orElse(null));
-        components.setSchemas(SchemaReader.readSchemas(context,nested.value(ComponentsConstant.PROP_SCHEMAS)));
+        components.setSchemas(SchemaReader.readSchemas(context, nested.value(ComponentsConstant.PROP_SCHEMAS)));
 
         return components;
     }

@@ -30,15 +30,15 @@ import io.smallrye.asyncapi.spec.annotations.schema.SchemaType;
 
 public class HTTPService {
 
-    @ChannelItem(channel = "http-test1", subscribe = @Operation(bindings = @OperationBindings(httpBinding = @HTTPOperationBinding(type = "request", method = Method.GET, query = @Schema(type = SchemaType.OBJECT, properties = {
-                    @SchemaProperty(name = "companyId", minimum = "1", description = "The Id of the company")
-            }), bindingVersion = "0.1.0")))
+    @ChannelItem(channel = "http-test1", subscribe = @Operation(bindings = @OperationBindings(http = @HTTPOperationBinding(type = "request", method = Method.GET, query = @Schema(type = SchemaType.OBJECT, properties = {
+            @SchemaProperty(name = "companyId", minimum = "1", description = "The Id of the company")
+    }), bindingVersion = "0.1.0")))
 
     )
     public void httpTest1() {
     }
 
-    @ChannelItem(channel = "http-test2", publish = @Operation(message = @Message(bindings = @MessageBindings(httpBinding = @HTTPMessageBinding(headers = @Schema(type = SchemaType.OBJECT), bindingVersion = "0.1.0")))))
+    @ChannelItem(channel = "http-test2", publish = @Operation(message = @Message(bindings = @MessageBindings(http = @HTTPMessageBinding(headers = @Schema(type = SchemaType.OBJECT), bindingVersion = "0.1.0")))))
     public void httpTest2() {
     }
 }

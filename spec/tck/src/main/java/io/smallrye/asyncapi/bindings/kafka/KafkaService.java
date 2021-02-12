@@ -28,12 +28,12 @@ import io.smallrye.asyncapi.spec.annotations.schema.SchemaType;
 
 public class KafkaService {
 
-    @ChannelItem(channel = "kafka-test1", subscribe = @Operation(message = @Message(bindings = @MessageBindings(kafkaBinding = @KafkaMessageBinding(key = @Schema(type = SchemaType.STRING, enumeration = {
+    @ChannelItem(channel = "kafka-test1", subscribe = @Operation(message = @Message(bindings = @MessageBindings(kafka = @KafkaMessageBinding(key = @Schema(type = SchemaType.STRING, enumeration = {
             "myKey" }), bindingVersion = "0.1.0")))))
     public void kafkaTest1() {
     }
 
-    @ChannelItem(channel = "kafka-test2", subscribe = @Operation(bindings = @OperationBindings(kafkaBinding = @KafkaOperationBinding(groupId = @Schema(type = SchemaType.STRING, enumeration = {
+    @ChannelItem(channel = "kafka-test2", subscribe = @Operation(bindings = @OperationBindings(kafka = @KafkaOperationBinding(groupId = @Schema(type = SchemaType.STRING, enumeration = {
             "myGroupId" }), clientId = @Schema(type = SchemaType.STRING, enumeration = {
                     "myClientId" }), bindingVersion = "0.1.0"))))
     public void kafkaTest2() {

@@ -47,7 +47,7 @@ public class HTTPServiceTest extends AppTestBase {
     public void testOperationBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        String httpBinding = "channels.http-test1.subscribe.bindings.httpBinding.";
+        String httpBinding = "channels.http-test1.subscribe.bindings.http.";
         vr.body(httpBinding + "type", equalTo("request"));
         vr.body(httpBinding + "method", equalTo("GET"));
         vr.body(httpBinding + "query.type", equalTo("object"));
@@ -61,7 +61,7 @@ public class HTTPServiceTest extends AppTestBase {
     public void testMessageBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        String httpBinding = "channels.http-test2.publish.message.bindings.httpBinding.";
+        String httpBinding = "channels.http-test2.publish.message.bindings.http.";
         vr.body(httpBinding + "headers.type", equalTo("object"));
         vr.body(httpBinding + "bindingVersion", equalTo("0.1.0"));
     }

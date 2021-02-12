@@ -45,5 +45,5 @@ public @interface ServerBindings {
      *
      * @return mqtt bindings of the server
      */
-    MQTTServerBinding mqttBinding() default @MQTTServerBinding();
+    MQTTServerBinding mqtt() default @MQTTServerBinding();
 }

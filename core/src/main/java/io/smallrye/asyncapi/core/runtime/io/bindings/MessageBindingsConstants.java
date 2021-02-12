@@ -19,13 +19,13 @@ public class MessageBindingsConstants {
 
     public static final String PROP_BINDINGS = "bindings";
 
-    public static final String PROP_AMQP_BINDING = "amqpBinding";
+    public static final String PROP_AMQP_BINDING = "amqp";
 
-    public static final String PROP_HTTP_BINDING = "httpBinding";
+    public static final String PROP_HTTP_BINDING = "http";
 
-    public static final String PROP_KAFKA_BINDING = "kafkaBinding";
+    public static final String PROP_KAFKA_BINDING = "kafka";
 
-    public static final String PROP_MQTT_BINDING = "mqttBinding";
+    public static final String PROP_MQTT_BINDING = "mqtt";
 
     public MessageBindingsConstants() {
     }

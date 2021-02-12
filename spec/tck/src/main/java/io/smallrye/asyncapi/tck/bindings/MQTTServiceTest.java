@@ -47,14 +47,14 @@ public class MQTTServiceTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testMessageBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("channels.mqtt-test1.subscribe.message.bindings.mqttBinding.bindingVersion", equalTo("0.1.0"));
+        vr.body("channels.mqtt-test1.subscribe.message.bindings.mqtt.bindingVersion", equalTo("0.1.0"));
     }
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testOperationBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String operationPath = "channels.mqtt-test2.subscribe.bindings.mqttBinding.";
+        String operationPath = "channels.mqtt-test2.subscribe.bindings.mqtt.";
 
         vr.body(operationPath + "qos", equalTo(2));
         vr.body(operationPath + "retain", equalTo(true));
@@ -65,13 +65,14 @@ public class MQTTServiceTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testServerBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
+        String serverPath = "servers.production.bindings.mqtt.";
 
-        vr.body("servers.production.bindings.mqttBinding.clientId", equalTo("guest"));
-        vr.body("servers.production.bindings.mqttBinding.cleanSession", equalTo(true));
-        vr.body("servers.production.bindings.mqttBinding.lastWill.topic", equalTo("/last-will"));
-        vr.body("servers.production.bindings.mqttBinding.lastWill.qos", equalTo(2));
-        vr.body("servers.production.bindings.mqttBinding.lastWill.message", equalTo("Guest gone offline."));
-        vr.body("servers.production.bindings.mqttBinding.lastWill.retain", equalTo(false));
+        vr.body(serverPath + "clientId", equalTo("guest"));
+        vr.body(serverPath + "cleanSession", equalTo(true));
+        vr.body(serverPath + "lastWill.topic", equalTo("/last-will"));
+        vr.body(serverPath + "lastWill.qos", equalTo(2));
+        vr.body(serverPath + "lastWill.message", equalTo("Guest gone offline."));
+        vr.body(serverPath + "lastWill.retain", equalTo(false));
 
     }
 }
