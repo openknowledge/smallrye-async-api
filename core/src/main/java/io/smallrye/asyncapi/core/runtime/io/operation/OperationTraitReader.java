@@ -16,11 +16,15 @@
 package io.smallrye.asyncapi.core.runtime.io.operation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationValue;
+import org.jboss.jandex.MethodInfo;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -40,6 +44,10 @@ import io.smallrye.asyncapi.spec.models.operation.OperationTrait;
 public class OperationTraitReader {
 
     public OperationTraitReader() {
+    }
+
+    public static AnnotationInstance getOperationTraitAnnotation(final MethodInfo method) {
+        return method.annotation(OperationConstant.DOTNAME_OPERATION_TRAIT);
     }
 
     public static Optional<List<OperationTrait>> readOperationTraits(final AnnotationScannerContext context,
@@ -86,6 +94,24 @@ public class OperationTraitReader {
         operationTrait.setRef(JandexUtil.stringValue(annotationInstance, OperationConstant.PROP_REF));
 
         return operationTrait;
+    }
+
+    public static Optional<Map<String, OperationTrait>> readComponentsOperationTraits(final JsonNode node) {
+        if (node != null && node.isArray()) {
+            IoLogging.logger.singleJsonNode("OperationTraits");
+
+            Map<String, OperationTrait> rval = new HashMap<>();
+            for (Iterator<String> iterator = node.fieldNames(); iterator.hasNext();) {
+                String fieldName = iterator.next();
+                JsonNode schemeNode = node.get(fieldName);
+                OperationTrait trait = readOperationTrait(schemeNode);
+                rval.put(fieldName, trait);
+            }
+
+            return Optional.of(rval);
+        }
+
+        return Optional.empty();
     }
 
     public static Optional<List<OperationTrait>> readOperationTraits(final JsonNode node) {

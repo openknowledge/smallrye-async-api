@@ -15,15 +15,23 @@
  */
 package io.smallrye.asyncapi.core.runtime.io.components;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import io.smallrye.asyncapi.core.runtime.io.definition.DefinitionConstant;
 import io.smallrye.asyncapi.core.runtime.io.extension.ExtensionWriter;
+import io.smallrye.asyncapi.core.runtime.io.message.MessageTraitWriter;
 import io.smallrye.asyncapi.core.runtime.io.message.MessageWriter;
+import io.smallrye.asyncapi.core.runtime.io.operation.OperationTraitWriter;
 import io.smallrye.asyncapi.core.runtime.io.parameter.ParameterWriter;
 import io.smallrye.asyncapi.core.runtime.io.schema.SchemaWriter;
 import io.smallrye.asyncapi.core.runtime.io.securityscheme.SecuritySchemesWriter;
 import io.smallrye.asyncapi.spec.models.Components;
+import io.smallrye.asyncapi.spec.models.message.MessageTrait;
+import io.smallrye.asyncapi.spec.models.operation.OperationTrait;
 
 public class ComponentsWriter {
     public ComponentsWriter() {
@@ -49,7 +57,34 @@ public class ComponentsWriter {
         SecuritySchemesWriter.writeSecuritySchemes(node, model.getSecuritySchemes());
         ParameterWriter.writeParameters(node, model.getParameters());
         SchemaWriter.writeSchemas(node, model.getSchemas());
+        OperationTraitWriter.writeOperationTraits(node, getOperationTraits(model));
+        MessageTraitWriter.writeComponentsMessageTraits(node, getMessageTraits(model));
         ExtensionWriter.writeExtensions(node, model);
     }
 
+    private static List<OperationTrait> getOperationTraits(Components model) {
+        if (model.getOperationTraits() == null) {
+            return new ArrayList<>();
+        }
+
+        List<OperationTrait> list = new ArrayList<>();
+        for (Map.Entry<String, OperationTrait> entry : model.getOperationTraits().entrySet()) {
+            list.add(entry.getValue());
+        }
+
+        return list;
+    }
+
+    private static List<MessageTrait> getMessageTraits(Components model) {
+        if (model.getMessageTraits() == null) {
+            return new ArrayList<>();
+        }
+
+        List<MessageTrait> list = new ArrayList<>();
+        for (Map.Entry<String, MessageTrait> entry : model.getMessageTraits().entrySet()) {
+            list.add(entry.getValue());
+        }
+
+        return list;
+    }
 }

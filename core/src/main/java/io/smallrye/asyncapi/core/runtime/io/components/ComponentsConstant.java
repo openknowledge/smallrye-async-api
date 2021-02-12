@@ -18,9 +18,16 @@ package io.smallrye.asyncapi.core.runtime.io.components;
 public class ComponentsConstant {
 
     public static final String PROP_SCHEMAS = "schemas";
+
     public static final String PROP_MESSAGES = "messages";
+
     public static final String PROP_PARAMETERS = "parameters";
+
     public static final String PROP_SECURITY_SCHEMES = "securitySchemes";
+
+    public static final String PROP_OPERATION_TRAITS = "operationTraits";
+
+    public static final String PROP_MESSAGE_TRAITS = "messageTraits";
 
     private ComponentsConstant() {
     }

@@ -15,6 +15,8 @@
  */
 package io.smallrye.asyncapi.core.runtime.io.operation;
 
+import org.jboss.jandex.DotName;
+
 public class OperationConstant {
 
     public static final String PROP_OPERATION_ID = "operationId";
@@ -34,6 +36,9 @@ public class OperationConstant {
     public static final String PROP_MESSAGE = "message";
 
     public static final String PROP_REF = "ref";
+
+    public static final DotName DOTNAME_OPERATION_TRAIT = DotName
+            .createSimple("io.smallrye.asyncapi.spec.annotations.operation.OperationTrait");
 
     public OperationConstant() {
     }
