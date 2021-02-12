@@ -89,12 +89,15 @@ public class ChannelsReader {
         channelItem.setDescription(JandexUtil.stringValue(annotationInstance, ChannelsConstants.PROP_DESCRIPTION));
         channelItem
                 .setPublish(OperationReader.readOperation(context, annotationInstance.value(ChannelsConstants.PROP_PUBLISH)));
-        channelItem.setSubscribe(
-                OperationReader.readOperation(context, annotationInstance.value(ChannelsConstants.PROP_SUBSCRIBE)));
-        channelItem.setParameters(
-                ParameterReader.readParametersList(context, annotationInstance.value(ChannelsConstants.PROP_PARAMETERS)));
-        channelItem.setBindings(
-                ChannelBindingsReader.readChannelBindings(context, annotationInstance.value(ChannelsConstants.PROP_BINDING)));
+        channelItem
+                .setSubscribe(
+                        OperationReader.readOperation(context, annotationInstance.value(ChannelsConstants.PROP_SUBSCRIBE)));
+        channelItem
+                .setParameters(ParameterReader.readParametersList(context,
+                        annotationInstance.value(ChannelsConstants.PROP_PARAMETERS)));
+        channelItem
+                .setBindings(ChannelBindingsReader.readChannelBindings(context,
+                        annotationInstance.value(ChannelsConstants.PROP_BINDING)));
 
         return channelItem;
     }
@@ -117,14 +120,14 @@ public class ChannelsReader {
             String fieldName = iterator.next();
             if (!ExtensionConstant.isExtensionField(fieldName)) {
                 JsonNode varNode = node.get(fieldName);
-                channels.addChannel(fieldName, readChannelItem(varNode));
+                channels.addChannel(fieldName, readChannelItem(varNode, fieldName));
             }
         }
 
         return channels;
     }
 
-    private static ChannelItem readChannelItem(JsonNode node) {
+    private static ChannelItem readChannelItem(JsonNode node, String name) {
         if (node == null) {
             return null;
         }
@@ -133,7 +136,7 @@ public class ChannelsReader {
 
         ChannelItem channelItem = new ChannelItemImpl();
 
-        channelItem.setChannel(JsonUtil.stringProperty(node, ChannelsConstants.PROP_CHANNEL));
+        channelItem.setChannel(name);
         channelItem.setDescription(JsonUtil.stringProperty(node, ChannelsConstants.PROP_DESCRIPTION));
         channelItem.setSubscribe(OperationReader.readOperation(node.get(ChannelsConstants.PROP_SUBSCRIBE)));
         channelItem.setPublish(OperationReader.readOperation(node.get(ChannelsConstants.PROP_PUBLISH)));

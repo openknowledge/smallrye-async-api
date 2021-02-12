@@ -58,7 +58,6 @@ public class ChannelsWriter {
         }
 
         ObjectNode node = parent.putObject(model.getChannel());
-        JsonUtil.stringProperty(node, ChannelsConstants.PROP_CHANNEL, model.getChannel());
         JsonUtil.stringProperty(node, ChannelsConstants.PROP_DESCRIPTION, model.getDescription());
         OperationWriter.writePublish(node, model.getPublish());
         OperationWriter.writeSubscribe(node, model.getSubscribe());
