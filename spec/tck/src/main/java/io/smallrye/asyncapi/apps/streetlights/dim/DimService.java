@@ -43,21 +43,23 @@ public class DimService {
           ref = "#/components/parameters/streetlightId") }),
       publish = @Operation(operationId = "dimLight",
           traits = { @OperationTrait(ref = "#/components/operationTraits/kafka") },
-          message = @Message(name = "dimLight",
-              title = "Dim light",
-              summary = "Command a particular streetlight to dim the lights.",
-              headers = @Schema(name = "Message Header",
-                  description = "A Kafka Message Header"),
-              traits = { @MessageTrait(name = "commonHeaders",
-                  description = "Common Headers",
-                  contentType = "application/json",
-                  headers = @Schema(type = SchemaType.OBJECT,
-                      properties = @SchemaProperty(name = "my-app-header",
-                          type = SchemaType.INTEGER,
-                          minimum = "0",
-                          maximum = "100")),
-                  example = { "{'minimum': 0, 'maximum': 100}", "{'minimum': 10, 'maximum': 50}" }) },
-              payload = @Schema(ref = "#/components/schemas/dimLightPayload"))))
+          message = @Message(ref = "#/components/messages/dimLight")))
+  @Message(name = "dimLight",
+      title = "Dim light",
+      summary = "Command a particular streetlight to dim the lights.",
+      headers = @Schema(name = "Message Header",
+          description = "A Kafka Message Header"),
+      traits = { @MessageTrait(ref = "#/components/messageTraits/commonHeaders") },
+      payload = @Schema(ref = "#/components/schemas/dimLightPayload"))
+  @MessageTrait(name = "commonHeaders",
+      description = "Common Headers",
+      contentType = "application/json",
+      headers = @Schema(type = SchemaType.OBJECT,
+          properties = @SchemaProperty(name = "my-app-header",
+              type = SchemaType.INTEGER,
+              minimum = "0",
+              maximum = "100")),
+      example = { "{'minimum': 0, 'maximum': 100}", "{'minimum': 10, 'maximum': 50}" })
   @Outgoing("dim")
   public Multi<MqttMessage<Dim>> dim() {
     return Multi.createFrom()

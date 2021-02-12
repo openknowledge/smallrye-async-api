@@ -24,8 +24,6 @@ import io.smallrye.asyncapi.spec.annotations.operation.OperationTrait;
 import io.smallrye.asyncapi.spec.annotations.parameter.Parameter;
 import io.smallrye.asyncapi.spec.annotations.parameter.Parameters;
 import io.smallrye.asyncapi.spec.annotations.schema.Schema;
-import io.smallrye.asyncapi.spec.annotations.schema.SchemaProperty;
-import io.smallrye.asyncapi.spec.annotations.schema.SchemaType;
 import io.smallrye.asyncapi.spec.annotations.tag.Tag;
 import io.smallrye.reactive.messaging.mqtt.MqttMessage;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
@@ -43,21 +41,14 @@ public class MeasuredService {
       subscribe = @Operation(summary = "Receive information about environmental lighting conditions of a particular streetlight.",
           operationId = "receiveLightMeasurement",
           traits = { @OperationTrait(ref = "#/components/operationTraits/kafka") },
-          message = @Message(name = "lightMeasured",
-              title = "Light measured",
-              summary = "Inform about environmental lighting conditions for a particular streetlight.",
-              contentType = "application/json",
-              traits = { @MessageTrait(name = "commonHeaders",
-                  description = "Common Headers",
-                  contentType = "application/json",
-                  headers = @Schema(type = SchemaType.OBJECT,
-                      properties = @SchemaProperty(name = "my-app-header",
-                          type = SchemaType.INTEGER,
-                          minimum = "0",
-                          maximum = "100")),
-                  example = { "{'minimum': 0, 'maximum': 100}", "{'minimum': 10, 'maximum': 50}" }) },
-              payload = @Schema(ref = "#/components/schemas/lightMeasuredPayload"),
-              tags = { @Tag(name = "streetlights"), @Tag(name = "measure") })))
+          message = @Message(ref = "#/components/messages/lightMeasured")))
+  @Message(name = "lightMeasured",
+      title = "Light measured",
+      summary = "Inform about environmental lighting conditions for a particular streetlight.",
+      contentType = "application/json",
+      traits = { @MessageTrait(ref = "#/components/messageTraits/commonHeaders") },
+      payload = @Schema(ref = "#/components/schemas/lightMeasuredPayload"),
+      tags = { @Tag(name = "streetlights"), @Tag(name = "measure") })
   @Incoming("measure")
   public CompletionStage<Void> consume(final org.eclipse.microprofile.reactive.messaging.Message<byte[]> message) {
     MqttMessage mqttMessage = message.unwrap(MqttMessage.class);
