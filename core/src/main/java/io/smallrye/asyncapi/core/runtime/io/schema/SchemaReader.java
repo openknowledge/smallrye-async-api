@@ -135,7 +135,7 @@ public class SchemaReader {
              * {@link org.eclipse.microprofile.openapi.annotations.Components}.
              */
             if (name != null) {
-              map.put(name, SchemaFactory.readSchema(context, new SchemaImpl(name), nested, Collections.emptyMap()));
+                map.put(name, SchemaFactory.readSchema(context, new SchemaImpl(name), nested, Collections.emptyMap()));
             }
         }
         return map;
@@ -177,7 +177,6 @@ public class SchemaReader {
         schema.setEnumeration(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_ENUMERATION)).orElse(null));
         schema.setType(readSchemaType(node.get(SchemaConstant.PROP_TYPE)));
         schema.setNot(readSchema(node.get(SchemaConstant.PROP_NOT)));
-        schema.setAllOf(readSchemaArray(node.get(SchemaConstant.PROP_ALL_OF)).orElse(null));
         schema.setProperties(readSchemas(node.get(SchemaConstant.PROP_PROPERTIES)).orElse(null));
         schema.setReadOnly(JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY).orElse(null));
         schema.setExternalDocs(ExternalDocsReader.readExternalDocs(node.get(ExternalDocsConstant.PROP_EXTERNAL_DOCS)));
@@ -235,8 +234,6 @@ public class SchemaReader {
         schema.setRequired(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_REQUIRED)).orElse(null));
         schema.setEnumeration(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_ENUMERATION)).orElse(null));
         schema.setType(readSchemaType(node.get(SchemaConstant.PROP_TYPE)));
-        //schema.setNot(readSchema(node.get(SchemaConstant.PROP_NOT)));
-        schema.setAllOf(readSchemaArray(node.get(SchemaConstant.PROP_ALL_OF)).orElse(null));
         schema.setReadOnly(JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY).orElse(null));
         schema.setExample((String) readObject(node.get(SchemaConstant.PROP_EXAMPLE)));
         schema.setOneOf(readSchemaArray(node.get(SchemaConstant.PROP_ONE_OF)).orElse(null));
