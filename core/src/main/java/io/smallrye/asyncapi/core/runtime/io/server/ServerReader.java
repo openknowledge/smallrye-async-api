@@ -137,6 +137,7 @@ public class ServerReader {
      * Reads a list of {@link Server} AsyncAPI nodes.
      *
      * @param node the json array
+     * @param name the name of the server
      * @return a List of Server models
      */
     public static Server readServer(final JsonNode node, final String name) {
