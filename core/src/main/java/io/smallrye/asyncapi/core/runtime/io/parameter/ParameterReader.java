@@ -99,7 +99,7 @@ public class ParameterReader {
         for (Iterator<String> fieldNames = node.fieldNames(); fieldNames.hasNext();) {
             String fieldName = fieldNames.next();
             JsonNode varNode = node.get(fieldName);
-            Parameter parameter = readParameter(varNode);
+            Parameter parameter = readParameter(varNode, fieldName);
             parameters.put(parameter.getName(), parameter);
         }
 
@@ -123,13 +123,13 @@ public class ParameterReader {
         for (Iterator<String> fieldNames = node.fieldNames(); fieldNames.hasNext();) {
             String fieldName = fieldNames.next();
             JsonNode varNode = node.get(fieldName);
-            parameters.addParameter(readParameter(varNode));
+            parameters.addParameter(readParameter(varNode, fieldName));
         }
 
         return parameters;
     }
 
-    private static Parameter readParameter(final JsonNode node) {
+    private static Parameter readParameter(final JsonNode node, final String name) {
         if (node == null) {
             return null;
         }
@@ -143,7 +143,7 @@ public class ParameterReader {
             return parameter;
         }
 
-        parameter.setName(JsonUtil.stringProperty(node, ParameterConstant.PROP_NAME));
+        parameter.setName(name);
         parameter.setDescription(JsonUtil.stringProperty(node, ParameterConstant.PROP_DESCRIPTION));
         parameter.setSchema(SchemaReader.readSchema(node.get(ParameterConstant.PROP_SCHEMA)));
         parameter.setLocation(JsonUtil.stringProperty(node, ParameterConstant.PROP_LOCATION));
