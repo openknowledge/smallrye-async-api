@@ -19,7 +19,6 @@ package io.smallrye.asyncapi.apps.streetlights.dim;
 import java.time.LocalDateTime;
 
 import io.smallrye.asyncapi.spec.annotations.schema.Schema;
-import io.smallrye.asyncapi.spec.annotations.schema.SchemaProperty;
 import io.smallrye.asyncapi.spec.annotations.schema.SchemaType;
 
 @Schema(name = "dimLightPayload", type = SchemaType.OBJECT)

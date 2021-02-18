@@ -48,19 +48,19 @@ public @interface ChannelBindings {
      *
      * @return amqp bindings of the channel
      */
-    AMQPChannelBinding amqpBinding() default @AMQPChannelBinding();
+    AMQPChannelBinding amqp() default @AMQPChannelBinding();
 
     /**
      * http-specific definitions for the channel.
      *
      * @return http bindings of the channel
      */
-    HTTPChannelBinding httpBinding() default @HTTPChannelBinding();
+    HTTPChannelBinding http() default @HTTPChannelBinding();
 
     /**
      * ws-specific definitions for the channel.
      *
      * @return ws bindings of the channel
      */
-    WebSocketChannelBinding wsBinding() default @WebSocketChannelBinding(headers = @Schema, query = @Schema);
+    WebSocketChannelBinding ws() default @WebSocketChannelBinding(headers = @Schema, query = @Schema);
 }

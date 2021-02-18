@@ -31,11 +31,11 @@ import io.smallrye.asyncapi.spec.annotations.operation.Operation;
 
 public class AMQPService {
 
-    @ChannelItem(channel = "amqp-test1", bindings = @ChannelBindings(amqpBinding = @AMQPChannelBinding(is = "queue", queue = @Queue(name = "amqp-test"))))
+    @ChannelItem(channel = "amqp-test1", bindings = @ChannelBindings(amqp = @AMQPChannelBinding(is = "queue", queue = @Queue(name = "amqp-test"))))
     public void amqpTest1() {
     }
 
-    @ChannelItem(channel = "amqp-test2", bindings = @ChannelBindings(amqpBinding = @AMQPChannelBinding(exchange = @Exchange(name = "amqp-test", type = ExchangeType.TOPIC))), publish = @Operation(message = @Message(bindings = @MessageBindings(amqpBinding = @AMQPMessageBinding(contentEncoding = "gzip", messageType = "test.amqp", bindingVersion = "0.1.0"))), bindings = @OperationBindings(amqpBinding = @AMQPOperationBinding(expiration = 100000, userId = "guest", cc = {
+    @ChannelItem(channel = "amqp-test2", bindings = @ChannelBindings(amqp = @AMQPChannelBinding(exchange = @Exchange(name = "amqp-test", type = ExchangeType.TOPIC))), publish = @Operation(message = @Message(bindings = @MessageBindings(amqp = @AMQPMessageBinding(contentEncoding = "gzip", messageType = "test.amqp", bindingVersion = "0.1.0"))), bindings = @OperationBindings(amqp = @AMQPOperationBinding(expiration = 100000, userId = "guest", cc = {
             "test.amqp" }, priority = 10, deliveryMode = 2, mandatory = false, bcc = {
                     "test.amqp" }, replyTo = "test.amqp", timeStamp = true, ack = false, bindingVersion = "0.1.0"))))
     public void amqpTest2() {

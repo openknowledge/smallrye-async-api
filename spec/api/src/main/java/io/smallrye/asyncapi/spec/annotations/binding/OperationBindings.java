@@ -51,33 +51,33 @@ public @interface OperationBindings {
      *
      * @return amqp bindings of the channel
      */
-    AMQPOperationBinding amqpBinding() default @AMQPOperationBinding();
+    AMQPOperationBinding amqp() default @AMQPOperationBinding();
 
     /**
      * http-specific definitions for the channel.
      *
      * @return http bindings of the channel
      */
-    HTTPOperationBinding httpBinding() default @HTTPOperationBinding(type = "", query = @Schema, method = Method.GET);
+    HTTPOperationBinding http() default @HTTPOperationBinding(type = "", query = @Schema, method = Method.GET);
 
     /**
      * kafka-specific definitions for the channel.
      *
      * @return kafka bindings of the channel
      */
-    KafkaOperationBinding kafkaBinding() default @KafkaOperationBinding(clientId = @Schema, groupId = @Schema);
+    KafkaOperationBinding kafka() default @KafkaOperationBinding(clientId = @Schema, groupId = @Schema);
 
     /**
      * mqtt-specific definitions for the channel.
      *
      * @return amqp bindings of the channel
      */
-    MQTTOperationBinding mqttBinding() default @MQTTOperationBinding(qos = 0, retain = false);
+    MQTTOperationBinding mqtt() default @MQTTOperationBinding(qos = 0, retain = false);
 
     /**
      * ws-specific definitions for the channel.
      *
      * @return ws bindings of the channel
      */
-    WebSocketOperationBinding wsBinding() default @WebSocketOperationBinding();
+    WebSocketOperationBinding ws() default @WebSocketOperationBinding();
 }

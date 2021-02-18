@@ -22,7 +22,7 @@ import io.smallrye.asyncapi.spec.annotations.channel.ChannelItem;
 
 public class WSService {
 
-    @ChannelItem(channel = "ws-test1", bindings = @ChannelBindings(wsBinding = @WebSocketChannelBinding(method = "GET", bindingVersion = "0.1.0")))
+    @ChannelItem(channel = "ws-test1", bindings = @ChannelBindings(ws = @WebSocketChannelBinding(method = "GET", bindingVersion = "0.1.0")))
     public void wsTest1() {
     }
 }

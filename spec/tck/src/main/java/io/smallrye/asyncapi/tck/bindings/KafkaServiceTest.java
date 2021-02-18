@@ -48,7 +48,7 @@ public class KafkaServiceTest extends AppTestBase {
     public void testMessageBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        String kafkaBinding = "channels.kafka-test1.subscribe.message.bindings.kafkaBinding.";
+        String kafkaBinding = "channels.kafka-test1.subscribe.message.bindings.kafka.";
         vr.body(kafkaBinding + "key.enumeration", containsInAnyOrder("myKey"));
         vr.body(kafkaBinding + "key.type", equalTo("string"));
         vr.body(kafkaBinding + "bindingVersion", equalTo("0.1.0"));
@@ -59,7 +59,7 @@ public class KafkaServiceTest extends AppTestBase {
     public void testOperationBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        String kafkaBinding = "channels.kafka-test2.subscribe.bindings.kafkaBinding.";
+        String kafkaBinding = "channels.kafka-test2.subscribe.bindings.kafka.";
         vr.body(kafkaBinding + "groupId.enumeration", containsInAnyOrder("myGroupId"));
         vr.body(kafkaBinding + "groupId.type", equalTo("string"));
         vr.body(kafkaBinding + "clientId.enumeration", containsInAnyOrder("myClientId"));

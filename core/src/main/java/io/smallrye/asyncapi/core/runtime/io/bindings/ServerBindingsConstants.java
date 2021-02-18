@@ -17,7 +17,7 @@ package io.smallrye.asyncapi.core.runtime.io.bindings;
 
 public class ServerBindingsConstants {
 
-    public static final String PROP_MQTT_BINDING = "mqttBinding";
+    public static final String PROP_MQTT_BINDING = "mqtt";
 
     public static final String PROP_BINDINGS = "bindings";
 

@@ -47,14 +47,14 @@ public class AMQPServiceTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testChannelBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String channelAMQPPath = "channels.amqp-test1.bindings.amqpBinding.";
+        String channelAMQPPath = "channels.amqp-test1.bindings.amqp.";
         vr.body(channelAMQPPath + "is", equalTo("queue"));
         vr.body(channelAMQPPath + "queue.name", equalTo("amqp-test"));
         vr.body(channelAMQPPath + "queue.durable", equalTo(false));
         vr.body(channelAMQPPath + "queue.exclusive", equalTo(false));
         vr.body(channelAMQPPath + "queue.autoDelete", equalTo(false));
 
-        channelAMQPPath = "channels.amqp-test2.bindings.amqpBinding.";
+        channelAMQPPath = "channels.amqp-test2.bindings.amqp.";
         vr.body(channelAMQPPath + "is", equalTo("routingKey"));
         vr.body(channelAMQPPath + "exchange.name", equalTo("amqp-test"));
         vr.body(channelAMQPPath + "exchange.durable", equalTo(false));
@@ -65,7 +65,7 @@ public class AMQPServiceTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testMessageBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String messageAMQPPath = "channels.amqp-test2.publish.message.bindings.amqpBinding.";
+        String messageAMQPPath = "channels.amqp-test2.publish.message.bindings.amqp.";
 
         vr.body(messageAMQPPath + "contentEncoding", equalTo("gzip"));
         vr.body(messageAMQPPath + "messageType", equalTo("test.amqp"));
@@ -76,7 +76,7 @@ public class AMQPServiceTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testOperationBinding(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String operationAMQPPath = "channels.amqp-test2.publish.bindings.amqpBinding.";
+        String operationAMQPPath = "channels.amqp-test2.publish.bindings.amqp.";
 
         vr.body(operationAMQPPath + "cc", containsInAnyOrder("test.amqp"));
         vr.body(operationAMQPPath + "priority", equalTo(10));

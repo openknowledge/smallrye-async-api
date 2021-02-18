@@ -19,9 +19,9 @@ public class ChannelBindingsConstants {
 
     public static final String PROP_BINDINGS = "bindings";
 
-    public static final String PROP_AMQP_BINDING = "amqpBinding";
+    public static final String PROP_AMQP_BINDING = "amqp";
 
-    public static final String PROP_WS_BINDING = "wsBinding";
+    public static final String PROP_WS_BINDING = "ws";
 
     public ChannelBindingsConstants() {
     }

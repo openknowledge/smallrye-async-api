@@ -44,26 +44,26 @@ public @interface MessageBindings {
      *
      * @return amqp bindings of the channel
      */
-    AMQPMessageBinding amqpBinding() default @AMQPMessageBinding(messageType = "", contentEncoding = "");
+    AMQPMessageBinding amqp() default @AMQPMessageBinding(messageType = "", contentEncoding = "");
 
     /**
      * http-specific definitions for the channel.
      *
      * @return http bindings of the channel
      */
-    HTTPMessageBinding httpBinding() default @HTTPMessageBinding(headers = @Schema());
+    HTTPMessageBinding http() default @HTTPMessageBinding(headers = @Schema());
 
     /**
      * kafka-specific definitions for the channel.
      *
      * @return kafka bindings of the channel
      */
-    KafkaMessageBinding kafkaBinding() default @KafkaMessageBinding(key = @Schema);
+    KafkaMessageBinding kafka() default @KafkaMessageBinding(key = @Schema);
 
     /**
      * mqtt-specific definitions for the channel.
      *
      * @return mqtt bindings of the channel
      */
-    MQTTMessageBinding mqttBinding() default @MQTTMessageBinding;
+    MQTTMessageBinding mqtt() default @MQTTMessageBinding;
 }
