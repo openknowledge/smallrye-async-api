@@ -138,12 +138,13 @@ public class ParameterReader {
 
         Parameter parameter = new ParameterImpl();
 
+        parameter.setName(name);
+
         if (node.isTextual()) {
             parameter.setRef(node.asText());
             return parameter;
         }
 
-        parameter.setName(name);
         parameter.setDescription(JsonUtil.stringProperty(node, ParameterConstant.PROP_DESCRIPTION));
         parameter.setSchema(SchemaReader.readSchema(node.get(ParameterConstant.PROP_SCHEMA)));
         parameter.setLocation(JsonUtil.stringProperty(node, ParameterConstant.PROP_LOCATION));

@@ -40,7 +40,7 @@ public @interface Parameter {
      *
      * @return name of the parameter
      */
-    String name() default "";
+    String name();
 
     /**
      * A verbose explanation of the parameter. CommonMark syntax can be used for rich text representation.

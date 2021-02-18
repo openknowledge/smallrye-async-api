@@ -71,12 +71,12 @@ public class ParameterWriter {
             return;
         }
 
+        ObjectNode node = parent.putObject(model.getName());
+
         if (StringUtil.isNotEmpty(model.getRef())) {
-            JsonUtil.stringProperty(parent, Referenceable.PROP_$REF, model.getRef());
+            JsonUtil.stringProperty(node, Referenceable.PROP_$REF, model.getRef());
             return;
         }
-
-        ObjectNode node = parent.putObject(model.getName());
 
         JsonUtil.stringProperty(node, ParameterConstant.PROP_DESCRIPTION, model.getDescription());
         SchemaWriter.writeSchema(node.putObject(ParameterConstant.PROP_SCHEMA), model.getSchema());
