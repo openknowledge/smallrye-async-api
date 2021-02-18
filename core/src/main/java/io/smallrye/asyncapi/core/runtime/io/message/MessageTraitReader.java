@@ -16,11 +16,15 @@
 package io.smallrye.asyncapi.core.runtime.io.message;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationValue;
+import org.jboss.jandex.MethodInfo;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -40,6 +44,10 @@ import io.smallrye.asyncapi.core.runtime.util.JandexUtil;
 import io.smallrye.asyncapi.spec.models.message.MessageTrait;
 
 public class MessageTraitReader {
+
+    public static AnnotationInstance getMessageTraitAnnotation(final MethodInfo method) {
+        return method.annotation(MessageConstant.DOTNAME_MESSAGE_TRAIT);
+    }
 
     public static Optional<List<MessageTrait>> readMessageTraits(final AnnotationScannerContext context,
             final AnnotationValue annotationValue) {
@@ -99,6 +107,24 @@ public class MessageTraitReader {
             ArrayNode nodes = (ArrayNode) node;
             for (JsonNode messageTraitNode : nodes) {
                 rval.add(readMessageTrait(messageTraitNode));
+            }
+
+            return Optional.of(rval);
+        }
+
+        return Optional.empty();
+    }
+
+    public static Optional<Map<String, MessageTrait>> readComponentsMessageTraits(final JsonNode node) {
+        if (node != null) {
+            IoLogging.logger.singleJsonNode("OperationTraits");
+
+            Map<String, MessageTrait> rval = new HashMap<>();
+            for (Iterator<String> iterator = node.fieldNames(); iterator.hasNext();) {
+                String fieldName = iterator.next();
+                JsonNode schemeNode = node.get(fieldName);
+                MessageTrait trait = readMessageTrait(schemeNode);
+                rval.put(fieldName, trait);
             }
 
             return Optional.of(rval);

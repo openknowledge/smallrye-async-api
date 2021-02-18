@@ -21,10 +21,13 @@ import java.util.Map;
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.ClassInfo;
 import org.jboss.jandex.MethodInfo;
+import org.jboss.jandex.Type;
 
 import io.smallrye.asyncapi.core.runtime.io.channels.ChannelsReader;
 import io.smallrye.asyncapi.core.runtime.io.definition.DefinitionReader;
 import io.smallrye.asyncapi.core.runtime.io.message.MessageReader;
+import io.smallrye.asyncapi.core.runtime.io.message.MessageTraitReader;
+import io.smallrye.asyncapi.core.runtime.io.operation.OperationTraitReader;
 import io.smallrye.asyncapi.core.runtime.io.parameter.ParameterReader;
 import io.smallrye.asyncapi.core.runtime.io.securityscheme.SecuritySchemesConstant;
 import io.smallrye.asyncapi.core.runtime.io.securityscheme.SecuritySchemesReader;
@@ -34,9 +37,10 @@ import io.smallrye.asyncapi.spec.models.Components;
 import io.smallrye.asyncapi.spec.models.channel.ChannelItem;
 import io.smallrye.asyncapi.spec.models.channel.Channels;
 import io.smallrye.asyncapi.spec.models.message.Message;
+import io.smallrye.asyncapi.spec.models.message.MessageTrait;
+import io.smallrye.asyncapi.spec.models.operation.OperationTrait;
 import io.smallrye.asyncapi.spec.models.parameter.Parameter;
 import io.smallrye.asyncapi.spec.models.security.SecurityScheme;
-import org.jboss.jandex.Type;
 
 public interface AnnotationScanner {
 
@@ -107,5 +111,23 @@ public interface AnnotationScanner {
         Components components = ModelUtil.components(asyncAPI);
         securitySchemes.entrySet()
                 .forEach(securityScheme -> components.addSecurityScheme(securityScheme.getKey(), securityScheme.getValue()));
+    }
+
+    default void processMessageTraits(final AnnotationScannerContext context, final MethodInfo method, AsyncAPI asyncAPI) {
+        AnnotationInstance messageTraitAnnotation = MessageTraitReader.getMessageTraitAnnotation(method);
+
+        MessageTrait messageTrait = MessageTraitReader.readMessageTrait(context, messageTraitAnnotation);
+
+        Components components = ModelUtil.components(asyncAPI);
+        components.addMessageTrait(messageTrait.getName(), messageTrait);
+    }
+
+    default void processOperationTraits(final AnnotationScannerContext context, final MethodInfo method, AsyncAPI asyncAPI) {
+        AnnotationInstance operationTraitAnnotation = OperationTraitReader.getOperationTraitAnnotation(method);
+
+        OperationTrait operationTrait = OperationTraitReader.readOperationTrait(context, operationTraitAnnotation);
+
+        Components components = ModelUtil.components(asyncAPI);
+        components.addOperationTrait("", operationTrait);
     }
 }

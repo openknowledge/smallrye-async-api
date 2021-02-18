@@ -45,13 +45,15 @@ public class DefaultAnnotationScanner implements AnnotationScanner {
 
         processSecuritySchemesClass(context, aai);
 
+        processMessageTraitMethod(context, aai);
+
+        processOperationTraitMethod(context, aai);
+
         return aai;
     }
 
     private void processChannelsMethods(final AnnotationScannerContext context, final AsyncAPI aai) {
-        Collection<MethodInfo> channelsMethods = getChannelsMethods(context.getIndex());
-
-        channelsMethods.forEach(methodInfo -> processChannelItem(context, methodInfo, aai.getChannels()));
+        getChannelsMethods(context.getIndex()).forEach(methodInfo -> processChannelItem(context, methodInfo, aai.getChannels()));
     }
 
     private List<MethodInfo> getChannelsMethods(IndexView index) {
@@ -64,9 +66,7 @@ public class DefaultAnnotationScanner implements AnnotationScanner {
     }
 
     private void processMessagesMethod(final AnnotationScannerContext context, final AsyncAPI aai) {
-        Collection<MethodInfo> messageMethods = getMessageMethods(context.getIndex());
-
-        messageMethods.forEach(methodInfo -> processMessages(context, methodInfo, aai));
+        getMessageMethods(context.getIndex()).forEach(methodInfo -> processMessages(context, methodInfo, aai));
     }
 
     private List<MethodInfo> getMessageMethods(IndexView index) {
@@ -79,9 +79,7 @@ public class DefaultAnnotationScanner implements AnnotationScanner {
     }
 
     private void processParametersMethod(final AnnotationScannerContext context, final AsyncAPI aai) {
-        Collection<MethodInfo> parametersMethods = getParameterMethods(context.getIndex());
-
-        parametersMethods.forEach(methodInfo -> processParameters(context, methodInfo, aai));
+        getParameterMethods(context.getIndex()).forEach(methodInfo -> processParameters(context, methodInfo, aai));
     }
 
     private List<MethodInfo> getParameterMethods(IndexView index) {
@@ -94,9 +92,7 @@ public class DefaultAnnotationScanner implements AnnotationScanner {
     }
 
     private void processSecuritySchemesClass(final AnnotationScannerContext context, final AsyncAPI aai) {
-        Collection<ClassInfo> securitySchemesClasses = getSecuritySchemesClass(context.getIndex());
-
-        securitySchemesClasses.forEach(classInfo -> processSecuritySchemes(context, classInfo, aai));
+        getSecuritySchemesClass(context.getIndex()).forEach(classInfo -> processSecuritySchemes(context, classInfo, aai));
     }
 
     private List<ClassInfo> getSecuritySchemesClass(IndexView index) {
@@ -104,6 +100,32 @@ public class DefaultAnnotationScanner implements AnnotationScanner {
                 .stream()
                 .map(AnnotationInstance::target)
                 .map(annotationTarget -> annotationTarget.asClass())
+                .distinct() // CompositeIndex instances may return duplicates
+                .collect(Collectors.toList());
+    }
+
+    private void processMessageTraitMethod(final AnnotationScannerContext context, final AsyncAPI aai) {
+        getMessageTraitMethods(context.getIndex()).forEach(methodInfo -> processMessageTraits(context, methodInfo, aai));
+    }
+
+    private List<MethodInfo> getMessageTraitMethods(IndexView index) {
+        return index.getAnnotations(DefaultScannerConstants.MESSAGE_TRAITS)
+                .stream()
+                .map(AnnotationInstance::target)
+                .map(annotationTarget -> annotationTarget.asMethod())
+                .distinct() // CompositeIndex instances may return duplicates
+                .collect(Collectors.toList());
+    }
+
+    private void processOperationTraitMethod(final AnnotationScannerContext context, final AsyncAPI aai) {
+        getOperationTraitMethods(context.getIndex()).forEach(methodInfo -> processOperationTraits(context, methodInfo, aai));
+    }
+
+    private List<MethodInfo> getOperationTraitMethods(IndexView index) {
+        return index.getAnnotations(DefaultScannerConstants.OPERATION_TRAITS)
+                .stream()
+                .map(AnnotationInstance::target)
+                .map(annotationTarget -> annotationTarget.asMethod())
                 .distinct() // CompositeIndex instances may return duplicates
                 .collect(Collectors.toList());
     }

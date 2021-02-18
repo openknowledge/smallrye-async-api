@@ -24,6 +24,11 @@ public class DefaultScannerConstants {
 
     static final DotName MESSAGE = DotName.createSimple("io.smallrye.asyncapi.spec.annotations.message.Message");
 
+    static final DotName MESSAGE_TRAITS = DotName.createSimple("io.smallrye.asyncapi.spec.annotations.message.MessageTrait");
+
+    static final DotName OPERATION_TRAITS = DotName
+            .createSimple("io.smallrye.asyncapi.spec.annotations.operation.OperationTrait");
+
     static final DotName SECURITY_SCHEMES = DotName
             .createSimple("io.smallrye.asyncapi.spec.annotations.security.SecuritySchemes");
 

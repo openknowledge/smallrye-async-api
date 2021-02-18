@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.smallrye.asyncapi.core.runtime.io.JsonUtil;
 import io.smallrye.asyncapi.core.runtime.io.Referenceable;
 import io.smallrye.asyncapi.core.runtime.io.bindings.MessageBindingsWriter;
+import io.smallrye.asyncapi.core.runtime.io.components.ComponentsConstant;
 import io.smallrye.asyncapi.core.runtime.io.correlationId.CorrelationIdWriter;
 import io.smallrye.asyncapi.core.runtime.io.extension.ExtensionWriter;
 import io.smallrye.asyncapi.core.runtime.io.schema.SchemaWriter;
@@ -86,5 +87,19 @@ public class MessageTraitWriter {
         MessageBindingsWriter.writeMessageBindings(node, model.getBindings());
         TagWriter.writeTags(node, model.getTags());
         ExtensionWriter.writeExtensions(node, model);
+    }
+
+    public static void writeComponentsMessageTraits(ObjectNode parent, List<MessageTrait> messageTraits) {
+        if (messageTraits == null || messageTraits.size() == 0) {
+            return;
+        }
+
+        ObjectNode node = parent.putObject(ComponentsConstant.PROP_MESSAGE_TRAITS);
+
+        for (MessageTrait messageTrait : messageTraits) {
+            ObjectNode messageTraitNode = node.putObject(messageTrait.getName());
+
+            writeMessageTraitsToNode(messageTraitNode, messageTrait);
+        }
     }
 }

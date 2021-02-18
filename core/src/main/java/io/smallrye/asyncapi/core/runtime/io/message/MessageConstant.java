@@ -18,10 +18,13 @@ package io.smallrye.asyncapi.core.runtime.io.message;
 import org.jboss.jandex.DotName;
 
 import io.smallrye.asyncapi.spec.annotations.message.Message;
+import io.smallrye.asyncapi.spec.annotations.message.MessageTrait;
 
 public class MessageConstant {
 
     static final DotName DOTNAME_MESSAGE = DotName.createSimple(Message.class.getName());
+
+    static final DotName DOTNAME_MESSAGE_TRAIT = DotName.createSimple(MessageTrait.class.getName());
 
     public static final String PROP_HEADERS = "headers";
 
