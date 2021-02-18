@@ -70,7 +70,13 @@ public class JandexUtil {
      */
     @SuppressWarnings({ "unchecked", "squid:S3776" })
     public static <T> T value(AnnotationInstance annotation, String name) {
-        final AnnotationValue value = annotation.value(name);
+
+        AnnotationValue value;
+        if (name == null) {
+            value = annotation.value();
+        } else {
+            value = annotation.value(name);
+        }
 
         if (value == null) {
             return null;

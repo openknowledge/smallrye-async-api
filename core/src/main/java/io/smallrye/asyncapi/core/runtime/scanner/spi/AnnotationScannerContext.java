@@ -76,7 +76,7 @@ public class AnnotationScannerContext {
         return extensions;
     }
 
-    public AsyncApiConfig getConfig() {
+    public AsyncApiConfig getAsyncApiConfig() {
         return config;
     }
 

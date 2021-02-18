@@ -19,13 +19,6 @@ package io.smallrye.asyncapi.tck.info;
 import io.smallrye.asyncapi.spec.annotations.AsyncAPI;
 import io.smallrye.asyncapi.spec.annotations.info.Info;
 
-@AsyncAPI(
-    asyncapi = "2.0.0",
-    info = @Info(
-        title = "InfoService",
-        version = "1.0.0"
-    ),
-    defaultContentType = "application/json"
-)
+@AsyncAPI(asyncapi = "2.0.0", info = @Info(title = "InfoService", version = "1.0.0"), defaultContentType = "application/json")
 public class InfoService {
 }

@@ -31,18 +31,18 @@
     <packaging>pom</packaging>
 
     <name>SmallRye: MicroProfile AsyncAPI Parent</name>
-    <description>Document your Message Drive APIs with AsyncAPI</description>
     <url>http://smallrye.io</url>
 
     <properties>
-        <version.quarkus>1.11.1.Final</version.quarkus>
-
         <!-- MicroProfile Projects -->
         <version.eclipse.microprofile.config>2.0</version.eclipse.microprofile.config>
         <version.eclipse.microprofile.rest-api>2.0</version.eclipse.microprofile.rest-api>
 
+        <!-- Quarkus -->
+        <version.quarkus>1.12.0.Final</version.quarkus>
+
         <!-- SmallRye Projects -->
-        <version.io.smallrye.smallrye-config>2.0.0</version.io.smallrye.smallrye-config>
+        <version.io.smallrye.smallrye-config>1.5.0</version.io.smallrye.smallrye-config>
 
         <!-- Apicurio Data Models -->
         <version.apicurio-data-models>1.1.6</version.apicurio-data-models>
@@ -74,7 +74,8 @@
         <version.io.rest-assured>4.3.3</version.io.rest-assured>
 
         <version.restclient>2.0</version.restclient>
-        <version.restclient>1.1</version.restclient>
+        <version.org.json>20180813</version.org.json>
+        <version.io.commons>2.8.0</version.io.commons>
 
         <!-- Plug-Ins -->
         <version.apache.rat.plugin>0.12</version.apache.rat.plugin>
@@ -119,7 +120,7 @@
         <module>tck</module>
         <module>tools</module>
         <module>examples</module>
-        <module>ui</module>
+        <module>extension-reactive-messaging</module>
     </modules>
 
     <dependencyManagement>
@@ -306,17 +307,23 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>${version.org.junit.jupiter.junit-jupiter}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>${version.arquillian}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${version.org.json}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${version.io.commons}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -373,52 +380,6 @@
                     <groupId>org.apache.rat</groupId>
                     <artifactId>apache-rat-plugin</artifactId>
                     <version>${version.apache.rat.plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.eclipse.cbi.maven.plugins</groupId>
-                    <artifactId>eclipse-jarsigner-plugin</artifactId>
-                    <version>${version.eclipse.jarsigner.plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${version.maven.checkstyle.plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>${version.gpg.plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>${version.jar.plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>${version.maven.javadoc.plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${version.maven.release.plugin}</version>
-                    <configuration>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <localCheckout>true</localCheckout>
-                        <useReleaseProfile>false</useReleaseProfile>
-                        <arguments>${arguments} -Prelease -Drevremark=${revremark}</arguments>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>${version.maven.source.plugin}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.asciidoctor</groupId>
-                    <artifactId>asciidoctor-maven-plugin</artifactId>
-                    <version>${version.asciidoctor.maven.plugin}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

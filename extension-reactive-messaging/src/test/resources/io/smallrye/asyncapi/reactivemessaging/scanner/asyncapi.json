@@ -1,0 +1,62 @@
+{
+  "asyncapi" : "2.0.0",
+  "defaultContentType" : "application/json",
+  "info" : {
+    "title" : "GreetingChannel",
+    "version" : "1.0.0"
+  },
+  "servers" : {
+    "in_caps_smallrye-kafka" : {
+      "url" : "localhost:9092",
+      "protocol" : "kafka"
+    },
+    "in_lower-in_smallrye-kafka" : {
+      "url" : "localhost:9093",
+      "protocol" : "kafka"
+    }
+  },
+  "channels" : {
+    "hello-topic" : {
+      "publish" : {
+        "operationId" : "hello",
+        "message" : {
+          "payload" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "lower-out-topic" : {
+      "publish" : {
+        "operationId" : "lower-out",
+        "message" : {
+          "payload" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "cap-topic" : {
+      "subscribe" : {
+        "operationId" : "caps",
+        "message" : {
+          "payload" : {
+            "title" : "caps",
+            "type" : "boolean"
+          }
+        }
+      }
+    },
+    "lower-in-topic" : {
+      "subscribe" : {
+        "operationId" : "lower-in",
+        "message" : {
+          "payload" : {
+            "title" : "greeting",
+            "type" : "object"
+          }
+        }
+      }
+    }
+  }
+}
