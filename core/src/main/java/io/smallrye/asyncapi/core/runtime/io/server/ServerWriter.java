@@ -57,6 +57,7 @@ public class ServerWriter {
 
     private static void writeServerToNode(ObjectNode node, Server model) {
         JsonUtil.stringProperty(node, ServerConstant.PROP_URL, model.getUrl());
+        JsonUtil.stringProperty(node, ServerConstant.PROP_PROTOCOL, model.getProtocol());
         JsonUtil.stringProperty(node, ServerConstant.PROP_DESCRIPTION, model.getDescription());
         ServerVariableWriter.writeServerVariables(node, model.getVariables());
         SecurityRequirementWriter.writeSecurityRequirements(node, model.getSecurityRequirements());
