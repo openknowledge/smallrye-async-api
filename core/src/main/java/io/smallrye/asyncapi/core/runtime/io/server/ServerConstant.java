@@ -33,6 +33,7 @@ public class ServerConstant {
     static final DotName DOTNAME_SERVERS = DotName.createSimple(Servers.class.getName());
     public static final String PROP_SERVER = "server";
     public static final String PROP_URL = "url";
+    public static final String PROP_NAME = "name";
     public static final String PROP_PROTOCOL = "protocol";
     public static final String PROP_PROTOCOL_VERSION = "protocolVersion";
     public static final String PROP_DESCRIPTION = "description";

@@ -16,6 +16,7 @@
 package io.smallrye.asyncapi.core.runtime.io.server;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,6 @@ import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationValue;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import io.smallrye.asyncapi.core.api.models.server.ServerImpl;
 import io.smallrye.asyncapi.core.runtime.io.IoLogging;
@@ -53,14 +53,18 @@ public class ServerReader {
      * @return a List of Server models
      */
     public static Optional<List<Server>> readServers(final AnnotationValue annotationValue) {
+
         if (annotationValue == null) {
             return Optional.empty();
         }
-        IoLogging.logger.annotationsArray("@Server");
+        IoLogging.logger.annotation("@Server");
+
         AnnotationInstance[] nestedArray = annotationValue.asNestedArray();
+
         List<Server> servers = new ArrayList<>();
-        for (AnnotationInstance serverAnno : nestedArray) {
-            servers.add(readServer(serverAnno));
+        for (AnnotationInstance schemeAnno : nestedArray) {
+            Server server = readServer(schemeAnno);
+            servers.add(server);
         }
         return Optional.of(servers);
     }
@@ -72,16 +76,21 @@ public class ServerReader {
      * @return a List of Server models
      */
     public static Optional<List<Server>> readServers(final JsonNode node) {
-        if (node != null && node.isArray()) {
-            IoLogging.logger.jsonArray("Server");
-            ArrayNode nodes = (ArrayNode) node;
-            List<Server> rval = new ArrayList<>(nodes.size());
-            for (JsonNode serverNode : nodes) {
-                rval.add(readServer(serverNode));
-            }
-            return Optional.of(rval);
+        if (node == null) {
+            return Optional.empty();
         }
-        return Optional.empty();
+
+        IoLogging.logger.annotation("Server");
+
+        List<Server> rval = new ArrayList<>();
+        for (Iterator<String> iterator = node.fieldNames(); iterator.hasNext();) {
+            String fieldName = iterator.next();
+            JsonNode schemeNode = node.get(fieldName);
+            Server server = readServer(schemeNode, fieldName);
+            rval.add(server);
+        }
+
+        return Optional.of(rval);
     }
 
     /**
@@ -108,6 +117,7 @@ public class ServerReader {
             IoLogging.logger.singleAnnotation("@Server");
             Server server = new ServerImpl();
             server.setUrl(JandexUtil.stringValue(annotationInstance, ServerConstant.PROP_URL));
+            server.setName(JandexUtil.stringValue(annotationInstance, ServerConstant.PROP_NAME));
             server.setProtocol(JandexUtil.stringValue(annotationInstance, ServerConstant.PROP_PROTOCOL));
             server.setProtocolVersion(JandexUtil.stringValue(annotationInstance, ServerConstant.PROP_PROTOCOL_VERSION));
             server.setDescription(JandexUtil.stringValue(annotationInstance, ServerConstant.PROP_DESCRIPTION));
@@ -127,13 +137,15 @@ public class ServerReader {
      * Reads a list of {@link Server} AsyncAPI nodes.
      *
      * @param node the json array
+     * @param name the name of the server
      * @return a List of Server models
      */
-    public static Server readServer(final JsonNode node) {
+    public static Server readServer(final JsonNode node, final String name) {
         if (node != null && node.isObject()) {
             IoLogging.logger.singleJsonNode("Server");
             Server server = new ServerImpl();
             server.setUrl(JsonUtil.stringProperty(node, ServerConstant.PROP_URL));
+            server.setName(name);
             server.setProtocol(JsonUtil.stringProperty(node, ServerConstant.PROP_PROTOCOL));
             server.setProtocolVersion(JsonUtil.stringProperty(node, ServerConstant.PROP_PROTOCOL_VERSION));
             server.setDescription(JsonUtil.stringProperty(node, ServerConstant.PROP_DESCRIPTION));

@@ -53,6 +53,13 @@ public @interface Server {
     String url();
 
     /**
+     * <strong>Required</strong>. Name of the target host.
+     *
+     * @return Name of the target host
+     **/
+    String name();
+
+    /**
      * <strong>Required</strong>. The protocol this URL supports for connection.
      *
      * Supported protocol include, but are not limited to: amqp, amqps, http, https, jms, kafka, kafka-secure, mqtt,

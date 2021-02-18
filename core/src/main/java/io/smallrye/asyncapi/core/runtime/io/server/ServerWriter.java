@@ -17,7 +17,6 @@ package io.smallrye.asyncapi.core.runtime.io.server;
 
 import java.util.List;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import io.smallrye.asyncapi.core.runtime.io.JsonUtil;
@@ -41,17 +40,18 @@ public class ServerWriter {
     /**
      * Writes the {@link Server} model array to the JSON tree.
      *
-     * @param node the json node
+     * @param parent the json node
      * @param servers list of Server models
      */
-    public static void writeServers(ObjectNode node, List<Server> servers) {
+    public static void writeServers(ObjectNode parent, List<Server> servers) {
         if (servers == null) {
             return;
         }
-        ArrayNode array = node.putArray(DefinitionConstant.PROP_SERVERS);
+        ObjectNode node = parent.putObject(DefinitionConstant.PROP_SERVERS);
+
         for (Server server : servers) {
-            ObjectNode serverNode = array.addObject();
-            writeServerToNode(serverNode, server);
+            ObjectNode jsonNode = node.putObject(server.getName());
+            writeServerToNode(jsonNode, server);
         }
     }
 

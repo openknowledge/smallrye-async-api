@@ -31,7 +31,7 @@ import io.smallrye.asyncapi.spec.annotations.operation.Operation;
 import io.smallrye.asyncapi.spec.annotations.server.Server;
 
 @AsyncAPI(asyncapi = "2.0.0", info = @Info(version = "1.0.0-SNAPSHOT", title = "MQTTService"), defaultContentType = "application/json", servers = {
-        @Server(protocol = "mqtt", url = "mqtt://example.com", bindings = @ServerBindings(mqttBinding = @MQTTServerBinding(clientId = "guest", cleanSession = true, lastWill = @LastWill(topic = "/last-will", qos = 2, message = "Guest gone offline.", retain = false))))
+        @Server(protocol = "mqtt", name = "production", url = "mqtt://example.com", bindings = @ServerBindings(mqttBinding = @MQTTServerBinding(clientId = "guest", cleanSession = true, lastWill = @LastWill(topic = "/last-will", qos = 2, message = "Guest gone offline.", retain = false))))
 })
 public class MQTTService {
 
