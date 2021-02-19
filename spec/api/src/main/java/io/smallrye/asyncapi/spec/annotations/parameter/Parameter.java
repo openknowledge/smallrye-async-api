@@ -23,6 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import io.smallrye.asyncapi.spec.annotations.schema.Schema;
+import io.smallrye.asyncapi.spec.annotations.schema.SchemaType;
 
 /**
  * Describes a parameter included in a channel name.
@@ -54,7 +55,7 @@ public @interface Parameter {
      *
      * @return Schema of the parameter
      */
-    Schema schema() default @Schema();
+    Schema schema() default @Schema(type = SchemaType.STRING);
 
     /**
      * A runtime expression that specifies the location of the parameter value.
