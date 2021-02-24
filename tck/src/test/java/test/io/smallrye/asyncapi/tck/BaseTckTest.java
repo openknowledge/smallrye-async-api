@@ -93,12 +93,12 @@ public abstract class BaseTckTest<T extends Arquillian> {
                 acceptedTypes = MediaType.WILDCARD;
             }
             String queryString = t.getRequestURI()
-                .getQuery();
+                    .getQuery();
             AsyncApiFormat format;
             String mediaType;
 
             if ((queryString != null && Arrays.asList(queryString.split("&"))
-                .contains("format=JSON")) || acceptedTypes.contains(MediaType.APPLICATION_JSON)) {
+                    .contains("format=JSON")) || acceptedTypes.contains(MediaType.APPLICATION_JSON)) {
                 format = AsyncApiFormat.JSON;
                 mediaType = MediaType.APPLICATION_JSON;
             } else {

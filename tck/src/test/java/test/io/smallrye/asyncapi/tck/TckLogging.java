@@ -24,9 +24,9 @@ import org.jboss.logging.annotations.MessageLogger;
 @MessageLogger(projectCode = "SMAAP", length = 5)
 interface TckLogging {
 
-  TckLogging log = Logger.getMessageLogger(TckLogging.class, TckLogging.class.getPackage().getName());
+    TckLogging log = Logger.getMessageLogger(TckLogging.class, TckLogging.class.getPackage().getName());
 
-  @LogMessage(level = Logger.Level.DEBUG)
-  @Message(id = 12000, value = "Indexing asset: %s from archive: %s")
-  void indexing(String archivePath, String archive);
+    @LogMessage(level = Logger.Level.DEBUG)
+    @Message(id = 12000, value = "Indexing asset: %s from archive: %s")
+    void indexing(String archivePath, String archive);
 }

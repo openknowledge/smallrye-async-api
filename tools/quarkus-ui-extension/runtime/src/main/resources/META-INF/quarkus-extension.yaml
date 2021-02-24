@@ -1,0 +1,9 @@
+---
+name: "AsyncAPI UI"
+metadata:
+  keywords:
+    - "smallrye-asyncapi-ui"
+    - "smallrye-asyncapi"
+  guide: "https://github.com/smallrye/smallrye-async-api"
+  status: stable
+  unlisted: true

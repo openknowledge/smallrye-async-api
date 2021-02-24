@@ -621,7 +621,6 @@ public class TypeUtil {
         return allOfTypes != null && Arrays.stream(allOfTypes).map(Type::name).anyMatch(type.name()::equals);
     }
 
-
     /**
      * Test whether testSubject is an instanceof type test.
      * <p>

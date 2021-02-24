@@ -13,27 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package io.quarkus.asyncapi.deployment;
-
-import java.nio.file.Path;
-import java.util.Optional;
+package io.smallrye.asyncapiui.runtime;
 
 import io.quarkus.runtime.annotations.ConfigItem;
+import io.quarkus.runtime.annotations.ConfigPhase;
 import io.quarkus.runtime.annotations.ConfigRoot;
 
-@ConfigRoot(name = "smallrye-asyncapi")
-public final class SmallRyeAsyncApiConfig {
+@ConfigRoot(phase = ConfigPhase.RUN_TIME)
+public class AsyncApiUiRuntimeConfig {
 
     /**
-     * The path at which to register the AsyncAPI Servlet.
+     * If AsyncApi UI is included, it should be enabled/disabled. By default, AsyncApi UI is enabled if it is included (see
+     * {@code always-include}).
      */
-    @ConfigItem(defaultValue = "/asyncapi")
-    public String path;
+    @ConfigItem(defaultValue = "true")
+    boolean enable;
 
-    /**
-     * If set, the generated AsyncAPI schema documents will be stored here on build.
-     * Both asyncapi.json and asyncapi.yaml will be stored here if this is set.
-     */
-    @ConfigItem
-    public Optional<Path> storeSchemaDirectory;
 }
