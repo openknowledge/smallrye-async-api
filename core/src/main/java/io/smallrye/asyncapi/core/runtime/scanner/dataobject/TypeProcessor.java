@@ -120,14 +120,14 @@ public class TypeProcessor {
         if (TypeUtil.isOptional(type)) {
             Type optType = TypeUtil.getOptionalType(type);
             if (!TypeUtil.isTerminalType(optType) && index.containsClass(optType)) {
-                pushToStack(optType);
+                pushToStack(optType, schema);
             }
             return optType;
         }
 
         if (isA(type, AsyncApiDataObjectScanner.ENUM_TYPE) && index.containsClass(type)) {
             MergeUtil.mergeObjects(schema, SchemaFactory.enumToSchema(context, type));
-            pushToStack(type);
+            pushToStack(type, schema);
             return AsyncApiDataObjectScanner.STRING_TYPE;
         }
 
@@ -153,7 +153,7 @@ public class TypeProcessor {
 
         // Simple case: bare class or primitive type.
         if (index.containsClass(type)) {
-            pushToStack(type);
+            pushToStack(type, schema);
         } else {
             // If the type is not in Jandex then we don't have easy access to it.
             // Future work could consider separate code to traverse classes reachable from this classloader.
@@ -210,7 +210,7 @@ public class TypeProcessor {
             typeRead = AsyncApiDataObjectScanner.OBJECT_TYPE;
         } else if (index.containsClass(type)) {
             // This type will be resolved later, if necessary.
-            pushToStack(pType);
+            pushToStack(pType, schema);
         }
 
         return typeRead;
@@ -228,7 +228,7 @@ public class TypeProcessor {
             if (isA(valueType, AsyncApiDataObjectScanner.ENUM_TYPE)) {
                 DataObjectLogging.logger.processingEnum(type);
                 propsSchema = SchemaFactory.enumToSchema(context, valueType);
-                pushToStack(valueType);
+                pushToStack(valueType, schema);
             } else {
                 propsSchema.type(SchemaType.OBJECT);
                 pushToStack(valueType, propsSchema);
@@ -256,12 +256,8 @@ public class TypeProcessor {
         return resolvedType;
     }
 
-    private void pushToStack(Type fieldType) {
-        objectStack.push(annotationTarget, parentPathEntry, fieldType, schema);
-    }
-
-    private void pushToStack(Type resolvedType, Schema schema) {
-        objectStack.push(annotationTarget, parentPathEntry, resolvedType, schema);
+    private void pushToStack(Type type, Schema schema) {
+        objectStack.push(annotationTarget, parentPathEntry, type, schema);
     }
 
     private boolean isA(Type testSubject, Type test) {
