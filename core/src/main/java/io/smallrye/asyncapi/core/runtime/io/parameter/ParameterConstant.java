@@ -36,8 +36,6 @@ public class ParameterConstant {
 
     public static final String PROP_LOCATION = "location";
 
-    public static final String PROP_REF = "ref";
-
     private ParameterConstant() {
     }
 }

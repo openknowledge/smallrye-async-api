@@ -42,7 +42,7 @@ import io.smallrye.reactive.messaging.mqtt.MqttMessage;
 public class TurnService {
 
     @ChannelItem(channel = "smartylighting/streetlights/1/0/action/{streetlightId}/turn/on", parameters = @Parameters(value = {
-            @Parameter(name = "streetlightId", ref = "#/components/parameters/streetlightId")
+        @Parameter(name = "streetlightId", description = "The ID of the streetlight.", schema = @Schema(type = SchemaType.STRING))
     }), publish = @Operation(operationId = "turnOn", traits = {
             @OperationTrait(ref = "#/components/operationTraits/kafka")
     }, message = @Message(name = "turnOnOff", title = "TurnOnOff on/off", summary = "Command a particular streetlight to turn the lights on or off.", correlationID = @CorrelationID(description = "Default Correlation ID", location = "$message.header#/correlationId"), traits = {
@@ -60,7 +60,7 @@ public class TurnService {
     }
 
     @ChannelItem(channel = "smartylighting/streetlights/1/0/action/{streetlightId}/turn/off", parameters = @Parameters(value = {
-            @Parameter(name = "streetlightId", ref = "#/components/parameters/streetlightId")
+        @Parameter(name = "streetlightId", description = "The ID of the streetlight.", schema = @Schema(type = SchemaType.STRING))
     }), publish = @Operation(operationId = "turnOff", traits = {
             @OperationTrait(ref = "#/components/operationTraits/kafka")
     }, message = @Message(ref = "#/components/messages/turnOnOff")))

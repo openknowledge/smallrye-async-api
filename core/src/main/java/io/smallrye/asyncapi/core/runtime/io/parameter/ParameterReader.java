@@ -83,7 +83,6 @@ public class ParameterReader {
         parameter.setDescription(JandexUtil.stringValue(annotationInstance, ParameterConstant.PROP_DESCRIPTION));
         parameter.setSchema(SchemaFactory.readSchema(context, annotationInstance.value(ParameterConstant.PROP_SCHEMA)));
         parameter.setLocation(JandexUtil.stringValue(annotationInstance, ParameterConstant.PROP_LOCATION));
-        parameter.setRef(JandexUtil.refValue(annotationInstance, JandexUtil.RefType.PARAMETER));
 
         return parameter;
     }
@@ -139,12 +138,6 @@ public class ParameterReader {
         Parameter parameter = new ParameterImpl();
 
         parameter.setName(name);
-
-        if (node.isTextual()) {
-            parameter.setRef(node.asText());
-            return parameter;
-        }
-
         parameter.setDescription(JsonUtil.stringProperty(node, ParameterConstant.PROP_DESCRIPTION));
         parameter.setSchema(SchemaReader.readSchema(node.get(ParameterConstant.PROP_SCHEMA)));
         parameter.setLocation(JsonUtil.stringProperty(node, ParameterConstant.PROP_LOCATION));

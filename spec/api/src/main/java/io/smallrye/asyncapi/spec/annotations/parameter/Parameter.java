@@ -67,15 +67,4 @@ public @interface Parameter {
      * @return location of the parameter
      */
     String location() default "";
-
-    /**
-     * This property provides a reference to an object defined elsewhere.
-     *
-     * This property and all other properties are mutually exclusive. If other properties are defined in addition to the ref
-     * property then the
-     * result is undefined.
-     *
-     * @return a reference to a schema definition
-     **/
-    String ref() default "";
 }

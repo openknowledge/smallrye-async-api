@@ -24,6 +24,7 @@ import io.smallrye.asyncapi.spec.annotations.operation.OperationTrait;
 import io.smallrye.asyncapi.spec.annotations.parameter.Parameter;
 import io.smallrye.asyncapi.spec.annotations.parameter.Parameters;
 import io.smallrye.asyncapi.spec.annotations.schema.Schema;
+import io.smallrye.asyncapi.spec.annotations.schema.SchemaType;
 import io.smallrye.asyncapi.spec.annotations.tag.Tag;
 import io.smallrye.reactive.messaging.mqtt.MqttMessage;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
@@ -37,7 +38,7 @@ public class MeasuredService {
   @ChannelItem(channel = "smartylighting/streetlights/1/0/event/{streetlightId}/lighting/measure",
       description = "The topic on which measure values may be produced and consumed.",
       parameters = @Parameters(value = { @Parameter(name = "streetlightId",
-          ref = "#/components/parameters/streetlightId") }),
+          description = "The ID of the streetlight.", schema = @Schema(type = SchemaType.STRING)) }),
       subscribe = @Operation(summary = "Receive information about environmental lighting conditions of a particular streetlight.",
           operationId = "receiveLightMeasurement",
           traits = { @OperationTrait(ref = "#/components/operationTraits/kafka") },
