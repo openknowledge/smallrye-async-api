@@ -33,8 +33,6 @@ public class ParameterImpl extends ExtensibleImpl<Parameter> implements Paramete
 
     private String location;
 
-    private String ref;
-
     /**
      * @see Parameter#getName()
      */
@@ -97,28 +95,5 @@ public class ParameterImpl extends ExtensibleImpl<Parameter> implements Paramete
     @Override
     public void setLocation(final String location) {
         this.location = location;
-    }
-
-    /**
-     * @see Parameter#getRef()
-     */
-    @Override
-    public String getRef() {
-        return ref;
-    }
-
-    /**
-     * @see Parameter#setRef(String ref)
-     */
-    @Override
-    public void setRef(final String ref) {
-        this.ref = ref;
-    }
-
-    @Override
-    public String toString() {
-        return "ParameterImpl{" + "name='" + name + '\'' + ", description='" + description + '\'' + ", schema=" + schema
-                + ", location='" + location
-                + '\'' + ", ref='" + ref + '\'' + '}';
     }
 }

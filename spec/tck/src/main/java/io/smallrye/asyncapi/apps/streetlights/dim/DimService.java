@@ -40,7 +40,7 @@ public class DimService {
 
   @ChannelItem(channel = "smartylighting/streetlights/1/0/action/{streetlightId}/dim",
       parameters = @Parameters(value = { @Parameter(name = "streetlightId",
-          ref = "#/components/parameters/streetlightId") }),
+          description = "The ID of the streetlight.", schema = @Schema(type = SchemaType.STRING)) }),
       publish = @Operation(operationId = "dimLight",
           traits = { @OperationTrait(ref = "#/components/operationTraits/kafka") },
           message = @Message(ref = "#/components/messages/dimLight")))

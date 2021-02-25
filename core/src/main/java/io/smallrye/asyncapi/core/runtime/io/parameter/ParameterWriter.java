@@ -20,10 +20,8 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import io.smallrye.asyncapi.core.runtime.io.JsonUtil;
-import io.smallrye.asyncapi.core.runtime.io.Referenceable;
 import io.smallrye.asyncapi.core.runtime.io.channels.ChannelsConstants;
 import io.smallrye.asyncapi.core.runtime.io.schema.SchemaWriter;
-import io.smallrye.asyncapi.core.runtime.util.StringUtil;
 import io.smallrye.asyncapi.spec.models.parameter.Parameter;
 import io.smallrye.asyncapi.spec.models.parameter.Parameters;
 
@@ -73,14 +71,8 @@ public class ParameterWriter {
 
         ObjectNode node = parent.putObject(model.getName());
 
-        if (StringUtil.isNotEmpty(model.getRef())) {
-            JsonUtil.stringProperty(node, Referenceable.PROP_$REF, model.getRef());
-            return;
-        }
-
         JsonUtil.stringProperty(node, ParameterConstant.PROP_DESCRIPTION, model.getDescription());
         SchemaWriter.writeSchema(node.putObject(ParameterConstant.PROP_SCHEMA), model.getSchema());
         JsonUtil.stringProperty(node, ParameterConstant.PROP_LOCATION, model.getLocation());
-        JsonUtil.stringProperty(node, ParameterConstant.PROP_REF, model.getRef());
     }
 }

@@ -112,7 +112,8 @@ public class StreetlightsAppTest extends AppTestBase {
         vr.body("channels." + topic + ".publish.operationId", equalTo("dimLight"));
         vr.body("channels." + topic + ".publish.traits[0].$ref", equalTo("#/components/operationTraits/kafka"));
         vr.body("channels." + topic + ".publish.message.$ref", equalTo("#/components/messages/dimLight"));
-        vr.body("channels." + topic + ".parameters.streetlightId.$ref", equalTo("#/components/parameters/streetlightId"));
+        vr.body("channels." + topic + ".parameters.streetlightId.description", equalTo("The ID of the streetlight."));
+        vr.body("channels." + topic + ".parameters.streetlightId.schema.type", equalTo("string"));
 
         topic = "'smartylighting/streetlights/1/0/action/{streetlightId}/turn/on'";
         vr.body("channels." + topic + ".publish.operationId", equalTo("turnOn"));
@@ -137,7 +138,8 @@ public class StreetlightsAppTest extends AppTestBase {
         vr.body("channels." + topic + ".publish.operationId", equalTo("turnOff"));
         vr.body("channels." + topic + ".publish.traits[0].$ref", equalTo("#/components/operationTraits/kafka"));
         vr.body("channels." + topic + ".publish.message.$ref", equalTo("#/components/messages/turnOnOff"));
-        vr.body("channels." + topic + ".parameters.streetlightId.$ref", equalTo("#/components/parameters/streetlightId"));
+        vr.body("channels." + topic + ".parameters.streetlightId.description", equalTo("The ID of the streetlight."));
+        vr.body("channels." + topic + ".parameters.streetlightId.schema.type", equalTo("string"));
 
         topic = "'smartylighting/streetlights/1/0/event/{streetlightId}/lighting/measure'";
         vr.body("channels." + topic + ".description",
@@ -147,7 +149,8 @@ public class StreetlightsAppTest extends AppTestBase {
                 equalTo("Receive information about environmental lighting conditions of a particular streetlight."));
         vr.body("channels." + topic + ".subscribe.traits[0].$ref", equalTo("#/components/operationTraits/kafka"));
         vr.body("channels." + topic + ".subscribe.message.$ref", equalTo("#/components/messages/lightMeasured"));
-        vr.body("channels." + topic + ".parameters.streetlightId.$ref", equalTo("#/components/parameters/streetlightId"));
+        vr.body("channels." + topic + ".parameters.streetlightId.description", equalTo("The ID of the streetlight."));
+        vr.body("channels." + topic + ".parameters.streetlightId.schema.type", equalTo("string"));
     }
 
     @RunAsClient

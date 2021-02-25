@@ -17,15 +17,14 @@ package io.smallrye.asyncapi.spec.models.parameter;
 
 import io.smallrye.asyncapi.spec.models.Constructible;
 import io.smallrye.asyncapi.spec.models.Extensible;
-import io.smallrye.asyncapi.spec.models.Reference;
 import io.smallrye.asyncapi.spec.models.schema.Schema;
 
 /**
  * Describes a parameter included in a channel name.
  *
- * @see "https://www.asyncapi.com/docs/specifications/2.0.0/#a-name-parameterobject-a-parameter-object"
+ * @see "https://www.asyncapi.com/docs/specifications/2.0.0#parameterObject"
  */
-public interface Parameter extends Constructible, Extensible<Parameter>, Reference<Parameter> {
+public interface Parameter extends Constructible, Extensible<Parameter> {
 
     /**
      * Returns the name of the parameter
