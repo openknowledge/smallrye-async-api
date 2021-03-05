@@ -1,0 +1,60 @@
+{
+  "asyncapi" : "2.0.0",
+  "defaultContentType" : "application/json",
+  "info" : {
+    "title" : "PrimitiveChannel",
+    "version" : "1.0.0"
+  },
+  "channels" : {
+    "int-channel" : {
+      "publish" : {
+        "operationId" : "int-channel",
+        "message" : {
+          "payload" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "float-channel" : {
+      "publish" : {
+        "operationId" : "float-channel",
+        "message" : {
+          "payload" : {
+            "type" : "number"
+          }
+        }
+      }
+    },
+    "short-channel" : {
+      "publish" : {
+        "operationId" : "short-channel",
+        "message" : {
+          "payload" : {
+            "type" : "number"
+          }
+        }
+      }
+    },
+    "double-channel" : {
+      "publish" : {
+        "operationId" : "double-channel",
+        "message" : {
+          "payload" : {
+            "type" : "number"
+          }
+        }
+      }
+    },
+    "boolean-channel" : {
+      "publish" : {
+        "operationId" : "boolean-channel",
+        "message" : {
+          "payload" : {
+            "type" : "boolean"
+          }
+        }
+      }
+    }
+  }
+}

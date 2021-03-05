@@ -50,8 +50,10 @@ public class ServerWriter {
         ObjectNode node = parent.putObject(DefinitionConstant.PROP_SERVERS);
 
         for (Server server : servers) {
-            ObjectNode jsonNode = node.putObject(server.getName());
-            writeServerToNode(jsonNode, server);
+            if (server != null){
+                ObjectNode jsonNode = node.putObject(server.getName());
+                writeServerToNode(jsonNode, server);
+            }
         }
     }
 

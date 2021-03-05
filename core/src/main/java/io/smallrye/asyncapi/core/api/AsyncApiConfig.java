@@ -22,9 +22,15 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.eclipse.microprofile.config.Config;
+
 import io.smallrye.asyncapi.core.api.constants.AsyncApiConstants;
 
 public interface AsyncApiConfig {
+
+    default Config getConfig() {
+        return null;
+    }
 
     default String modelReader() {
         return null;

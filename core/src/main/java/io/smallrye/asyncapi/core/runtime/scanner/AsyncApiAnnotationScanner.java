@@ -137,11 +137,11 @@ public class AsyncApiAnnotationScanner {
         asyncAPI.setAsyncapi(AsyncApiConstants.ASYNC_API_VERSION);
 
         // Creating a new instance of a registry which will be set on the thread context.
-        SchemaRegistry schemaRegistry = SchemaRegistry.newInstance(annotationScannerContext.getConfig(), asyncAPI,
+        SchemaRegistry schemaRegistry = SchemaRegistry.newInstance(annotationScannerContext.getAsyncApiConfig(), asyncAPI,
                 annotationScannerContext.getIndex());
 
         // Register custom schemas if available
-        getCustomSchemaRegistry(annotationScannerContext.getConfig()).registerCustomSchemas(schemaRegistry);
+        getCustomSchemaRegistry(annotationScannerContext.getAsyncApiConfig()).registerCustomSchemas(schemaRegistry);
 
         // Find all AsyncAPI annotations at the package level
         ScannerLogging.logger.scanning("AsyncAPI");

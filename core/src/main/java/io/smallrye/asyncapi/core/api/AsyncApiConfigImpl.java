@@ -95,7 +95,7 @@ public class AsyncApiConfigImpl implements AsyncApiConfig {
     /**
      * @return the MP config instance
      */
-    protected Config getConfig() {
+    public Config getConfig() {
         // We cannot use ConfigProvider.getConfig() as the archive is not deployed yet - TCCL cannot be set
         return config;
     }

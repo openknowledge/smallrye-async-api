@@ -16,7 +16,6 @@
 
 package io.smallrye.asyncapi.core.runtime.scanner;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,14 +24,14 @@ import org.jboss.jandex.ClassInfo;
 import org.jboss.jandex.IndexView;
 import org.jboss.jandex.MethodInfo;
 
-import io.smallrye.asyncapi.core.runtime.scanner.spi.AnnotationScanner;
+import io.smallrye.asyncapi.core.runtime.scanner.spi.AbstractAnnotationScanner;
 import io.smallrye.asyncapi.core.runtime.scanner.spi.AnnotationScannerContext;
 import io.smallrye.asyncapi.spec.models.AsyncAPI;
 
-public class DefaultAnnotationScanner implements AnnotationScanner {
+public class DefaultAnnotationScanner extends AbstractAnnotationScanner {
 
     public String getName() {
-        return "ReactiveMessaging";
+        return "Default";
     }
 
     public AsyncAPI scan(final AnnotationScannerContext context, final AsyncAPI aai) {
@@ -53,7 +52,8 @@ public class DefaultAnnotationScanner implements AnnotationScanner {
     }
 
     private void processChannelsMethods(final AnnotationScannerContext context, final AsyncAPI aai) {
-        getChannelsMethods(context.getIndex()).forEach(methodInfo -> processChannelItem(context, methodInfo, aai.getChannels()));
+        getChannelsMethods(context.getIndex())
+                .forEach(methodInfo -> processChannelItem(context, methodInfo, aai.getChannels()));
     }
 
     private List<MethodInfo> getChannelsMethods(IndexView index) {
@@ -128,9 +128,5 @@ public class DefaultAnnotationScanner implements AnnotationScanner {
                 .map(annotationTarget -> annotationTarget.asMethod())
                 .distinct() // CompositeIndex instances may return duplicates
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void setContextRoot(final String path) {
     }
 }
