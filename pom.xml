@@ -42,7 +42,7 @@
         <version.quarkus>1.12.0.Final</version.quarkus>
 
         <!-- SmallRye Projects -->
-        <version.io.smallrye.smallrye-config>1.5.0</version.io.smallrye.smallrye-config>
+        <version.io.smallrye.smallrye-config>2.1.0</version.io.smallrye.smallrye-config>
 
         <!-- Apicurio Data Models -->
         <version.apicurio-data-models>1.1.6</version.apicurio-data-models>
@@ -120,6 +120,7 @@
         <module>tck</module>
         <module>tools</module>
         <module>examples</module>
+        <module>ui</module>
         <module>extension-reactive-messaging</module>
     </modules>
 
