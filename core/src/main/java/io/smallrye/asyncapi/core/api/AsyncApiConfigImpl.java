@@ -269,8 +269,8 @@ public class AsyncApiConfigImpl implements AsyncApiConfig {
         if (schemas == null) {
             schemas = StreamSupport.stream(config.getPropertyNames()
                     .spliterator(), false)
-                    .filter(name -> name.startsWith("mp.async.schema.") || name.startsWith("MP_ASYNCAPI_SCHEMA_"))
-                    .collect(Collectors.toMap(name -> name.substring("mp.async.schema.".length()),
+                    .filter(name -> name.startsWith("mp.asyncapi.schema.") || name.startsWith("MP_ASYNCAPI_SCHEMA_"))
+                    .collect(Collectors.toMap(name -> name.substring("mp.asyncapi.schema.".length()),
                             name -> config.getValue(name, String.class)));
         }
         return schemas;
@@ -375,30 +375,5 @@ public class AsyncApiConfigImpl implements AsyncApiConfig {
         return getConfig().getOptionalValue(key, String.class)
                 .map(v -> "".equals(v.trim()) ? null : v)
                 .orElse(null);
-    }
-
-    List<String> getStringConfigValues(String key) {
-        return getConfig().getOptionalValues(key, String.class).get();
-    }
-
-    @Override
-    public String toString() {
-        return "AsyncApiConfigImpl{" + "config=" + config + ", modelReader='" + modelReader + '\'' + ", filter='" + filter
-                + '\'' + ", scanDisable="
-                + scanDisable + ", scanPackages=" + scanPackages + ", scanClasses=" + scanClasses + ", scanExcludePackages="
-                + scanExcludePackages
-                + ", scanExcludeClasses=" + scanExcludeClasses + ", servers=" + servers + ", scanDependenciesDisable="
-                + scanDependenciesDisable
-                + ", scanDependenciesJars=" + scanDependenciesJars + ", customSchemaRegistryClass='" + customSchemaRegistryClass
-                + '\''
-                + ", applicationPathDisable=" + applicationPathDisable + ", schemas=" + schemas + ", version='" + version + '\''
-                + ", infoTitle='" + infoTitle
-                + '\'' + ", infoVersion='" + infoVersion + '\'' + ", infoDescription='" + infoDescription + '\''
-                + ", infoTermsOfService='"
-                + infoTermsOfService + '\'' + ", infoContactEmail='" + infoContactEmail + '\'' + ", infoContactName='"
-                + infoContactName + '\''
-                + ", infoContactUrl='" + infoContactUrl + '\'' + ", infoLicenseName='" + infoLicenseName + '\''
-                + ", infoLicenseUrl='" + infoLicenseUrl + '\''
-                + ", operationIdStrategy=" + operationIdStrategy + '}';
     }
 }
