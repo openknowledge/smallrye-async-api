@@ -15,8 +15,10 @@
  */
 package io.smallrye.asyncapi.core.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -64,16 +66,8 @@ public interface AsyncApiConfig {
                 .collect(Collectors.joining("|")) + ")");
     }
 
-    default Set<String> servers() {
-        return new HashSet<>();
-    }
-
-    default Set<String> pathServers(String path) {
-        return new HashSet<>();
-    }
-
-    default Set<String> operationServers(String operationId) {
-        return new HashSet<>();
+    default List<String[]> servers() {
+        return new ArrayList<>();
     }
 
     default boolean scanDependenciesDisable() {

@@ -15,6 +15,9 @@
  */
 package io.smallrye.asyncapi.core.api;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -45,7 +48,7 @@ public class AsyncApiConfigImpl implements AsyncApiConfig {
 
     private Pattern scanExcludeClasses;
 
-    private Set<String> servers;
+    private Map<String, String> servers;
 
     private Boolean scanDependenciesDisable;
 
@@ -184,30 +187,30 @@ public class AsyncApiConfigImpl implements AsyncApiConfig {
      * @see AsyncApiConfig#servers()
      */
     @Override
-    public Set<String> servers() {
+    public List<String[]> servers() {
         if (servers == null) {
-            String theServers = getStringConfigValue(AASConfig.SERVERS);
-            servers = asCsvSet(theServers);
+            List<String[]> servers = new ArrayList<>();
+
+            getConfig().getPropertyNames().forEach(s -> {
+                if (s.startsWith(AASConfig.SERVER)){
+                    String[] server = new String[3];
+
+                    String tmp = s.substring(AASConfig.SERVER.length());
+                    String protocol = tmp.substring(0, tmp.indexOf("."));
+                    String serverName = tmp.substring(tmp.indexOf(".") + 1);
+                    String serverUrl = getStringConfigValue(s);
+
+                    server[0] = protocol;
+                    server[1] = serverName;
+                    server[2] = serverUrl;
+
+                    servers.add(server);
+                }
+            });
+
+            return servers;
         }
-        return servers;
-    }
-
-    /**
-     * @see AsyncApiConfig#pathServers(String)
-     */
-    @Override
-    public Set<String> pathServers(String path) {
-        String pathServers = getStringConfigValue(AASConfig.SERVERS_PATH_PREFIX + path);
-        return asCsvSet(pathServers);
-    }
-
-    /**
-     * @see AsyncApiConfig#operationServers(String)
-     */
-    @Override
-    public Set<String> operationServers(String operationId) {
-        String opServers = getStringConfigValue(AASConfig.SERVERS_OPERATION_PREFIX + operationId);
-        return asCsvSet(opServers);
+        return new ArrayList<>();
     }
 
     /**
@@ -372,6 +375,10 @@ public class AsyncApiConfigImpl implements AsyncApiConfig {
         return getConfig().getOptionalValue(key, String.class)
                 .map(v -> "".equals(v.trim()) ? null : v)
                 .orElse(null);
+    }
+
+    List<String> getStringConfigValues(String key) {
+        return getConfig().getOptionalValues(key, String.class).get();
     }
 
     @Override

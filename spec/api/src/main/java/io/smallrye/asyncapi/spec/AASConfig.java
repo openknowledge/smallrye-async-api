@@ -55,7 +55,7 @@ public final class AASConfig {
     /**
      * Configuration property to specify the list of global servers that provide connectivity information.
      */
-    public static final String SERVERS = "mp.asyncapi.servers";
+    public static final String SERVER = "mp.asyncapi.server.";
     /**
      * Prefix of the configuration property to specify an alternative list of servers to service all operations in a path.
      */

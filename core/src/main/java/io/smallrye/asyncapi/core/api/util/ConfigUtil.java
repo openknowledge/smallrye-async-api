@@ -18,7 +18,14 @@ package io.smallrye.asyncapi.core.api.util;
 import io.smallrye.asyncapi.core.api.AsyncApiConfig;
 import io.smallrye.asyncapi.core.api.models.info.ContactImpl;
 import io.smallrye.asyncapi.core.api.models.info.LicenseImpl;
+import io.smallrye.asyncapi.core.api.models.server.ServerImpl;
 import io.smallrye.asyncapi.spec.models.AsyncAPI;
+import io.smallrye.asyncapi.spec.models.server.Server;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ConfigUtil {
     private ConfigUtil() {
@@ -26,6 +33,7 @@ public class ConfigUtil {
 
     public static final void applyConfig(AsyncApiConfig config, AsyncAPI aai) {
         configureInfo(config, aai);
+        configureServers(config, aai);
     }
 
     protected static final void configureInfo(AsyncApiConfig config, AsyncAPI aai) {
@@ -66,6 +74,19 @@ public class ConfigUtil {
         }
         if (config.getInfoLicenseUrl() != null) {
             aai.getInfo().getLicense().setUrl(config.getInfoLicenseUrl());
+        }
+    }
+
+    protected static final void configureServers(AsyncApiConfig config, AsyncAPI aai) {
+        List<String[]> servers = config.servers();
+        if (servers != null) {
+            for (String[] server : servers) {
+                Server s = new ServerImpl();
+                s.setProtocol(server[0]);
+                s.setName(server[1]);
+                s.setUrl(server[2]);
+                aai.addServer(s);
+            }
         }
     }
 }
