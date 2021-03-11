@@ -16,6 +16,7 @@
 package io.smallrye.asyncapi.core.api.util;
 
 import io.smallrye.asyncapi.core.api.AsyncApiConfig;
+import io.smallrye.asyncapi.core.api.constants.AsyncApiConstants;
 import io.smallrye.asyncapi.core.api.models.info.ContactImpl;
 import io.smallrye.asyncapi.core.api.models.info.LicenseImpl;
 import io.smallrye.asyncapi.core.api.models.server.ServerImpl;
@@ -32,8 +33,20 @@ public class ConfigUtil {
     }
 
     public static final void applyConfig(AsyncApiConfig config, AsyncAPI aai) {
-        configureInfo(config, aai);
+        // From the spec
         configureServers(config, aai);
+        // Our own extension
+        configureVersion(config, aai);
+        configureInfo(config, aai);
+    }
+
+    private static void configureVersion(final AsyncApiConfig config, final AsyncAPI aai) {
+        String versionInConfig = config.getAsyncApiVersion();
+        if (versionInConfig != null && !versionInConfig.isEmpty()) {
+            aai.setAsyncapi(versionInConfig);
+        } else if (aai.getAsyncapi() == null || aai.getAsyncapi().isEmpty()) {
+            aai.setAsyncapi(AsyncApiConstants.ASYNC_API_VERSION);
+        }
     }
 
     protected static final void configureInfo(AsyncApiConfig config, AsyncAPI aai) {
