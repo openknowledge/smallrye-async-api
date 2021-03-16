@@ -32,7 +32,7 @@ public class MessageConstant {
 
     public static final String PROP_CORRELATION_ID = "correlationID";
 
-    public static final String PROP_SCHEME_FORMAT = "schemeFormat";
+    public static final String PROP_SCHEMA_FORMAT = "schemaFormat";
 
     public static final String PROP_CONTENT_TYPE = "contentType";
 

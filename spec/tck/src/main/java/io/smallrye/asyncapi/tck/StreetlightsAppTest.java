@@ -41,6 +41,7 @@ public class StreetlightsAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testVersion(String type) {
         ValidatableResponse vr = callEndpoint(type);
+        System.out.println(getResponse().body().prettyPrint());
         vr.body("asyncapi", equalTo("2.0.0"));
     }
 
@@ -161,6 +162,7 @@ public class StreetlightsAppTest extends AppTestBase {
         vr.body(messagesPath + "dimLight.name", equalTo("dimLight"));
         vr.body(messagesPath + "dimLight.title", equalTo("Dim light"));
         vr.body(messagesPath + "dimLight.summary", equalTo("Command a particular streetlight to dim the lights."));
+        vr.body(messagesPath + "dimLight.schemaFormat", equalTo("application/vnd.aai.asyncapi;version=2.0.0"));
         vr.body(messagesPath + "dimLight.traits[0].$ref", equalTo("#/components/messageTraits/commonHeaders"));
 
         vr.body(messagesPath + "lightMeasured.contentType", equalTo("application/json"));

@@ -47,6 +47,7 @@ public class DimService {
   @Message(name = "dimLight",
       title = "Dim light",
       summary = "Command a particular streetlight to dim the lights.",
+      schemaFormat = "application/vnd.aai.asyncapi;version=2.0.0",
       headers = @Schema(name = "Message Header",
           description = "A Kafka Message Header"),
       traits = { @MessageTrait(ref = "#/components/messageTraits/commonHeaders") },
