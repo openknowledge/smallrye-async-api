@@ -104,7 +104,7 @@ public class MessageReader {
         message.setHeaders(SchemaFactory.readSchema(context, nested.value(MessageConstant.PROP_HEADERS)));
         message.setPayload(SchemaFactory.readSchema(context, nested.value(MessageConstant.PROP_PAYLOAD)));
         message.setCorrelationID(CorrelationIdReader.readCorrelationID(nested.value(MessageConstant.PROP_CORRELATION_ID)));
-        message.setSchemaFormat(JandexUtil.stringValue(nested, MessageConstant.PROP_SCHEME_FORMAT));
+        message.setSchemaFormat(JandexUtil.stringValue(nested, MessageConstant.PROP_SCHEMA_FORMAT));
         message.setContentType(JandexUtil.stringValue(nested, MessageConstant.PROP_CONTENT_TYPE));
         message.setName(JandexUtil.stringValue(nested, MessageConstant.PROP_NAME));
         message.setTitle(JandexUtil.stringValue(nested, MessageConstant.PROP_TITLE));
@@ -151,7 +151,7 @@ public class MessageReader {
         message.setHeaders(SchemaReader.readSchema(node.get(MessageConstant.PROP_HEADERS)));
         message.setPayload(SchemaReader.readSchema(node.get(MessageConstant.PROP_PAYLOAD)));
         message.setCorrelationID(CorrelationIdReader.readCorrelationID(node.get(MessageConstant.PROP_CORRELATION_ID)));
-        message.setSchemaFormat(JsonUtil.stringProperty(node, MessageConstant.PROP_SCHEME_FORMAT));
+        message.setSchemaFormat(JsonUtil.stringProperty(node, MessageConstant.PROP_SCHEMA_FORMAT));
         message.setContentType(JsonUtil.stringProperty(node, MessageConstant.PROP_CONTENT_TYPE));
         message.setName(JsonUtil.stringProperty(node, MessageConstant.PROP_NAME));
         message.setTitle(JsonUtil.stringProperty(node, MessageConstant.PROP_TITLE));

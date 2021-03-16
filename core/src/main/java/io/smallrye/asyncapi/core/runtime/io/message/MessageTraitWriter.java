@@ -68,7 +68,7 @@ public class MessageTraitWriter {
 
         SchemaWriter.writeSchema(node, model.getHeaders(), MessageConstant.PROP_HEADERS);
         CorrelationIdWriter.writeCorrelationID(node, model.getCorrelationID());
-        JsonUtil.stringProperty(node, MessageConstant.PROP_SCHEME_FORMAT, model.getSchemaFormat());
+        JsonUtil.stringProperty(node, MessageConstant.PROP_SCHEMA_FORMAT, model.getSchemaFormat());
         JsonUtil.stringProperty(node, MessageConstant.PROP_CONTENT_TYPE, model.getContentType());
         JsonUtil.stringProperty(node, MessageConstant.PROP_NAME, model.getName());
         JsonUtil.stringProperty(node, MessageConstant.PROP_TITLE, model.getTitle());
