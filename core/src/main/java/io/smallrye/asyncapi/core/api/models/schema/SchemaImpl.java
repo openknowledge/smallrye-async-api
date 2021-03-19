@@ -77,7 +77,7 @@ public class SchemaImpl extends ExtensibleImpl<Schema> implements Schema, ModelI
 
     private Schema constant;
 
-    private String example;
+    private Object example;
 
     private Boolean readOnly;
 
@@ -480,15 +480,15 @@ public class SchemaImpl extends ExtensibleImpl<Schema> implements Schema, ModelI
      * @see Schema#getExample()
      */
     @Override
-    public String getExample() {
+    public Object getExample() {
         return this.example;
     }
 
     /**
-     * @see Schema#setExample(String example)
+     * @see Schema#setExample(Object example)
      */
     @Override
-    public void setExample(final String example) {
+    public void setExample(final Object example) {
         this.example = example;
     }
 

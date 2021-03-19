@@ -245,7 +245,7 @@ public class SchemaFactory {
         final SchemaType schemaType = SchemaFactory.<String, SchemaType> readAttr(annotation, SchemaConstant.PROP_TYPE,
                 value -> JandexUtil.enumValue(value, SchemaType.class), defaults);
         schema.setType(schemaType);
-        schema.setExample((String) parseSchemaAttr(annotation, SchemaConstant.PROP_EXAMPLE, defaults, schemaType));
+        schema.setExample(parseSchemaAttr(annotation, SchemaConstant.PROP_EXAMPLE, defaults, schema.getType()));
         schema.setMaxItems(readAttr(annotation, SchemaConstant.PROP_MAX_ITEMS, defaults));
         schema.setMinItems(readAttr(annotation, SchemaConstant.PROP_MIN_ITEMS, defaults));
         schema.setUniqueItems(readAttr(annotation, SchemaConstant.PROP_UNIQUE_ITEMS, defaults));
