@@ -121,6 +121,7 @@
         <module>tools</module>
         <module>examples</module>
         <module>ui</module>
+        <module>implementation</module>
         <module>extension-reactive-messaging</module>
     </modules>
 
