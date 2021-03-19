@@ -55,6 +55,11 @@ public class SchemaTckTest extends BaseTckTest<SchemaTckTest.SchemaTest> {
       vr.body("components.schemas.EpochMillis.type", equalTo("number"));
 
       vr.body("components.schemas.Hello.properties.date.$ref", equalTo("#/components/schemas/EpochMillis"));
+
+      vr.body("components.schemas.Customer.type", equalTo("object"));
+      vr.body("components.schemas.Customer.properties.id.format", equalTo("int64"));
+      vr.body("components.schemas.Customer.properties.id.type", equalTo("number"));
+      vr.body("components.schemas.Customer.properties.id.example", equalTo("342-513-214"));
     }
   }
 }

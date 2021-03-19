@@ -180,7 +180,7 @@ public class SchemaReader {
         schema.setProperties(readSchemas(node.get(SchemaConstant.PROP_PROPERTIES)).orElse(null));
         schema.setReadOnly(JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY).orElse(null));
         schema.setExternalDocs(ExternalDocsReader.readExternalDocs(node.get(ExternalDocsConstant.PROP_EXTERNAL_DOCS)));
-        schema.setExample((String) readObject(node.get(SchemaConstant.PROP_EXAMPLE)));
+        schema.setExample(readObject(node.get(SchemaConstant.PROP_EXAMPLE)));
         schema.setOneOf(readSchemaArray(node.get(SchemaConstant.PROP_ONE_OF)).orElse(null));
         schema.setAnyOf(readSchemaArray(node.get(SchemaConstant.PROP_ANY_OF)).orElse(null));
         schema.setWriteOnly(JsonUtil.booleanProperty(node, SchemaConstant.PROP_WRITE_ONLY).orElse(null));

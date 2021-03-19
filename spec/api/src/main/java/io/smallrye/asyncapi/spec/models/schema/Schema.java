@@ -616,14 +616,14 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      *
      * @return the example of the schema
      */
-    String getExample();
+    Object getExample();
 
     /**
      * Sets the example of the example
      *
      * @param example the example of the schema
      */
-    void setExample(String example);
+    void setExample(Object example);
 
     /**
      * Sets the example of the schema
@@ -631,7 +631,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @param example the example of the schema
      * @return this Schema instance
      */
-    default Schema example(String example) {
+    default Schema example(Object example) {
         setExample(example);
         return this;
     }
