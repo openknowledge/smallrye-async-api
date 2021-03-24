@@ -270,7 +270,7 @@ public class JandexUtil {
     }
 
     /**
-     * Many OAI annotations can either be found singly or as a wrapped array. This method will
+     * Many AAI annotations can either be found singly or as a wrapped array. This method will
      * look for both and return a list of all found. Both the single and wrapper annotation names
      * must be provided.
      *

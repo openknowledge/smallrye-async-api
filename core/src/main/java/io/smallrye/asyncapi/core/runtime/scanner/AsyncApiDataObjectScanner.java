@@ -52,7 +52,7 @@ import io.smallrye.asyncapi.spec.models.schema.Schema;
  * <li>Explicitly provided attributes/overrides on {@literal @}Schema annotated elements.
  * Note that some attributes have special behaviours: for example, ref is mutually
  * exclusive, and implementation replaces the implementation entirely.</li>
- * <li>Unannotated fields unless property openapi.infer-unannotated-types set false</li>
+ * <li>Unannotated fields unless property asyncapi.infer-unannotated-types set false</li>
  * <li>Inferred attributes, such as name, type, format, etc.</li>
  * </ol>
  *
@@ -163,7 +163,7 @@ public class AsyncApiDataObjectScanner {
      *
      * @param context scanning context
      * @param type root to begin scan
-     * @return the OAI schema
+     * @return the AAI schema
      */
     public static Schema process(final AnnotationScannerContext context, Type type) {
         return new AsyncApiDataObjectScanner(context, type).process();
@@ -173,7 +173,7 @@ public class AsyncApiDataObjectScanner {
      * Build a Schema with PrimitiveType as root.
      *
      * @param primitive root to begin scan
-     * @return the OAI schema
+     * @return the AAI schema
      */
     public static Schema process(PrimitiveType primitive) {
         Schema primitiveSchema = new SchemaImpl();
@@ -184,7 +184,7 @@ public class AsyncApiDataObjectScanner {
     /**
      * Build the Schema
      *
-     * @return the OAI schema
+     * @return the AAI schema
      */
     Schema process() {
         ScannerLogging.logger.startProcessing(rootClassType.name());

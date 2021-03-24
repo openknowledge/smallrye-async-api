@@ -131,8 +131,7 @@ public class SchemaReader {
             }
 
             /*
-             * The name is REQUIRED when the schema is defined within
-             * {@link org.eclipse.microprofile.openapi.annotations.Components}.
+             * The name is REQUIRED when the schema is defined within Components.
              */
             if (name != null) {
                 map.put(name, SchemaFactory.readSchema(context, new SchemaImpl(name), nested, Collections.emptyMap()));
