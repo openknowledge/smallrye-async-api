@@ -35,6 +35,15 @@ import io.smallrye.asyncapi.spec.annotations.ExternalDocumentation;
 public @interface Schema {
 
     /**
+     * Provides a java class as implementation for this schema.
+     * When provided, additional information in the Schema annotation (except for type
+     * information) will augment the java class after introspection.
+     *
+     * @return a class that implements this schema
+     **/
+    Class<?> implementation() default Void.class;
+
+    /**
      * A title to explain the purpose of the schema.
      *
      * @return the title of the schema
@@ -214,6 +223,17 @@ public @interface Schema {
     String[] enumeration() default {};
 
     /**
+     * Provides a discriminator property value.
+     * Adds support for polymorphism.
+     *
+     * The discriminator is an object name that is used to differentiate between other schemas
+     * which may satisfy the payload description.
+     *
+     * @return the discriminator property
+     */
+    String discriminator() default "";
+
+    /**
      * Equivalent to an "enum" with a single value.
      *
      * @return allowed schema values
@@ -232,12 +252,6 @@ public @interface Schema {
      * @return an example of this schema
      **/
     String example() default "";
-
-    // TODO: if
-
-    // TODO: then
-
-    // TODO: else
 
     /**
      * Relevant only for Schema "properties" definitions. Declares the property as "read only".
@@ -293,18 +307,6 @@ public @interface Schema {
      **/
     SchemaProperty[] properties() default {};
 
-    // TODO: patternProperties
-
-    // TODO: additionalProperties
-
-    // TODO: additionalItems
-
-    // TODO: items
-
-    // TODO: propertyName
-
-    // TODO: contains
-
     /**
      * Provides an array of java class implementations which can be used to describe multiple acceptable schemas.
      *
@@ -353,4 +355,11 @@ public @interface Schema {
      * @return ExternalDocumentation
      */
     ExternalDocumentation externalDoc() default @ExternalDocumentation(url = "");
+
+    /**
+     * Specifies that a schema is deprecated and SHOULD be transitioned out of usage. Default value is false.
+     *
+     * @return whether the schema is deprecated or not
+     */
+    boolean deprecated() default false;
 }

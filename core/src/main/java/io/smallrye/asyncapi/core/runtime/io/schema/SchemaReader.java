@@ -183,7 +183,10 @@ public class SchemaReader {
         schema.setExample(readObject(node.get(SchemaConstant.PROP_EXAMPLE)));
         schema.setOneOf(readSchemaArray(node.get(SchemaConstant.PROP_ONE_OF)).orElse(null));
         schema.setAnyOf(readSchemaArray(node.get(SchemaConstant.PROP_ANY_OF)).orElse(null));
+        schema.setAllOf(readSchemaArray(node.get(SchemaConstant.PROP_ALL_OF)).orElse(null));
         schema.setWriteOnly(JsonUtil.booleanProperty(node, SchemaConstant.PROP_WRITE_ONLY).orElse(null));
+        schema.setDeprecated(JsonUtil.booleanProperty(node, SchemaConstant.PROP_DEPRECATED).orElse(null));
+        schema.setDiscriminator(JsonUtil.stringProperty(node, SchemaConstant.PROP_DISCRIMINATOR));
         ExtensionReader.readExtensions(node, schema);
 
         return schema;
