@@ -18,7 +18,7 @@ package io.smallrye.asyncapi.core.runtime.io.info;
 /**
  * Constants related to Info
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#infoObject">infoObject</a>
+ * @see <a href="https://www.asyncapi.com/docs/specifications/2.0.0#infoObject">infoObject</a>
  */
 public class InfoConstant {
 

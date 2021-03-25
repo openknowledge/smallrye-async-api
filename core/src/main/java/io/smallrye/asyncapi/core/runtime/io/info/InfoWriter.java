@@ -27,7 +27,7 @@ import io.smallrye.asyncapi.spec.models.info.Info;
 /**
  * This write the Info to json
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.3.md#infoObject">infoObject</a>
+ * @see <a href="https://www.asyncapi.com/docs/specifications/2.0.0#infoObject">infoObject</a>
  */
 public class InfoWriter {
     private InfoWriter() {

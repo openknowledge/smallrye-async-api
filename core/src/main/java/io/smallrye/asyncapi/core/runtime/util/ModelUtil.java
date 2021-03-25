@@ -34,7 +34,7 @@ public class ModelUtil {
     }
 
     /**
-     * Gets the {@link Components} from the OAI model. If it doesn't exist, creates it.
+     * Gets the {@link Components} from the AAI model. If it doesn't exist, creates it.
      *
      * @param asyncAPI AsyncAPI
      * @return Components

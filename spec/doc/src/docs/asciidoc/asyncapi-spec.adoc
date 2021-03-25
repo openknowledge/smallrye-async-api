@@ -85,7 +85,7 @@ framework-specific values for configurations that affect implementation behavior
 
 For convenience of vendors (and application developers using custom ConfigSources),
 the full list of supported configuration keys is available as constants in the
-https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASConfig.java[OASConfig] class.
+https://github.com/openknowledge/smallrye-async-api/blob/master/core/src/main/java/io/smallrye/asyncapi/core/api/AsyncApiConfig.java[AASConfig] class.
 
 ==== Core configurations
 
@@ -608,12 +608,12 @@ with annotations, programming model, or via the filter.
 
 ==== Location and formats
 
-Vendors are required to fetch a single document named `openapi` with an extension
+Vendors are required to fetch a single document named `asyncapi` with an extension
 of `yml`, `yaml` or `json`, inside the application module's root
 `META-INF` folder.  If there is more than one document found that matches one of
 these extensions the behavior of which file is chosen is undefined (i.e. each vendor
 may implement their own logic), which means that application developers should
-only place a single `openapi` document into that folder.
+only place a single `asyncapi` document into that folder.
 
 For convenience, you may also place your `microprofile-config.properties` in the
 root `META-INF` folder, if you wish to keep both documents in the same directory.

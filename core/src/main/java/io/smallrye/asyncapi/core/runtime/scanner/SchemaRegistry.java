@@ -57,12 +57,12 @@ public class SchemaRegistry {
      * replace the registry in the current thread context with a new instance.
      *
      * @param config current runtime configuration
-     * @param oai the AsyncAPI being constructed by the scan
+     * @param aai the AsyncAPI being constructed by the scan
      * @param index indexed class information
      * @return the registry
      */
-    public static SchemaRegistry newInstance(AsyncApiConfig config, AsyncAPI oai, IndexView index) {
-        SchemaRegistry registry = new SchemaRegistry(config, oai, index);
+    public static SchemaRegistry newInstance(AsyncApiConfig config, AsyncAPI aai, IndexView index) {
+        SchemaRegistry registry = new SchemaRegistry(config, aai, index);
         current.set(registry);
         return registry;
     }
@@ -96,7 +96,7 @@ public class SchemaRegistry {
      * </ul>
      * <p>
      * If eligible, schema references are enabled by MP Config property
-     * <code>mp.openapi.extensions.smallrye.schema-references.enable</code>, and the
+     * <code>mp.asyncapi.extensions.smallrye.schema-references.enable</code>, and the
      * resolved type is available in the registry's {@link IndexView} then the
      * schema can be registered.
      * <p>
@@ -127,7 +127,7 @@ public class SchemaRegistry {
      * </ul>
      * <p>
      * If eligible, schema references are enabled by MP Config property
-     * <code>mp.openapi.extensions.smallrye.schema-references.enable</code>, and the
+     * <code>mp.asyncapi.extensions.smallrye.schema-references.enable</code>, and the
      * resolved type is available in the registry's {@link IndexView} then the
      * schema reference can be registered.
      * <p>
@@ -231,7 +231,7 @@ public class SchemaRegistry {
         }
     }
 
-    private final AsyncAPI oai;
+    private final AsyncAPI aai;
 
     private final IndexView index;
 
@@ -239,15 +239,15 @@ public class SchemaRegistry {
 
     private final Set<String> names = new LinkedHashSet<>();
 
-    private SchemaRegistry(AsyncApiConfig config, AsyncAPI oai, IndexView index) {
-        this.oai = oai;
+    private SchemaRegistry(AsyncApiConfig config, AsyncAPI aai, IndexView index) {
+        this.aai = aai;
         this.index = index;
 
         /*
          * If anything has been added in the component scan, add the names here
          * to prevent a collision.
          */
-        Components components = oai.getComponents();
+        Components components = aai.getComponents();
 
         if (components != null) {
             Map<String, Schema> schemas = components.getSchemas();
@@ -329,7 +329,7 @@ public class SchemaRegistry {
         registry.put(key, new GeneratedSchemaInfo(name, schema, schemaRef));
         names.add(name);
 
-        ModelUtil.components(oai)
+        ModelUtil.components(aai)
                 .addSchema(name, schema);
 
         return schemaRef;

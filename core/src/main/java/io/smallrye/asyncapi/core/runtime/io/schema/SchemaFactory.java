@@ -293,7 +293,7 @@ public class SchemaFactory {
             } else if (implSchema != null) {
                 // If there is an impl class - merge the @Schema properties *onto* the schema
                 // generated from the Class so that the annotation properties override the class
-                // properties (as required by the MP+OAI spec).
+                // properties (as required by the MP+AAI spec).
                 schema = MergeUtil.mergeObjects(implSchema, schema);
             }
         }
