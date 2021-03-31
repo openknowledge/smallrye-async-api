@@ -99,6 +99,12 @@ public class SchemaImpl extends ExtensibleImpl<Schema> implements Schema, ModelI
 
     private Schema not;
 
+    private ExternalDocumentation externalDocs;
+
+    private Boolean deprecated;
+
+    private String discriminator;
+
     public SchemaImpl() {
     }
 
@@ -632,7 +638,7 @@ public class SchemaImpl extends ExtensibleImpl<Schema> implements Schema, ModelI
 
     @Override
     public void removeAllOf(final Schema allOf) {
-
+        ModelUtil.remove(this.allOf, allOf);
     }
 
     /**
@@ -717,14 +723,52 @@ public class SchemaImpl extends ExtensibleImpl<Schema> implements Schema, ModelI
         this.not = not;
     }
 
+    /**
+     * @see Schema#getExternalDocs()
+     */
     @Override
     public ExternalDocumentation getExternalDocs() {
-        return null;
+        return this.externalDocs;
     }
 
+    /**
+     * @see Schema#setExternalDocs(ExternalDocumentation externalDocumentation)
+     */
     @Override
     public void setExternalDocs(final ExternalDocumentation externalDocumentation) {
+        this.externalDocs = externalDocumentation;
+    }
 
+    /**
+     * @see Schema#getDeprecated()
+     */
+    @Override
+    public Boolean getDeprecated() {
+        return this.deprecated;
+    }
+
+    /**
+     * @see Schema#setDeprecated(Boolean deprecated)
+     */
+    @Override
+    public void setDeprecated(final Boolean deprecated) {
+        this.deprecated = deprecated;
+    }
+
+    /**
+     * @see Schema#getDiscriminator()
+     */
+    @Override
+    public String getDiscriminator() {
+        return this.discriminator;
+    }
+
+    /**
+     * @see Schema#setDiscriminator(String discriminator)
+     */
+    @Override
+    public void setDiscriminator(String discriminator) {
+        this.discriminator = discriminator;
     }
 
     /**

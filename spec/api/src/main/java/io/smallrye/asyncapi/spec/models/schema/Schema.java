@@ -35,6 +35,31 @@ import io.smallrye.asyncapi.spec.models.Reference;
 public interface Schema extends Extensible<Schema>, Constructible, Reference<Schema> {
 
     /**
+     * Returns the discriminator property from this Schema instance.
+     *
+     * @return the discriminator that is used to differentiate between the schemas which may satisfy the payload description
+     **/
+    String getDiscriminator();
+
+    /**
+     * Sets the discriminator property of this Schema instance to the given object.
+     *
+     * @param discriminator the object that is used to differentiate between the schemas which may satisfy the payload description
+     */
+    void setDiscriminator(String discriminator);
+
+    /**
+     * Sets the discriminator property of this Schema instance to the given object.
+     *
+     * @param discriminator the object that is used to differentiate between the schemas which may satisfy the payload description
+     * @return the current Schema instance
+     */
+    default Schema discriminator(String discriminator) {
+        setDiscriminator(discriminator);
+        return this;
+    }
+
+    /**
      * Returns the title of the schema
      *
      * @return the title of the schema
@@ -1012,6 +1037,29 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      */
     default Schema externalDocs(ExternalDocumentation externalDocs) {
         setExternalDocs(externalDocs);
+        return this;
+    }
+
+    /**
+     * @return the deprecated property from this Schema instance.
+     **/
+    Boolean getDeprecated();
+
+    /**
+     * Sets the deprecated property of this Schema.
+     *
+     * @param deprecated the deprecated property from this Schema instance.
+     */
+    void setDeprecated(Boolean deprecated);
+
+    /**
+     * Sets the deprecated property of this Schema.
+     *
+     * @param deprecated the deprecated property from this Schema instance.
+     * @return this Schema instance
+     */
+    default Schema deprecated(Boolean deprecated) {
+        setDeprecated(deprecated);
         return this;
     }
 }

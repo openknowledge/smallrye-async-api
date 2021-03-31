@@ -201,6 +201,17 @@ public @interface SchemaProperty {
     String[] enumeration() default {};
 
     /**
+     * Provides a discriminator property value.
+     * Adds support for polymorphism.
+     *
+     * The discriminator is an object name that is used to differentiate between other schemas
+     * which may satisfy the payload description.
+     *
+     * @return the discriminator property
+     */
+    String discriminator() default "";
+
+    /**
      * Equivalent to an "enum" with a single value.
      *
      * @return allowed schema values

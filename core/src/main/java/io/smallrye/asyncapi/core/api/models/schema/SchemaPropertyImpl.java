@@ -89,6 +89,8 @@ public class SchemaPropertyImpl extends ExtensibleImpl<SchemaProperty> implement
 
     private List<Schema> not;
 
+    private String discriminator;
+
     /**
      * @see SchemaProperty#getTitle()
      */
@@ -637,6 +639,22 @@ public class SchemaPropertyImpl extends ExtensibleImpl<SchemaProperty> implement
     }
 
     /**
+     * @see Schema#getDiscriminator()
+     */
+    @Override
+    public String getDiscriminator() {
+        return this.discriminator;
+    }
+
+    /**
+     * @see Schema#setDiscriminator(String discriminator)
+     */
+    @Override
+    public void setDiscriminator(String discriminator) {
+        this.discriminator = discriminator;
+    }
+
+    /**
      * @see SchemaProperty#getRef()
      */
     @Override
@@ -650,22 +668,5 @@ public class SchemaPropertyImpl extends ExtensibleImpl<SchemaProperty> implement
     @Override
     public void setRef(final String ref) {
         this.ref = ref;
-    }
-
-    @Override
-    public String toString() {
-        return "SchemaPropertyImpl{" + "ref='" + ref + '\'' + ", title='" + title + '\'' + ", type=" + type + ", required="
-                + required + ", description='"
-                + description + '\'' + ", format='" + format + '\'' + ", name='" + name + '\'' + ", multipleOf=" + multipleOf
-                + ", maximum=" + maximum
-                + ", exclusiveMaximum=" + exclusiveMaximum + ", minimum=" + minimum + ", exclusiveMinimum=" + exclusiveMinimum
-                + ", maxLength=" + maxLength
-                + ", minLength=" + minLength + ", pattern='" + pattern + '\'' + ", maxItems=" + maxItems + ", minItems="
-                + minItems + ", uniqueItems="
-                + uniqueItems + ", maxProperties=" + maxProperties + ", minProperties=" + minProperties + ", enumerations="
-                + enumerations + ", constant="
-                + constant + ", example='" + example + '\'' + ", readOnly=" + readOnly + ", writeOnly=" + writeOnly + ", allOf="
-                + allOf + ", oneOf=" + oneOf
-                + ", anyOf=" + anyOf + ", not=" + not + '}';
     }
 }

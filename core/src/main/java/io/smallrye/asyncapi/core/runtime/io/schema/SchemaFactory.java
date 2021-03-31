@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import io.smallrye.asyncapi.core.runtime.util.ModelUtil;
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationValue;
 import org.jboss.jandex.ArrayType;
@@ -220,6 +221,8 @@ public class SchemaFactory {
                 type -> readClassSchemas(context, type), defaults));
         schema.setAnyOf(SchemaFactory.<Type[], List<Schema>> readAttr(annotation, SchemaConstant.PROP_ANY_OF,
                 type -> readClassSchemas(context, type), defaults));
+        schema.setAllOf(SchemaFactory.<Type[], List<Schema>> readAttr(annotation, SchemaConstant.PROP_ALL_OF,
+                type -> readClassSchemas(context, type), defaults));
         schema.setTitle(readAttr(annotation, SchemaConstant.PROP_TITLE, defaults));
         schema.setMultipleOf(SchemaFactory.<Double, BigDecimal> readAttr(annotation, SchemaConstant.PROP_MULTIPLE_OF,
                 BigDecimal::valueOf, defaults));
@@ -236,6 +239,7 @@ public class SchemaFactory {
         schema.setMinProperties(readAttr(annotation, SchemaConstant.PROP_MIN_PROPERTIES, defaults));
         schema.setRequired(readAttr(annotation, SchemaConstant.PROP_REQUIRED_PROPERTIES, defaults));
         schema.setDescription(readAttr(annotation, SchemaConstant.PROP_DESCRIPTION, defaults));
+        schema.setDiscriminator(readAttr(annotation, SchemaConstant.PROP_DISCRIMINATOR, defaults));
         schema.setFormat(readAttr(annotation, SchemaConstant.PROP_FORMAT, defaults));
         schema.setRef(readAttr(annotation, AsyncApiConstants.REF, defaults));
         schema.setReadOnly(readAttr(annotation, SchemaConstant.PROP_READ_ONLY, defaults));
@@ -250,6 +254,7 @@ public class SchemaFactory {
         schema.setMinItems(readAttr(annotation, SchemaConstant.PROP_MIN_ITEMS, defaults));
         schema.setUniqueItems(readAttr(annotation, SchemaConstant.PROP_UNIQUE_ITEMS, defaults));
         schema.setExtensions(ExtensionReader.readExtensions(context, annotation));
+        schema.setDeprecated(readAttr(annotation, SchemaConstant.PROP_DEPRECATED, defaults));
 
         schema.setProperties(SchemaFactory.<AnnotationInstance[], Map<String, Schema>> readAttr(annotation,
                 SchemaConstant.PROP_PROPERTIES, properties -> {

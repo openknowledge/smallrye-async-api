@@ -23,6 +23,8 @@ public class SchemaConstant {
 
     public static final DotName DOTNAME_SCHEMA = DotName.createSimple(Schema.class.getName());
 
+    public static final String PROP_DISCRIMINATOR = "discriminator";
+
     public static final String PROP_NAME = "name";
 
     public static final String PROP_XML = "xml";
@@ -68,6 +70,8 @@ public class SchemaConstant {
     public static final String PROP_TITLE = "title";
 
     public static final String PROP_NULLABLE = "nullable";
+
+    public static final String PROP_SCHEMA = "schema";
 
     public static final String PROP_UNIQUE_ITEMS = "uniqueItems";
 

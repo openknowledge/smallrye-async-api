@@ -33,6 +33,31 @@ import io.smallrye.asyncapi.spec.models.Reference;
 public interface SchemaProperty extends Extensible<SchemaProperty>, Constructible, Reference<SchemaProperty> {
 
     /**
+     * Returns the discriminator property from this Schema instance.
+     *
+     * @return the discriminator that is used to differentiate between the schemas which may satisfy the payload description
+     **/
+    String getDiscriminator();
+
+    /**
+     * Sets the discriminator property of this Schema instance to the given object.
+     *
+     * @param discriminator the object that is used to differentiate between the schemas which may satisfy the payload description
+     */
+    void setDiscriminator(String discriminator);
+
+    /**
+     * Sets the discriminator property of this Schema instance to the given object.
+     *
+     * @param discriminator the object that is used to differentiate between the schemas which may satisfy the payload description
+     * @return the current Schema instance
+     */
+    default SchemaProperty discriminator(String discriminator) {
+        setDiscriminator(discriminator);
+        return this;
+    }
+
+    /**
      * Returns the title of the schema
      *
      * @return the title of the schema
