@@ -375,7 +375,7 @@ public class TypeResolver {
     }
 
     private static boolean acceptField(FieldInfo field) {
-        return !Modifier.isStatic(field.flags());
+        return !Modifier.isStatic(field.flags()) && !field.isSynthetic();
     }
 
     /**
