@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>smallrye-async-api-tck</artifactId>
-    <name>SmallRye: MicroProfile AsyncAPI TCK</name>
+    <name>SmallRye: AsyncAPI TCK</name>
 
     <dependencies>
         <!-- Project Dependencies -->

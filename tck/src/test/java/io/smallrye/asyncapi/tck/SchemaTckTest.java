@@ -42,7 +42,6 @@ public class SchemaTckTest extends BaseTckTest<SchemaTckTest.SchemaTest> {
     @Test(dataProvider = "formatProvider")
     public void testVersion(String type) {
       ValidatableResponse vr = callEndpoint(type);
-      System.out.println(getResponse().body().prettyPrint());
       vr.body("asyncapi", equalTo("2.0.0"));
     }
 

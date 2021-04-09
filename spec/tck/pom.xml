@@ -27,7 +27,7 @@
     </parent>
 
     <artifactId>smallrye-async-api-spec-tck</artifactId>
-    <name>SmallRye: MicroProfile AsyncAPI Spec TCK</name>
+    <name>SmallRye: AsyncAPI Spec TCK</name>
 
     <dependencies>
         <!-- Project dependencies -->

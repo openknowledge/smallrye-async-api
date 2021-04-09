@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>smallrye-async-api-core</artifactId>
-    <name>SmallRye: MicroProfile AsyncAPI Core</name>
+    <name>SmallRye: AsyncAPI Core</name>
 
     <dependencies>
         <!-- MP Config Spec -->
