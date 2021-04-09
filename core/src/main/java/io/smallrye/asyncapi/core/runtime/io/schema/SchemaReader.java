@@ -175,6 +175,7 @@ public class SchemaReader {
         schema.setRequired(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_REQUIRED)).orElse(null));
         schema.setEnumeration(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_ENUM)).orElse(null));
         schema.setType(readSchemaType(node.get(SchemaConstant.PROP_TYPE)));
+        schema.setItems(readSchema(node.get(SchemaConstant.PROP_ITEMS)));
         schema.setNot(readSchema(node.get(SchemaConstant.PROP_NOT)));
         schema.setProperties(readSchemas(node.get(SchemaConstant.PROP_PROPERTIES)).orElse(null));
         schema.setReadOnly(JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY).orElse(null));

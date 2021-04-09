@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationTarget;
@@ -369,12 +370,18 @@ public class JandexUtil {
      */
     public static boolean isSimpleArraySchema(AnnotationInstance annotation) {
         // May only have 'type' display property
-        if (annotation.values()
-                .size() != 1) {
+        if (schemaDisplayValues(annotation).size() != 1) {
             return false;
         }
 
         return isArraySchema(annotation);
+    }
+
+    public static List<AnnotationValue> schemaDisplayValues(AnnotationInstance annotation) {
+        return annotation.values()
+            .stream()
+            .filter(value -> !SchemaConstant.PROPERTIES_NONDISPLAY.contains(value.name()))
+            .collect(Collectors.toList());
     }
 
     /**

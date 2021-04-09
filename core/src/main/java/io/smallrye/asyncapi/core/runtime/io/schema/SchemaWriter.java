@@ -149,6 +149,7 @@ public class SchemaWriter {
             ObjectWriter.writeStringArray(node, model.getRequired(), SchemaConstant.PROP_REQUIRED);
             ObjectWriter.writeStringArray(node, model.getEnumeration(), SchemaConstant.PROP_ENUM);
             JsonUtil.enumProperty(node, SchemaConstant.PROP_TYPE, model.getType());
+            writeSchema(node, model.getItems(), SchemaConstant.PROP_ITEMS);
             writeSchemas(node, model.getProperties(), SchemaConstant.PROP_PROPERTIES);
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY, model.getReadOnly());
             ExternalDocsWriter.writeExternalDocumentation(node, model.getExternalDocs());

@@ -19,6 +19,10 @@ import org.jboss.jandex.DotName;
 
 import io.smallrye.asyncapi.spec.annotations.schema.Schema;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class SchemaConstant {
 
     public static final DotName DOTNAME_SCHEMA = DotName.createSimple(Schema.class.getName());
@@ -96,6 +100,8 @@ public class SchemaConstant {
 
     public static final String PROP_ONE_OF = "oneOf";
 
+    public static final String PROP_ITEMS = "items";
+
     public static final String PROP_MAX_PROPERTIES = "maxProperties";
 
     // Only in SchemaFactory ?
@@ -104,6 +110,11 @@ public class SchemaConstant {
     public static final String PROP_PROPERTIES = "properties";
 
     public static final String PROP_NOT = "not";
+
+    public static final List<String> PROPERTIES_NONDISPLAY = Collections.unmodifiableList(Arrays.asList(
+        PROP_IMPLEMENTATION,
+        PROP_NAME,
+        PROP_REQUIRED));
 
     private SchemaConstant() {
     }
