@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import io.smallrye.asyncapi.core.api.constants.JaxbConstants;
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationTarget;
 import org.jboss.jandex.AnnotationValue;
@@ -334,6 +335,26 @@ public class TypeUtil {
 
         // If is known type.
         return !getTypeFormat(type).isSchemaType(SchemaType.ARRAY, SchemaType.OBJECT);
+    }
+
+    public static boolean isWrappedType(Type type) {
+        if (type != null) {
+            return isOptional(type) || JaxbConstants.JAXB_ELEMENT.equals(type.name());
+        }
+        return false;
+    }
+
+    public static Type unwrapType(Type type) {
+        if (type != null) {
+            if (isOptional(type)) {
+                return getOptionalType(type);
+            }
+            if (JaxbConstants.JAXB_ELEMENT.equals(type.name())) {
+                return type.asParameterizedType().arguments().get(0);
+            }
+        }
+
+        return type;
     }
 
     public static Type resolveWildcard(WildcardType wildcardType) {

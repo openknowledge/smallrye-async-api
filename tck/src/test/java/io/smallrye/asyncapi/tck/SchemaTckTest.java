@@ -42,6 +42,7 @@ public class SchemaTckTest extends BaseTckTest<SchemaTckTest.SchemaTest> {
     @Test(dataProvider = "formatProvider")
     public void testVersion(String type) {
       ValidatableResponse vr = callEndpoint(type);
+      System.out.println(getResponse().body().prettyPrint());
       vr.body("asyncapi", equalTo("2.0.0"));
     }
 
@@ -55,6 +56,9 @@ public class SchemaTckTest extends BaseTckTest<SchemaTckTest.SchemaTest> {
       vr.body("components.schemas.EpochMillis.type", equalTo("number"));
 
       vr.body("components.schemas.Hello.properties.date.$ref", equalTo("#/components/schemas/EpochMillis"));
+      vr.body("components.schemas.Hello.properties.customers.description", equalTo("A list of customer"));
+      vr.body("components.schemas.Hello.properties.customers.type", equalTo("array"));
+      vr.body("components.schemas.Hello.properties.customers.items.$ref", equalTo("#/components/schemas/Customer"));
 
       vr.body("components.schemas.Customer.type", equalTo("object"));
       vr.body("components.schemas.Customer.properties.id.format", equalTo("int64"));

@@ -21,6 +21,7 @@ import io.smallrye.asyncapi.spec.annotations.schema.Schema;
 import io.smallrye.asyncapi.spec.annotations.schema.SchemaType;
 
 import java.util.Date;
+import java.util.List;
 
 @AsyncAPI(asyncapi = "2.0.0",
     info = @Info(title = "SchemaService",
@@ -34,6 +35,9 @@ public class SchemaService {
     private String name;
 
     private Date date;
+
+    @Schema(description = "A list of customer")
+    private List<Customer> customers;
 
     public Hello(final String name, final Date date) {
       this.name = name;

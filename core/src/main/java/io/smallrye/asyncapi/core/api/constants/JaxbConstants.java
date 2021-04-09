@@ -22,6 +22,8 @@ import org.jboss.jandex.DotName;
  */
 public class JaxbConstants {
 
+    public static final DotName JAXB_ELEMENT = DotName.createSimple("javax.xml.bind.JAXBElement");
+
     public static final DotName XML_TYPE = DotName.createSimple("javax.xml.bind.annotation.XmlType");
 
     public static final DotName XML_ELEMENT = DotName.createSimple("javax.xml.bind.annotation.XmlElement");

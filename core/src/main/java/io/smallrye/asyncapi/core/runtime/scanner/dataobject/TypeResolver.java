@@ -30,8 +30,10 @@ import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
+import io.smallrye.asyncapi.core.runtime.scanner.spi.AnnotationScannerContext;
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationTarget;
 import org.jboss.jandex.AnnotationValue;
@@ -687,6 +689,29 @@ public class TypeResolver {
         return current;
     }
 
+    /**
+     * Resolve a parameterized type against this {@link TypeResolver}'s resolution stack.
+     * If any of the type's arguments are wild card types, the resolution will fall back
+     * to the basic {@link #getResolvedType(Type)} method, resolving none of
+     * the arguments.
+     *
+     * @param type type to resolve
+     * @return resolved type (if found)
+     */
+    public Type resolve(Type type) {
+        Type resolvedType;
+
+        if (type == null) {
+            resolvedType = null;
+        } else if (type.kind() == Type.Kind.PARAMETERIZED_TYPE) {
+            resolvedType = getResolvedType(type.asParameterizedType());
+        } else {
+            resolvedType = getResolvedType(type);
+        }
+
+        return resolvedType;
+    }
+
     private static String methodNamePrefix(MethodInfo method) {
         String methodName = method.name();
 
@@ -751,4 +776,63 @@ public class TypeResolver {
         return resolutionMap;
     }
 
+    public static ParameterizedType resolveParameterizedAncestor(AnnotationScannerContext context, ParameterizedType pType,
+        Type seekType) {
+        ParameterizedType cursor = pType;
+        boolean seekContinue = true;
+
+        while (context.getAugmentedIndex().containsClass(cursor) && seekContinue) {
+            ClassInfo cursorClass = context.getIndex().getClassByName(cursor.name());
+            Map<String, Type> resolutionMap = buildParamTypeResolutionMap(cursorClass, cursor);
+            List<Type> interfaces = getInterfacesOfType(context, cursorClass, seekType);
+
+            for (Type implementedType : interfaces) {
+                // Follow interface hierarchy toward `seekType` instead of parent class
+                cursor = createParameterizedType(implementedType, resolutionMap);
+
+                if (implementedType.name().equals(seekType.name())) {
+                    // The searched-for type is implemented directly
+                    seekContinue = false;
+                    break;
+                }
+            }
+
+            if (interfaces.isEmpty()) {
+                Type superType = cursorClass.superClassType();
+
+                if (TypeUtil.isA(context, superType, seekType)) {
+                    cursor = createParameterizedType(superType, resolutionMap);
+                } else {
+                    seekContinue = false;
+                }
+            }
+        }
+
+        return cursor;
+    }
+
+    private static List<Type> getInterfacesOfType(AnnotationScannerContext context, ClassInfo clazz, Type seekType) {
+        return clazz.interfaceTypes().stream().filter(t -> TypeUtil.isA(context, t, seekType)).collect(Collectors.toList());
+    }
+
+    private static ParameterizedType createParameterizedType(Type targetType, Map<String, Type> resolutionMap) {
+        Type[] resolvedArgs = resolveArguments(targetType.asParameterizedType(), t -> resolveType(t, resolutionMap));
+        return ParameterizedType.create(targetType.name(), resolvedArgs, null);
+    }
+
+    private static Type resolveType(Type type, Map<String, Type> resolutionMap) {
+        switch (type.kind()) {
+        case PARAMETERIZED_TYPE:
+            return createParameterizedType(type, resolutionMap);
+        case TYPE_VARIABLE:
+            String id = type.asTypeVariable().identifier();
+            return resolutionMap.getOrDefault(id, type);
+        default:
+            return type;
+        }
+    }
+
+    private static Type[] resolveArguments(ParameterizedType type, UnaryOperator<Type> resolver) {
+        return type.arguments().stream().map(resolver).toArray(Type[]::new);
+    }
 }
