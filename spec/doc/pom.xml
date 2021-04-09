@@ -27,7 +27,7 @@
     </parent>
 
     <artifactId>smallrye-async-api-spec-doc</artifactId>
-    <name>SmallRye: MicroProfile AsyncAPI Spec Documentation</name>
+    <name>SmallRye: AsyncAPI Spec Documentation</name>
 
     <properties>
         <license>Apache License v 2.0</license>

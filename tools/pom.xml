@@ -25,7 +25,7 @@
     </parent>
 
     <artifactId>smallrye-async-api-tools</artifactId>
-    <name>SmallRye: MicroProfile AsyncAPI Tools</name>
+    <name>SmallRye: AsyncAPI Tools</name>
     <packaging>pom</packaging>
 
     <modules>

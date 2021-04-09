@@ -30,7 +30,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>SmallRye: MicroProfile AsyncAPI Parent</name>
+    <name>SmallRye: AsyncAPI Parent</name>
     <url>http://smallrye.io</url>
 
     <properties>

@@ -27,7 +27,7 @@
     </parent>
 
     <artifactId>smallrye-async-api-spec-api</artifactId>
-    <name>SmallRye: MicroProfile AsyncAPI Spec API</name>
+    <name>SmallRye: AsyncAPI Spec API</name>
 
     <dependencies>
         <dependency>
