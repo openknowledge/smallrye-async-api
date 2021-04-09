@@ -37,8 +37,6 @@ public class PetStoreTest extends AppTestBase {
   @Test(dataProvider = "formatProvider")
   public void testVersion(String type) {
     ValidatableResponse vr = callEndpoint(type);
-    System.out.println(getResponse().body()
-        .prettyPrint());
     vr.body("asyncapi", startsWith("2.0."));
   }
 
@@ -73,8 +71,6 @@ public class PetStoreTest extends AppTestBase {
   @Test(dataProvider = "formatProvider")
   public void testAllOf(String type) {
     ValidatableResponse vr = callEndpoint(type);
-
-    System.out.println(getResponse().body().prettyPrint());
 
     vr.body("channels.pet-receive-topic.subscribe.message.payload.allOf[0].$ref", equalTo("#/components/schemas/Cat"));
     vr.body("channels.pet-receive-topic.subscribe.message.payload.allOf[1].$ref", equalTo("#/components/schemas/Dog"));
