@@ -173,7 +173,7 @@ public class SchemaReader {
         schema.setMaxProperties(JsonUtil.intProperty(node, SchemaConstant.PROP_MAX_PROPERTIES));
         schema.setMinProperties(JsonUtil.intProperty(node, SchemaConstant.PROP_MIN_PROPERTIES));
         schema.setRequired(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_REQUIRED)).orElse(null));
-        schema.setEnumeration(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_ENUMERATION)).orElse(null));
+        schema.setEnumeration(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_ENUM)).orElse(null));
         schema.setType(readSchemaType(node.get(SchemaConstant.PROP_TYPE)));
         schema.setNot(readSchema(node.get(SchemaConstant.PROP_NOT)));
         schema.setProperties(readSchemas(node.get(SchemaConstant.PROP_PROPERTIES)).orElse(null));
@@ -234,7 +234,7 @@ public class SchemaReader {
         schema.setMaxProperties(JsonUtil.intProperty(node, SchemaConstant.PROP_MAX_PROPERTIES));
         schema.setMinProperties(JsonUtil.intProperty(node, SchemaConstant.PROP_MIN_PROPERTIES));
         schema.setRequired(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_REQUIRED)).orElse(null));
-        schema.setEnumeration(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_ENUMERATION)).orElse(null));
+        schema.setEnumeration(JsonUtil.readStringArray(node.get(SchemaConstant.PROP_ENUM)).orElse(null));
         schema.setType(readSchemaType(node.get(SchemaConstant.PROP_TYPE)));
         schema.setReadOnly(JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY).orElse(null));
         schema.setExample((String) readObject(node.get(SchemaConstant.PROP_EXAMPLE)));

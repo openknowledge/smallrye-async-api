@@ -231,8 +231,8 @@ public class StreetlightsAppTest extends AppTestBase {
         vr.body(schemas + "turnOnOffPayload.properties.sentAt.type", equalTo("string"));
 
         vr.body(schemas + "Command.type", equalTo("string"));
-        vr.body(schemas + "Command.enumeration[0]", equalTo("OFF"));
-        vr.body(schemas + "Command.enumeration[1]", equalTo("ON"));
+        vr.body(schemas + "Command.enum[0]", equalTo("OFF"));
+        vr.body(schemas + "Command.enum[1]", equalTo("ON"));
 
         vr.body(schemas + "lightMeasuredPayload.type", equalTo("object"));
         vr.body(schemas + "lightMeasuredPayload.required[0]", equalTo("lumens"));

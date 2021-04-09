@@ -82,6 +82,8 @@ public class SchemaConstant {
     // for annotations (reserved words in Java)
     public static final String PROP_ENUMERATION = "enumeration";
 
+    public static final String PROP_ENUM = "enum";
+
     public static final String PROP_MAX_LENGTH = "maxLength";
 
     public static final String PROP_EXCLUSIVE_MAXIMUM = "exclusiveMaximum";

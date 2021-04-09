@@ -147,7 +147,7 @@ public class SchemaWriter {
             JsonUtil.intProperty(node, SchemaConstant.PROP_MAX_PROPERTIES, model.getMaxProperties());
             JsonUtil.intProperty(node, SchemaConstant.PROP_MIN_PROPERTIES, model.getMinProperties());
             ObjectWriter.writeStringArray(node, model.getRequired(), SchemaConstant.PROP_REQUIRED);
-            ObjectWriter.writeStringArray(node, model.getEnumeration(), SchemaConstant.PROP_ENUMERATION);
+            ObjectWriter.writeStringArray(node, model.getEnumeration(), SchemaConstant.PROP_ENUM);
             JsonUtil.enumProperty(node, SchemaConstant.PROP_TYPE, model.getType());
             writeSchemas(node, model.getProperties(), SchemaConstant.PROP_PROPERTIES);
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY, model.getReadOnly());
@@ -192,7 +192,7 @@ public class SchemaWriter {
             JsonUtil.intProperty(node, SchemaConstant.PROP_MIN_PROPERTIES, model.getMinProperties());
             ObjectWriter.writeStringArray(node, model.getRequired(), SchemaConstant.PROP_REQUIRED);
             JsonUtil.enumProperty(node, SchemaConstant.PROP_TYPE, model.getType());
-            ObjectWriter.writeStringArray(node, model.getEnumeration(), SchemaConstant.PROP_ENUMERATION);
+            ObjectWriter.writeStringArray(node, model.getEnumeration(), SchemaConstant.PROP_ENUM);
             JsonUtil.booleanProperty(node, SchemaConstant.PROP_READ_ONLY, model.getReadOnly());
             ObjectWriter.writeObject(node, SchemaConstant.PROP_EXAMPLE, model.getExample());
             writeSchemaList(node, model.getOneOf(), SchemaConstant.PROP_ONE_OF);
