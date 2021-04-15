@@ -57,8 +57,7 @@
                         </goals>
                         <phase>compile</phase>
                         <configuration>
-                            <deployment>${project.groupId}:smallrye-async-api-ui-quarkus-extension-deployment:1.0.0-SNAPSHOT
-                            </deployment>
+                            <deployment>${project.groupId}:smallrye-async-api-ui-quarkus-extension-deployment:1.0.0-SNAPSHOT</deployment>
                         </configuration>
                     </execution>
                 </executions>
@@ -71,7 +70,7 @@
                         <path>
                             <groupId>io.quarkus</groupId>
                             <artifactId>quarkus-extension-processor</artifactId>
-                            <version>1.11.1.Final</version>
+                            <version>${version.quarkus}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
