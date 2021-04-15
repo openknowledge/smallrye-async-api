@@ -82,5 +82,10 @@
             <artifactId>smallrye-reactive-messaging-api</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>smallrye-reactive-messaging-cloud-events</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

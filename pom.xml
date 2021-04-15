@@ -59,7 +59,7 @@
         <version.commons-logging>1.2</version.commons-logging>
         <version.httpclient>4.5.13</version.httpclient>
 
-        <version.reactivemessaging.api>2.3.0</version.reactivemessaging.api>
+        <version.reactivemessaging.api>2.9.0</version.reactivemessaging.api>
         <version.reactivemessaging.mqtt>2.3.0</version.reactivemessaging.mqtt>
 
         <!-- Test-only dependencies -->
@@ -76,6 +76,8 @@
         <version.restclient>2.0</version.restclient>
         <version.org.json>20180813</version.org.json>
         <version.io.commons>2.8.0</version.io.commons>
+        <version.cloud-events>2.5.0</version.cloud-events>
+        <version.cloud-events-api>1.1.0</version.cloud-events-api>
 
         <!-- Plug-Ins -->
         <version.apache.rat.plugin>0.12</version.apache.rat.plugin>
@@ -93,6 +95,9 @@
         <version.jar.plugin>3.2.0</version.jar.plugin>
 
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/tck/target/site/jacoco-aggregate/jacoco.xml,${project.basedir}/../tck/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
     <licenses>
@@ -187,7 +192,7 @@
                 <version>${version.jakarta.servlet}</version>
             </dependency>
 
-            <!-- Reative Messaging -->
+            <!-- Relative Messaging -->
             <dependency>
                 <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-reactive-messaging-api</artifactId>
@@ -326,6 +331,17 @@
                 <artifactId>commons-io</artifactId>
                 <version>${version.io.commons}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.smallrye.reactive</groupId>
+                <artifactId>smallrye-reactive-messaging-cloud-events</artifactId>
+                <version>${version.cloud-events}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.cloudevents</groupId>
+                <artifactId>cloudevents-api</artifactId>
+                <version>${version.cloud-events-api}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,0 +1,357 @@
+{
+  "asyncapi" : "2.0.0",
+  "defaultContentType" : "application/json",
+  "info" : {
+    "title" : "CloudEventsService",
+    "version" : "1.0.0"
+  },
+  "channels" : {
+    "prices" : {
+      "publish" : {
+        "operationId" : "generated-price",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/CloudEventRandomNumber"
+          },
+          "contentType" : "text/plain",
+          "name" : "generatePayload",
+          "summary" : "A random price"
+        }
+      }
+    },
+    "cloudevents-short-in" : {
+      "subscribe" : {
+        "operationId" : "cloudevents-short-in",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/CloudEventShort"
+          },
+          "contentType" : "text/plain",
+          "name" : "receiveShortCloudEventPayload",
+          "summary" : "10000"
+        }
+      }
+    },
+    "greeting-out" : {
+      "publish" : {
+        "operationId" : "greeting-out",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/Greeting"
+          },
+          "contentType" : "application/json",
+          "name" : "sendGreetingPayload",
+          "summary" : "a Hello World greeting"
+        }
+      }
+    },
+    "cloudevents-out" : {
+      "publish" : {
+        "operationId" : "cloudevents-out",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/CloudEventGreeting"
+          },
+          "name" : "sendGreetingCloudEventPayload"
+        }
+      }
+    },
+    "config-out" : {
+      "publish" : {
+        "operationId" : "config-out",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/CloudEventGreeting"
+          },
+          "name" : "sendConfigGreetingPayload"
+        }
+      }
+    },
+    "cloudevents-string-in" : {
+      "subscribe" : {
+        "operationId" : "cloudevents-string-in",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/CloudEventString"
+          },
+          "name" : "receiveStringCloudEventPayload"
+        }
+      }
+    },
+    "cloudevents-double-in" : {
+      "subscribe" : {
+        "operationId" : "cloudevents-double-in",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/CloudEventDouble"
+          },
+          "name" : "receiveDoubleCloudEventPayload"
+        }
+      }
+    },
+    "cloudevents-float-in" : {
+      "subscribe" : {
+        "operationId" : "cloudevents-float-in",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/CloudEventFloat"
+          },
+          "name" : "receiveFloatCloudEventPayload"
+        }
+      }
+    },
+    "cloudevents-integer-in" : {
+      "subscribe" : {
+        "operationId" : "cloudevents-integer-in",
+        "message" : {
+          "payload" : {
+            "$ref" : "#/components/schemas/CloudEventInteger"
+          },
+          "name" : "receiveIntegerCloudEventPayload"
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Greeting" : {
+        "required" : [ "greet" ],
+        "type" : "object",
+        "properties" : {
+          "greet" : {
+            "type" : "string",
+            "example" : "Hello World"
+          }
+        }
+      },
+      "RandomNumber" : {
+        "required" : [ "number" ],
+        "type" : "object",
+        "properties" : {
+          "number" : {
+            "format" : "int32",
+            "type" : "integer",
+            "example" : 2
+          }
+        }
+      },
+      "CloudEventRandomNumber" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "source" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "specversion" : {
+            "enum" : [ "v1.0.1" ],
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "datacontenttype" : {
+            "type" : "string"
+          },
+          "dataschema" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/RandomNumber"
+          }
+        }
+      },
+      "CloudEventGreeting" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "source" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "specversion" : {
+            "enum" : [ "v1.0.1" ],
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "datacontenttype" : {
+            "type" : "string"
+          },
+          "dataschema" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "data" : {
+            "$ref" : "#/components/schemas/Greeting"
+          }
+        }
+      },
+      "CloudEventString" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "source" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "specversion" : {
+            "enum" : [ "v1.0.1" ],
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "datacontenttype" : {
+            "type" : "string"
+          },
+          "dataschema" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CloudEventDouble" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "source" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "specversion" : {
+            "enum" : [ "v1.0.1" ],
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "datacontenttype" : {
+            "type" : "string"
+          },
+          "dataschema" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "number"
+          }
+        }
+      },
+      "CloudEventFloat" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "source" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "specversion" : {
+            "enum" : [ "v1.0.1" ],
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "datacontenttype" : {
+            "type" : "string"
+          },
+          "dataschema" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "number"
+          }
+        }
+      },
+      "CloudEventInteger" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "source" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "specversion" : {
+            "enum" : [ "v1.0.1" ],
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "datacontenttype" : {
+            "type" : "string"
+          },
+          "dataschema" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "CloudEventShort" : {
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "source" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "specversion" : {
+            "enum" : [ "v1.0.1" ],
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "datacontenttype" : {
+            "type" : "string"
+          },
+          "dataschema" : {
+            "format" : "uri",
+            "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "data" : {
+            "type" : "number"
+          }
+        }
+      }
+    }
+  }
+}
