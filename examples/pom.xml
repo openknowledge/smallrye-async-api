@@ -24,9 +24,10 @@
         <groupId>io.smallrye</groupId>
         <artifactId>smallrye-async-api-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>smallrye-async-api-examples</artifactId>
-    <packaging>pom</packaging>
     <name>SmallRye: AsyncAPI Examples</name>
+    <packaging>pom</packaging>
 </project>

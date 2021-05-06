@@ -40,7 +40,7 @@ public class ChannelReader {
         ChannelItem channelItem = new ChannelItemImpl();
         String channel = readTopic(rmContext, instance);
         channelItem.setChannel(channel);
-        channelItem.setPublish(OperationReader.readPublish(context, instance));
+        channelItem.setPublish(OperationReader.readPublish(context, rmContext, instance));
 
         return channelItem;
     }

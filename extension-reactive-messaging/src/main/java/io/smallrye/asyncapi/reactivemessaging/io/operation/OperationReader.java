@@ -15,6 +15,7 @@
  */
 package io.smallrye.asyncapi.reactivemessaging.io.operation;
 
+import io.smallrye.asyncapi.reactivemessaging.ReactiveMessagingContext;
 import org.jboss.jandex.AnnotationInstance;
 
 import io.smallrye.asyncapi.core.api.models.operation.OperationImpl;
@@ -25,14 +26,14 @@ import io.smallrye.asyncapi.spec.models.operation.Operation;
 
 public class OperationReader {
 
-    public static Operation readPublish(final AnnotationScannerContext context, final AnnotationInstance instance) {
+    public static Operation readPublish(final AnnotationScannerContext context, final ReactiveMessagingContext rmContext, final AnnotationInstance instance) {
         if (instance == null) {
             return null;
         }
 
         Operation operation = new OperationImpl();
         operation.setOperationId(JandexUtil.stringValue(instance, "value"));
-        operation.setMessage(MessageReader.readOutgoingMessage(context, instance));
+        operation.setMessage(MessageReader.readOutgoingMessage(context, rmContext, instance));
 
         return operation;
     }

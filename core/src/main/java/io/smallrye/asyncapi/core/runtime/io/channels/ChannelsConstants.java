@@ -26,7 +26,7 @@ import io.smallrye.asyncapi.spec.annotations.channel.ChannelItem;
  */
 public class ChannelsConstants {
 
-    static final DotName DOTNAME_CHANNEL_ITEM = DotName.createSimple(ChannelItem.class.getName());
+    public static final DotName DOTNAME_CHANNEL_ITEM = DotName.createSimple(ChannelItem.class.getName());
 
     public static final String PROP_CHANNEL = "channel";
 
