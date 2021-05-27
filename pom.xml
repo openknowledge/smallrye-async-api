@@ -192,7 +192,7 @@
                 <version>${version.jakarta.servlet}</version>
             </dependency>
 
-            <!-- Relative Messaging -->
+            <!-- Reactive Messaging -->
             <dependency>
                 <groupId>io.smallrye.reactive</groupId>
                 <artifactId>smallrye-reactive-messaging-api</artifactId>
